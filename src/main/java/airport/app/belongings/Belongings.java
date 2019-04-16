@@ -1,4 +1,7 @@
 package main.java.airport.app.belongings;
 
-public class Belongings {
+import main.java.airport.app.person.Person;
+
+abstract class Belongings {
+    private Person person;
 }
