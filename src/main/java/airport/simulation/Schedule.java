@@ -2,9 +2,15 @@ package main.java.airport.simulation;
 
 import java.util.TimerTask;
 
-public class Schedule extends TimerTask {
-    public void run() {
-        System.out.println("working at fixed rate delay");
+class Schedule extends TimerTask {
+    private Clock clock;
 
+    Schedule() {
+        this.clock = new Clock();
+    }
+
+    public void run() {
+        clock.increaseTime(15);
+        System.out.println(clock.getTime());
     }
 }
