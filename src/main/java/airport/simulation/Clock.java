@@ -18,7 +18,7 @@ class Clock {
     }
 
     String getTime() {
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         return timeFormat.format(this.currentTime);
     }
 
