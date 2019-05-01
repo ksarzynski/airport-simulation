@@ -6,4 +6,9 @@ class Employee {
     private Double efficiency;
     private Date shiftStartTime;
     private Date shiftEndTime;
+
+    public Double getEfficiency()
+    {
+        return this.efficiency;
+    }
 }
