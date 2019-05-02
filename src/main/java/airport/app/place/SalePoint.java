@@ -6,7 +6,7 @@ public class SalePoint extends Place {
 
     private Vendor vendor;
 
-    SalePoint(String name, Integer maxPeopleAmount)
+    public SalePoint(String name, Integer maxPeopleAmount)
     {
         super(name, maxPeopleAmount);
     }

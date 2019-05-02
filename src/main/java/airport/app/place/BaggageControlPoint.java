@@ -4,7 +4,7 @@ import main.java.airport.app.person.Controller;
 
 public class BaggageControlPoint extends ControlPoint {
 
-    BaggageControlPoint(String name, Integer maxPeopleAmount)
+    public BaggageControlPoint(String name, Integer maxPeopleAmount)
     {
         super(name, maxPeopleAmount);
     }

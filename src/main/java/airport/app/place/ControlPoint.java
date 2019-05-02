@@ -6,7 +6,7 @@ public class ControlPoint extends Place {
 
     private Controller controller;
 
-    ControlPoint(String name, Integer maxPeopleAmount)
+    public ControlPoint(String name, Integer maxPeopleAmount)
     {
         super(name, maxPeopleAmount);
     }

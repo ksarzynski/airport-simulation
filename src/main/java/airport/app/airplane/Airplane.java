@@ -7,21 +7,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Airplane {
-    private String from;
+    //private String from; no z naszego lotniska XDDD
     private String to;
     private String flightName;
     private String status = "LOADING";          // LOADING |
     private Integer maxPassenger;
-    private Integer minPassenger;
+    //private Integer minPassenger; jak bedzie za malo pasazerow to nie odleci :D?
     private Double maxBaggageWeight;
     private Pilot pilot;
     private List<Passanger> passengers;
 
-    Airplane(String flightName, String from, String to, Integer minPassenger, Integer maxPassenger, Double maxBaggageWeight, Pilot pilot) {
+    public Airplane()
+    {
+
+    }
+
+    public Airplane(String flightName, /*String from,*/ String to, /*Integer minPassenger,*/ Integer maxPassenger, Double maxBaggageWeight, Pilot pilot) {
         this.flightName = flightName;
-        this.from = from;
+        //this.from = from;
         this.to = to;
-        this.minPassenger = minPassenger;
+        //this.minPassenger = minPassenger;
         this.maxPassenger = maxPassenger;
         this.maxBaggageWeight = maxBaggageWeight;
         this.pilot = pilot;
@@ -38,9 +43,10 @@ public class Airplane {
         System.gc();
     }
 
-    public String getFrom() {
+/*    public String getFrom() {
         return from;
     }
+*/
 
     public String getTo() {
         return to;
@@ -53,10 +59,11 @@ public class Airplane {
     public Integer getMaxPassenger() {
         return maxPassenger;
     }
-
+/*
     public Integer getMinPassenger() {
         return minPassenger;
     }
+*/
 
     public Double getMaxBaggageWeight() {
         return maxBaggageWeight;
