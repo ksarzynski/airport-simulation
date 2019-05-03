@@ -4,6 +4,7 @@ import main.java.airport.app.belongings.Baggage;
 import main.java.airport.app.belongings.Ticket;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Passanger extends Person {
     private Baggage baggage;
@@ -41,7 +42,7 @@ public class Passanger extends Person {
 
         while (isDone == 0)
         {
-            index = (int) (Math.random() * ((tickets.size() + 1 + 1)));
+            index = (new Random().nextInt(tickets.size()));
             if(tickets.get(index).getStatus().compareTo("unsold") == 0)
             {
                 tickets.get(index).setStatus("sold");
