@@ -1,5 +1,7 @@
 package main.java.airport.app.person;
 
+import main.java.airport.app.belongings.Baggage;
+
 import java.util.Date;
 
 public class Employee extends Person{
@@ -7,7 +9,7 @@ public class Employee extends Person{
     private Date shiftStartTime;
     private Date shiftEndTime;
 
-    public Employee(String name, String status, Double efficiency, Date shiftStartTime, Date shiftEndTime)
+    Employee(String name, String status, Double efficiency, Date shiftStartTime, Date shiftEndTime)
     {
         super(name, status);
         this.efficiency = efficiency;
@@ -23,6 +25,16 @@ public class Employee extends Person{
     public Double getEfficiency()
     {
         return this.efficiency;
+    }
+
+    public String getStatus()
+    {
+        return this.status;
+    }
+
+    public void setStatus(String status)
+    {
+        this.status = status;
     }
 
 }
