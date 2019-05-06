@@ -6,9 +6,10 @@ import java.util.Date;
 
 public class Vendor extends Employee
 {
-    public Vendor(String name, String status, Double efficiency, Date shiftStartTime, Date shiftEndTime)
+    public Vendor(String name, String status, Double efficiency, Date shiftStartTime, Date shiftEndTime, SalePoint salePoint)
     {
         super(name, status, efficiency, shiftStartTime, shiftEndTime);
+        this.salePoint = salePoint;
     }
 
     private SalePoint salePoint;

@@ -13,12 +13,29 @@ import java.util.Date;
 import java.util.Random;
 
 public class Simulation {
+
+    private ArrayList<Ticket> tickets;
+    private ArrayList<Pilot> pilots;
+    private ArrayList<Airplane> airplanes;
+    private ArrayList<Controller> controllers;
+    private ArrayList<Vendor> vendors;
+    private ArrayList<Passanger> passangers;
+    private ArrayList<Baggage> baggages;
+
+    private DutyFreeZone airportEntry;
+    private SalePoint ticketOffice;
+    private ControlPoint baggageCheck;
+    private ControlPoint securityCheck;
+    private DutyFreeZone dutyFreeZone;
+    private ControlPoint boarding;
+
     private Clock clock;
 
     public void start() {
         this.clock = new Clock();
         clock.runTimer();
         initialization(10000, 1000, 5000, 20, 20,  100.0);
+        run(500);
     }
 
     //TODO przeniesienie parametrow stad ( ze startu ) do maina zeby przy wlaczeniu mozna je bylo latwo zmieniac
@@ -32,11 +49,11 @@ public class Simulation {
 
         ArrayList<Ticket> tickets = new ArrayList <> ();
 
-        DutyFreeZone airportEntry = new DutyFreeZone("airport entry", entrySize/1);
+        DutyFreeZone airportEntry = new DutyFreeZone("airport entry", entrySize/1, 1000);
         SalePoint ticketOffice = new SalePoint("ticket office", entrySize/5);
         ControlPoint baggageCheck = new ControlPoint("baggage check", entrySize/5);
         ControlPoint securityCheck = new ControlPoint("security check", entrySize/5);
-        DutyFreeZone dutyFreeZone = new DutyFreeZone("duty free zone", entrySize/1);
+        DutyFreeZone dutyFreeZone = new DutyFreeZone("duty free zone", entrySize/1, 1000);
         ControlPoint boarding = new ControlPoint("boarding", entrySize/5);
 
         //TODO trzeba sie zastanowic czy kazdy lot bedzie mial swoj boarding czy wrzucamy wszystkie do jednego obiektu
@@ -67,13 +84,15 @@ public class Simulation {
         ArrayList<Controller> controllers = new ArrayList<> (howManyControllers/1);
         for(int i=0; i < howManyControllers ; i++)
         {
-            controllers.add(i, new Controller ("controller name", "not working",250.0 * employeesEfficiencyLevel, new Date(), new Date()));
+            controllers.add(i, new Controller ("controller name", "not working",250.0 * employeesEfficiencyLevel, new Date(), new Date(),
+                    new ControlPoint("test", 0)));
         }
 
         ArrayList<Vendor> vendors = new ArrayList<> (howManyVendors/1);
         for(int i=0; i < howManyVendors ; i++)
         {
-            vendors.add(i, new Vendor ("vendor name", "not working",250.0 * employeesEfficiencyLevel, new Date(), new Date()));
+            vendors.add(i, new Vendor ("vendor name", "not working",250.0 * employeesEfficiencyLevel, new Date(), new Date(),
+                    new SalePoint("test", 0)));
         }
 
         ArrayList<Passanger> passangers = new ArrayList<> (howManyPeople/1);
@@ -91,18 +110,41 @@ public class Simulation {
         securityCheck.addRandomController(controllers);
         boarding.addRandomController(controllers);
 
+        airportEntry.addPasangers(passangers);
+
         //TODO zastanowic sie jak to inicjalizowac, co wpisywac w name itd
 
         //TODO wstawienie jakiegos przelicznika trudnosci
 
     }
 
-    public void run(int howManyPeoplePerHour)
+    private void run(int howManyPeoplePerHour)
     {
+        //TODO WAZME!!!!!!!!!!!!! musze ogarnac indexy tutaj
+
+        int index;
+
+        ArrayList<Passanger> passangersToMove = new ArrayList<>();
+
         for(int i = 0; i < howManyPeoplePerHour; i++)
         {
-
+            passangers.add(new Passanger("passenger name", "status"));
         }
+
+        passangersToMove.addAll(airportEntry.getPassangers(airportEntry.getFlow()));
+        index = airportEntry.getFlow() + 1;
+
+        ticketOffice.addPasangers(passangersToMove);
+
+        passangersToMove.clear();
+        index = 0;
+
+        ticketOffice.getPassangers((int) (ticketOffice.getVendorsEfficiency() * ticketOffice.getSize()) ).addAll(passangersToMove);
+
+        securityCheck.addPasangers(passangersToMove, (int)(securityCheck.getControllerEfficiency() * securityCheck.getSize()), 0);
+
+
+
     }
 
 }

@@ -5,11 +5,18 @@ import main.java.airport.app.person.Person;
 
 public class DutyFreeZone extends Place {
 
-    int flow = 1000;
+    private int flow = 1000;
 
-    public DutyFreeZone(String name, Integer maxPeopleAmount)
+    public DutyFreeZone(String name, Integer maxPeopleAmount, int flow)
+
     {
         super(name, maxPeopleAmount);
+        this.flow = flow;
+    }
+
+    public int getFlow()
+    {
+        return this.flow;
     }
 
 }

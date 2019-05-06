@@ -4,6 +4,7 @@ import main.java.airport.app.person.Controller;
 import main.java.airport.app.person.Vendor;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class ControlPoint extends Place {
 
@@ -26,7 +27,7 @@ public class ControlPoint extends Place {
 
         while (isDone == 0)
         {
-            index = (int) (Math.random() * (controllers.size() + 1 + 1));
+            index = new Random().nextInt(20) + 1;
             if(controllers.get(index).getStatus().compareTo("not working")==0)
             {
                 controllers.get(index).setStatus("working");
@@ -34,5 +35,10 @@ public class ControlPoint extends Place {
                 isDone = 1;
             }
         }
+    }
+
+    public Double getControllerEfficiency()
+    {
+        return this.controller.getEfficiency();
     }
 }

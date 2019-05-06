@@ -35,4 +35,9 @@ public class SalePoint extends Place {
         }
     }
 
+    public Double getVendorsEfficiency()
+    {
+        return this.vendor.getEfficiency();
+    }
+
 }
