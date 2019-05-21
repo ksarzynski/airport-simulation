@@ -4,13 +4,12 @@ import main.java.airport.app.belongings.Baggage;
 import main.java.airport.app.belongings.Ticket;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-public class Passanger extends Person {
+public class Passenger extends Person {
     private Baggage baggage;
     private Ticket ticket;
 
-    public Passanger(String name, String status)
+    public Passenger(String name, String status)
     {
         super(name,status);
     }
@@ -37,19 +36,19 @@ public class Passanger extends Person {
 
     public void setRandomTicket(ArrayList<Ticket> tickets)
     {
-        int index;
-        int isDone  = 0;
-
-        while (isDone == 0)
-        {
-            index = (new Random().nextInt(tickets.size()));
-            if(tickets.get(index).getStatus().compareTo("unsold") == 0)
-            {
-                tickets.get(index).setStatus("sold");
-                setTicket(tickets.get(index));
-                isDone = 1;
-            }
-        }
+//        int index;
+//        int isDone  = 0;
+//
+//        while (isDone == 0)
+//        {
+//            index = (new Random().nextInt(tickets.size()));
+//            if(tickets.get(index).getStatus().compareTo("unsold") == 0)
+//            {
+//                tickets.get(index).setStatus("sold");
+//                setTicket(tickets.get(index));
+//                isDone = 1;
+//            }
+//        }
     }
 
 }

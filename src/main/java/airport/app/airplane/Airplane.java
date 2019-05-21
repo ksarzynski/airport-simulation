@@ -1,55 +1,31 @@
 package main.java.airport.app.airplane;
 
-import main.java.airport.app.person.Passanger;
+import main.java.airport.app.belongings.Baggage;
+import main.java.airport.app.person.Passenger;
 import main.java.airport.app.person.Pilot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Airplane {
-    //private String from; no z naszego lotniska XDDD
-    private String to;
+    private String direction;
     private String flightName;
-    private String status = "LOADING";          // LOADING |
     private Integer maxPassenger;
-    //private Integer minPassenger; jak bedzie za malo pasazerow to nie odleci :D?
     private Double maxBaggageWeight;
     private Pilot pilot;
-    private List<Passanger> passengers;
+    private ArrayList<Passenger> passengers;
+    private ArrayList<Baggage> baggagesOnBoard;
 
-    public Airplane()
-    {
-
-    }
-
-    public Airplane(String flightName, /*String from,*/ String to, /*Integer minPassenger,*/ Integer maxPassenger, Double maxBaggageWeight, Pilot pilot) {
+    public Airplane(String flightName, String direction, Integer maxPassenger, Double maxBaggageWeight, Pilot pilot) {
         this.flightName = flightName;
-        //this.from = from;
-        this.to = to;
-        //this.minPassenger = minPassenger;
+        this.direction = direction;
         this.maxPassenger = maxPassenger;
         this.maxBaggageWeight = maxBaggageWeight;
         this.pilot = pilot;
         this.passengers = new ArrayList<>(maxPassenger);
     }
 
-    public boolean addPassanger(Passanger passanger) {
-        // TODO: Jesli passager jest po odparawie - metoda
-        return this.passengers.add(passanger);
-    }
-
-    public void startFlight() {
-        // TODO: Czy kazdy bagaz obecnego pasazera jest?
-        System.gc();
-    }
-
-/*    public String getFrom() {
-        return from;
-    }
-*/
-
-    public String getTo() {
-        return to;
+    public String getDirection() {
+        return direction;
     }
 
     public String getFlightName() {
@@ -59,21 +35,31 @@ public class Airplane {
     public Integer getMaxPassenger() {
         return maxPassenger;
     }
-/*
-    public Integer getMinPassenger() {
-        return minPassenger;
-    }
-*/
 
     public Double getMaxBaggageWeight() {
         return maxBaggageWeight;
     }
 
-    public Pilot getPilot() {
-        return pilot;
+    public Pilot getPilot() { return pilot; }
+
+    public boolean addPassanger(Passenger passenger) {
+        // TODO: Jesli passager jest po odparawie - metoda
+        return this.passengers.add(passenger);
     }
 
-    public String getStatus() {
-        return status;
+    public void startFlight() {
+        // TODO: metoda
+    }
+
+    public void addBaggage(Baggage baggage) {
+        // TODO: metoda
+    }
+
+    public void checkBaggagesReady() {
+        // TODO: metoda
+    }
+
+    private void delayFlight(Integer minutes) {
+        // TODO: metoda
     }
 }

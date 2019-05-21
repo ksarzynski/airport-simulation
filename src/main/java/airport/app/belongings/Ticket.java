@@ -1,11 +1,10 @@
 package main.java.airport.app.belongings;
 
-public class Ticket extends Belongings {
+public class Ticket {
     private String flightName;
 
-    public Ticket(String flightname)
+    public Ticket(String flightName)
     {
-        this.flightName = flightname;
-        this.status = "unsold";
+        this.flightName = flightName;
     }
 }

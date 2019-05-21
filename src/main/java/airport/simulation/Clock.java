@@ -3,8 +3,6 @@ package main.java.airport.simulation;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 class Clock {
     private Date currentTime;
@@ -20,13 +18,6 @@ class Clock {
     String getTime() {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         return timeFormat.format(this.currentTime);
-    }
-
-    void runTimer() {
-        TimerTask schedule = new Schedule();
-        Timer timer = new Timer();
-
-        timer.scheduleAtFixedRate(schedule, 500, 1000);
     }
 
     private static Date removeTime(Date date) {
