@@ -9,9 +9,9 @@ public class Passenger extends Person {
     private Baggage baggage;
     private Ticket ticket;
 
-    public Passenger(String name, String status)
+    public Passenger(String name)
     {
-        super(name,status);
+        super(name);
     }
 
     public void setBaggage (Baggage baggage)
@@ -34,21 +34,6 @@ public class Passenger extends Person {
         return this.ticket;
     }
 
-    public void setRandomTicket(ArrayList<Ticket> tickets)
-    {
-//        int index;
-//        int isDone  = 0;
-//
-//        while (isDone == 0)
-//        {
-//            index = (new Random().nextInt(tickets.size()));
-//            if(tickets.get(index).getStatus().compareTo("unsold") == 0)
-//            {
-//                tickets.get(index).setStatus("sold");
-//                setTicket(tickets.get(index));
-//                isDone = 1;
-//            }
-//        }
-    }
+    public void removePassenger (){} //TODO
 
 }

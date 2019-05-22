@@ -4,41 +4,35 @@ import main.java.airport.app.person.Controller;
 import main.java.airport.app.person.Vendor;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class ControlPoint extends Place {
 
     private Controller controller;
 
-    public ControlPoint(String name, Integer maxPeopleAmount)
+    ControlPoint(String name, Integer maxPeopleAmount)
     {
         super(name, maxPeopleAmount);
     }
 
-    private void addController(Controller controller)
+    private void setController(Controller controller)
     {
         this.controller = controller;
     }
 
-    public void addRandomController(ArrayList<Controller> controllers)
-    {
-        int index;
-        int isDone  = 0;
+    public void setRandomController(ArrayList<Controller> controllers) {
 
-        while (isDone == 0)
-        {
-            index = new Random().nextInt(20) + 1;
-            if(controllers.get(index).getStatus().compareTo("not working")==0)
-            {
-                controllers.get(index).setStatus("working");
-                addController(controllers.get(index));
-                isDone = 1;
-            }
-        }
+        //TODO method
+
     }
 
-    public Double getControllerEfficiency()
-    {
-        return this.controller.getEfficiency();
-    }
+    public void removeController(){} //TODO method
+
+    public Double getControllerEfficiency() { return this.controller.getEfficiency(); }
+
+    public void openPoint(){} //TODO method
+
+    public void closePoint(){} //TODO method
+
+    @Override
+    public void movePassengers() {} //TODO method
 }

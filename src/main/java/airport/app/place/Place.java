@@ -9,7 +9,6 @@ abstract class Place {
     private String name;
     private int maxPeopleAmount;
     private List<Passenger> passengers;
-    private List<Passenger> passangersToMove = new ArrayList<>();
 
     Place(String name, Integer maxPeopleAmount)
     {
@@ -18,40 +17,25 @@ abstract class Place {
         this.passengers = new ArrayList<>(maxPeopleAmount);
     }
 
-    public List<Passenger> getPassangers(int howMany)
-    {
-         for(int i=0; i<howMany; i++)
-        {
-            passangersToMove.add(this.passengers.get(i));
-        }
-        return passangersToMove;
+    public List<Passenger> getPassangers() {
+
+        return this.passengers;
+
     }
 
-    public void addPasangers(List<Passenger> passengers)
+    public void getPasangers(List<Passenger> passengers)
     {
         this.passengers.addAll(passengers);
     }
 
-    public void addPasangers(List<Passenger> passengers, int howMany)
-    {
-        for(int i = 0; i < howMany; i++)
-        {
-            this.passengers.add(passengers.get(0));
-        }
-    }
+    public void addPasangers(List<Passenger> passengers) {} //TODO method
 
-    public void addPasangers(List<Passenger> passengers, int howMany, int startIndex)
-    {
-        for(int i = startIndex; i < howMany; i++)
-        {
-            this.passengers.add(passengers.get(0));
-        }
-    }
-
-    public int getSize()
+    public int getQueueSize()
     {
         return this.maxPeopleAmount;
     }
+
+    abstract public void movePassengers(); //TODO method
 
 }
 

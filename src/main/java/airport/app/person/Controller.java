@@ -6,11 +6,11 @@ import java.util.Date;
 
 public class Controller extends Employee
 {
-    public Controller(String name, String status, Double efficiency, Date shiftStartTime, Date shiftEndTime, ControlPoint controlPoint)
+    private ControlPoint controlPoint;
+
+    public Controller(String name, Double efficiency, Date shiftStartTime, ControlPoint controlPoint)
     {
-        super(name, status, efficiency, shiftStartTime, shiftEndTime);
+        super(name, efficiency, shiftStartTime);
         this.controlPoint = controlPoint;
     }
-
-    private ControlPoint controlPoint;
 }

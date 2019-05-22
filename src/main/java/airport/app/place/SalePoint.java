@@ -13,31 +13,29 @@ public class SalePoint extends Place {
         super(name, maxPeopleAmount);
     }
 
-    private void addVendor(Vendor vendor)
+    private void setVendor(Vendor vendor)
     {
         this.vendor = vendor;
     }
 
-    public void addRandomVendor(ArrayList<Vendor> vendors)
-    {
-        int index;
-        int isDone  = 0;
+    public void setRandomVendor(ArrayList<Vendor> vendors) {
 
-        while (isDone == 0)
-        {
-            index = (int) (Math.random() * ((vendors.size() + 1) + 1));
-            if(vendors.get(index).getStatus().compareTo("not working") == 0)
-            {
-                vendors.get(index).setStatus("working");
-                addVendor(vendors.get(index));
-                isDone = 1;
-            }
-        }
+        //TODO method
     }
+
+    public void removeVendor(){} //TODO method
 
     public Double getVendorsEfficiency()
     {
         return this.vendor.getEfficiency();
     }
 
+    public void openPoint(){} // TODO method
+
+    public void closePoint(){} // TODO method
+
+    public void sellRandomTicket(){} //TODO method
+
+    @Override
+    public void movePassengers() {} // TODO method
 }
