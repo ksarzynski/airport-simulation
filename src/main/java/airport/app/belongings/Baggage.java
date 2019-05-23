@@ -11,12 +11,14 @@ public class Baggage {
     public Baggage(Double weight, Ticket ticket) {
         this.weight = weight;
         this.ticket = ticket;
-        setRandomDangerLevel(100);
+        this.status = "not boarded";
+        setRandomDangerLevel(1000);
     }
 
     public Baggage(Double weight) {
         this.weight = weight;
-        setRandomDangerLevel(100);
+        this.status = "not boarded";
+        setRandomDangerLevel(1000);
 
     }
 
@@ -44,10 +46,10 @@ public class Baggage {
     {
         Random r = new Random();
         int a = r.nextInt(accuracy);
-        if(a==accuracy/2)
+        if(a==0)
             this.dangerLevel = 2;
-        else if(a % 2 == 0)
-            this.dangerLevel = 0;
-        else this.dangerLevel = 1;
+        else if(a % accuracy/5 == 0)
+            this.dangerLevel = 1;
+        else this.dangerLevel = 0;
     }
 }

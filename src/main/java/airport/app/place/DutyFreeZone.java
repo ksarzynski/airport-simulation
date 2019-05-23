@@ -1,5 +1,9 @@
 package main.java.airport.app.place;
 
+import main.java.airport.app.airplane.Airplane;
+
+import java.util.ArrayList;
+
 public class DutyFreeZone extends Place {
 
     private Integer flow;
@@ -16,8 +20,19 @@ public class DutyFreeZone extends Place {
         return this.flow;
     }
 
-    @Override
-    public void movePassengers() {
-        //TODO method
+    public void movePassengers(ArrayList<Airplane> airplanes, int basicFlow) {
+
+        for(int i = 0; i < this.flow * basicFlow; i++)
+        {
+            for(Airplane airplane : airplanes)
+            {
+                if(passengers.get(i).getTicket().getFlightName().equals(airplane.getFlightName()))
+                {
+                    airplane.addBaggage(passengers.get(i).getBaggage());
+                    airplane.addPassenger(passengers.get(i));
+                }
+            }
+        }
+
     }
 }

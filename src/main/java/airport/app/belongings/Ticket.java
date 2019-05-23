@@ -8,4 +8,7 @@ public class Ticket {
     {
         this.flightName = flightName;
     }
+
+    public String getFlightName(){return this.flightName;}
+
 }

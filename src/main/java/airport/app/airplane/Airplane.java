@@ -5,6 +5,7 @@ import main.java.airport.app.person.Passenger;
 import main.java.airport.app.person.Pilot;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Airplane {
     private String direction;
@@ -12,16 +13,22 @@ public class Airplane {
     private Integer maxPassenger;
     private Double maxBaggageWeight;
     private Pilot pilot;
+    private String isReady;
+    private Date flightStart;
     private ArrayList<Passenger> passengers;
     private ArrayList<Baggage> baggagesOnBoard;
 
-    public Airplane(String flightName, String direction, Integer maxPassenger, Double maxBaggageWeight, Pilot pilot) {
+    public Airplane(String flightName, String direction, Integer maxPassenger, Double maxBaggageWeight, Pilot pilot, Date flightStart) {
+
         this.flightName = flightName;
         this.direction = direction;
         this.maxPassenger = maxPassenger;
         this.maxBaggageWeight = maxBaggageWeight;
         this.pilot = pilot;
         this.passengers = new ArrayList<>(maxPassenger);
+        this.isReady = "not ready";
+        this.flightStart = flightStart;
+
     }
 
     public String getDirection() {
@@ -42,24 +49,46 @@ public class Airplane {
 
     public Pilot getPilot() { return pilot; }
 
-    public boolean addPassanger(Passenger passenger) {
-        // TODO: Jesli passager jest po odparawie - metoda
-        return this.passengers.add(passenger);
+    public void addPassenger(Passenger passenger) {
+
+        this.passengers.add(passenger);
+
     }
 
     public void startFlight() {
-        // TODO: metoda
+
+        for(Passenger passenger : passengers)
+        {
+            passenger.removeBaggage();
+            passenger.removeTicket();
+        }
     }
 
     public void addBaggage(Baggage baggage) {
-        // TODO: metoda
+
+        baggagesOnBoard.add(baggage);
     }
 
-    public void checkBaggagesReady() {
-        // TODO: metoda
+    public void checkBaggagesReady(Integer minutes) {
+
+
+        for(Passenger passenger: passengers) {
+
+            if(!(passenger.getBaggage().getStatus().equals("boarded")))
+            {
+                this.isReady = "baggage not on board";
+                delayFlight(minutes);
+            }
+
+            if(!this.isReady.equals("baggage not on board"));
+            this.isReady = "baggage on board";
+
+        }
     }
 
     private void delayFlight(Integer minutes) {
-        // TODO: metoda
+
+        this.flightStart = new Date(this.flightStart.getTime() + (minutes * 60 * 1000));
+
     }
 }

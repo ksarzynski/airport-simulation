@@ -19,7 +19,7 @@ public class Passenger extends Person {
         this.baggage = baggage;
     }
 
-    private void setTicket (Ticket ticket)
+    public void setTicket (Ticket ticket)
     {
         this.ticket = ticket;
     }
@@ -34,6 +34,14 @@ public class Passenger extends Person {
         return this.ticket;
     }
 
-    public void removePassenger (){} //TODO
+    public void removeBaggage(){
+
+        this.baggage = null;
+    }
+
+    public void removeTicket(){
+
+        this.ticket = null;
+    }
 
 }

@@ -8,7 +8,7 @@ import java.util.List;
 abstract class Place {
     private String name;
     private int maxPeopleAmount;
-    private List<Passenger> passengers;
+    List<Passenger> passengers;
 
     Place(String name, Integer maxPeopleAmount)
     {
@@ -23,19 +23,21 @@ abstract class Place {
 
     }
 
-    public void getPasangers(List<Passenger> passengers)
+    public void getPassangers(List<Passenger> passengers)
     {
         this.passengers.addAll(passengers);
     }
 
-    public void addPasangers(List<Passenger> passengers) {} //TODO method
+    public void addPassengers(List<Passenger> passengers) {
+
+       this.passengers.addAll(passengers);
+
+    }
 
     public int getQueueSize()
     {
         return this.maxPeopleAmount;
     }
-
-    abstract public void movePassengers(); //TODO method
 
 }
 

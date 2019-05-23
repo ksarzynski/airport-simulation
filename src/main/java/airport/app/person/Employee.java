@@ -23,4 +23,6 @@ public class Employee extends Person{
         return this.efficiency;
     }
 
+    public void setShiftStartTime(Date shiftStartTime){this.shiftStartTime = shiftStartTime;}
+
 }

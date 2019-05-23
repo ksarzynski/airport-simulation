@@ -3,8 +3,15 @@ package main.java.airport.simulation;
 import main.java.airport.app.airplane.Airplane;
 import main.java.airport.app.belongings.Ticket;
 import main.java.airport.app.person.*;
+import main.java.airport.app.place.ControlPoint;
+import main.java.airport.app.place.SalePoint;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 
 public class Simulation {
     private Schedule schedule;
@@ -17,6 +24,9 @@ public class Simulation {
         initialization(3,10,3, 3,10,6);
         run(500, 10);
     }
+
+    // narazie nie wiemy jak bedziemy obliczac efektywnosc wiec zaloze ze kazda kasa itd obsluguje 50 ludzi na godzine
+    // i efficiency to dajmy na to od 20 do 120 % tej wartosci?
 
     private void initialization(Integer sellPointsAmout, Integer vendorsAmount, Integer controlPointsAmount, Integer baggageControlPointsAmount, Integer controllersAmount, Integer flightsAmount) {
         // TODO: metoda
@@ -50,21 +60,6 @@ public class Simulation {
     private ArrayList<Controller> addNewRandomController(Integer amount) {
         // TODO: metoda
         return new ArrayList<>();
-    }
-
-    public Ticket getAvailableTicket() {
-        // TODO: metoda
-        return allAvailableTickets.get(1);
-    }
-
-    public Vendor getAvailableVendor() {
-        // TODO: metoda
-        return allVendors.get(1);
-    }
-
-    public Controller getAvailableController() {
-        // TODO: metoda
-        return allControllers.get(1);
     }
 
     public void addVendor(Vendor vendor) {
