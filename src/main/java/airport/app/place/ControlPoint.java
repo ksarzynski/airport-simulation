@@ -33,7 +33,7 @@ public class ControlPoint extends Place {
 
     }
 
-    public Double getControllerEfficiency() { return this.controller.getEfficiency(); }
+    public Integer getControllerEfficiency() { return this.controller.getEfficiency(); }
 
     public void openPoint(ArrayList<Controller> controllers, Clock clock) throws ParseException {
 

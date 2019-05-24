@@ -8,9 +8,23 @@ public class Controller extends Employee
 {
     private ControlPoint controlPoint;
 
-    public Controller(String name, Double efficiency, Date shiftStartTime, ControlPoint controlPoint)
+    public Controller(String name, Integer efficiency, Date shiftStartTime, ControlPoint controlPoint)
     {
         super(name, efficiency, shiftStartTime);
+        this.controlPoint = controlPoint;
+    }
+
+    public Controller(String name, Integer efficiency)
+    {
+        super(name, efficiency);
+    }
+
+    @Override
+    public void setShiftStartTime(Date shiftStartTime) {
+        super.setShiftStartTime(shiftStartTime);
+    }
+
+    public void setControlPoint(ControlPoint controlPoint) {
         this.controlPoint = controlPoint;
     }
 }

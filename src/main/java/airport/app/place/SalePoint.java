@@ -50,7 +50,7 @@ public class SalePoint extends Place {
         this.vendor = null;
     }
 
-    public Double getVendorsEfficiency()
+    public Integer getVendorsEfficiency()
     {
         return this.vendor.getEfficiency();
     }

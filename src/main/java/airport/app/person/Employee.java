@@ -3,22 +3,27 @@ package main.java.airport.app.person;
 import java.util.Date;
 
 public class Employee extends Person{
-    private Double efficiency;
+    private Integer efficiency;
     private Date shiftStartTime;
 
-    Employee(String name, Double efficiency, Date shiftStartTime)
+    Employee(String name, Integer efficiency, Date shiftStartTime)
     {
         super(name);
         this.efficiency = efficiency;
         this.shiftStartTime = shiftStartTime;
     }
 
-    public void setEfficiency(Double efficiency)
+    public Employee(String name, Integer efficiency) {
+        super(name);
+        this.efficiency = efficiency;
+    }
+
+    public void setEfficiency(Integer efficiency)
     {
         this.efficiency = efficiency;
     }
 
-    public Double getEfficiency()
+    public Integer getEfficiency()
     {
         return this.efficiency;
     }

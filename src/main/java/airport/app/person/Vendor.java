@@ -8,9 +8,28 @@ public class Vendor extends Employee
 {
     private SalePoint salePoint;
 
-    public Vendor(String name, Double efficiency, Date shiftStartTime, SalePoint salePoint)
+    public Vendor(String name, Integer efficiency, Date shiftStartTime, SalePoint salePoint)
     {
         super(name, efficiency, shiftStartTime);
+        this.salePoint = salePoint;
+    }
+
+    public Vendor(String name, Integer efficiency) {
+        super(name, efficiency);
+    }
+
+    @Override
+    public String toString()
+    {
+        return getName();
+    }
+
+    @Override
+    public void setShiftStartTime(Date shiftStartTime) {
+        super.setShiftStartTime(shiftStartTime);
+    }
+
+    public void setSalePoint(SalePoint salePoint) {
         this.salePoint = salePoint;
     }
 }

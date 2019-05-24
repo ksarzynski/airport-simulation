@@ -11,14 +11,14 @@ public class Airplane {
     private String direction;
     private String flightName;
     private Integer maxPassenger;
-    private Double maxBaggageWeight;
+    private Integer maxBaggageWeight;
     private Pilot pilot;
     private String isReady;
     private Date flightStart;
     private ArrayList<Passenger> passengers;
     private ArrayList<Baggage> baggagesOnBoard;
 
-    public Airplane(String flightName, String direction, Integer maxPassenger, Double maxBaggageWeight, Pilot pilot, Date flightStart) {
+    public Airplane(String flightName, String direction, Integer maxPassenger, Integer maxBaggageWeight, Pilot pilot, Date flightStart) {
 
         this.flightName = flightName;
         this.direction = direction;
@@ -43,7 +43,7 @@ public class Airplane {
         return maxPassenger;
     }
 
-    public Double getMaxBaggageWeight() {
+    public Integer getMaxBaggageWeight() {
         return maxBaggageWeight;
     }
 
