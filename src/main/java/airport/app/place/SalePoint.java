@@ -18,7 +18,7 @@ public class SalePoint extends Place {
 
     private Vendor vendor;
 
-    static int openSalePointIndex;
+    private static int openSalePointIndex;
 
     public SalePoint(String name, Integer maxPeopleAmount)
     {
@@ -56,18 +56,18 @@ public class SalePoint extends Place {
         return this.employee.getEfficiency();
     }
 
-    public void openPoint(ArrayList<Vendor> vendors, String time, int index) throws ParseException {
+    public void openPoint(ArrayList<Vendor> vendors, String time) throws ParseException {
         setRandomVendor(vendors, time);
         isOpen = true;
-        index =+ 1;
+        openSalePointIndex =+ 1;
 
     }
 
-    public void closePoint(ArrayList<Vendor> vendors, int index){
+    public void closePoint(ArrayList<Vendor> vendors){
 
         removeVendor(vendors);
         this.isOpen = false;
-        index =- 1;
+        openSalePointIndex =- 1;
 
     }
 
@@ -93,7 +93,7 @@ public class SalePoint extends Place {
         baggageControlPoint.addPassengers(passengersToMove);
     }
 
-    public static int getOpenSalePointIndex() {
+    public int getOpenSalePointIndex() {
         return openSalePointIndex;
     }
 }

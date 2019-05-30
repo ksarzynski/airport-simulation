@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="fbb0f187-7c88-44ae-a85f-49e764216cf3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/airport/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/airport/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/airport/app/place/BaggageControlPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/airport/app/place/BaggageControlPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/airport/app/place/ControlPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/airport/app/place/ControlPoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/airport/app/place/SalePoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/airport/app/place/SalePoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/airport/simulation/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/airport/simulation/Schedule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/airport/simulation/Simulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/airport/simulation/Simulation.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -21,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/airport/simulation/Simulation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2295">
-              <caret line="135" column="37" selection-start-line="135" selection-start-column="37" selection-end-line="135" selection-end-column="37" />
+            <state relative-caret-position="-665">
+              <caret line="162" column="122" selection-start-line="162" selection-start-column="122" selection-end-line="162" selection-end-column="122" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -33,11 +33,82 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/airport/simulation/Schedule.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/place/Place.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+            <state relative-caret-position="46">
+              <caret line="34" column="37" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#671#672#0" expanded="true" />
+                <element signature="e#721#722#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/airport/simulation/OpenCSVReader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/belongings/Baggage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="697">
+              <caret line="49" column="38" selection-start-line="49" selection-start-column="38" selection-end-line="49" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/place/BaggageControlPoint.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="522">
+              <caret line="88" column="79" selection-start-line="88" selection-start-column="79" selection-end-line="88" selection-end-column="79" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/place/DutyFreeZone.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="86">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/airport/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -48,22 +119,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/place/SalePoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="77" lean-forward="true" selection-start-line="77" selection-end-line="77" />
+            <state relative-caret-position="491">
+              <caret line="95" column="4" lean-forward="true" selection-start-line="95" selection-start-column="4" selection-end-line="97" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#591#592#0" expanded="true" />
-                <element signature="e#635#636#0" expanded="true" />
+                <element signature="e#1356#1357#0" expanded="true" />
+                <element signature="e#1408#1409#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/airport/Main.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/place/ControlPoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+            <state relative-caret-position="391">
+              <caret line="53" column="5" lean-forward="true" selection-start-line="41" selection-start-column="3" selection-end-line="53" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -113,7 +184,6 @@
         <option value="$PROJECT_DIR$/src/main/java/airport/app/person/Pilot.java" />
         <option value="$PROJECT_DIR$/src/main/java/airport/simulation/Clock.java" />
         <option value="$PROJECT_DIR$/src/main/java/airport/app/belongings/Ticket.java" />
-        <option value="$PROJECT_DIR$/src/main/java/airport/app/place/BaggageControlPoint.java" />
         <option value="$PROJECT_DIR$/src/main/java/airport/app/place/DutyFreeZone.java" />
         <option value="$PROJECT_DIR$/src/main/java/airport/app/person/Employee.java" />
         <option value="$PROJECT_DIR$/src/main/java/airport/app/person/Person.java" />
@@ -122,13 +192,14 @@
         <option value="$PROJECT_DIR$/src/main/java/airport/app/person/Vendor.java" />
         <option value="$PROJECT_DIR$/src/main/resources/airplanes.csv" />
         <option value="$PROJECT_DIR$/src/main/java/airport/simulation/OpenCSVReader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/airport/app/place/ControlPoint.java" />
         <option value="$PROJECT_DIR$/src/main/java/airport/app/belongings/Baggage.java" />
         <option value="$PROJECT_DIR$/src/main/java/airport/app/person/Passenger.java" />
         <option value="$PROJECT_DIR$/src/main/java/airport/app/place/Place.java" />
         <option value="$PROJECT_DIR$/src/main/java/airport/simulation/Schedule.java" />
         <option value="$PROJECT_DIR$/src/main/java/airport/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/airport/app/place/SalePoint.java" />
+        <option value="$PROJECT_DIR$/src/main/java/airport/app/place/ControlPoint.java" />
+        <option value="$PROJECT_DIR$/src/main/java/airport/app/place/BaggageControlPoint.java" />
         <option value="$PROJECT_DIR$/src/main/java/airport/simulation/Simulation.java" />
       </list>
     </option>
@@ -152,6 +223,87 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="naprawa2" type="58d84e3e:PackageViewProjectNode" />
+              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="naprawa2" type="58d84e3e:PackageViewProjectNode" />
+              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
+              <item name="main" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="naprawa2" type="58d84e3e:PackageViewProjectNode" />
+              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
+              <item name="main" type="1f31426a:PackageElementNode" />
+              <item name="java.airport" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="naprawa2" type="58d84e3e:PackageViewProjectNode" />
+              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
+              <item name="main" type="1f31426a:PackageElementNode" />
+              <item name="java.airport" type="1f31426a:PackageElementNode" />
+              <item name="app" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="naprawa2" type="58d84e3e:PackageViewProjectNode" />
+              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
+              <item name="main" type="1f31426a:PackageElementNode" />
+              <item name="java.airport" type="1f31426a:PackageElementNode" />
+              <item name="app" type="1f31426a:PackageElementNode" />
+              <item name="airplane" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="naprawa2" type="58d84e3e:PackageViewProjectNode" />
+              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
+              <item name="main" type="1f31426a:PackageElementNode" />
+              <item name="java.airport" type="1f31426a:PackageElementNode" />
+              <item name="app" type="1f31426a:PackageElementNode" />
+              <item name="belongings" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="naprawa2" type="58d84e3e:PackageViewProjectNode" />
+              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
+              <item name="main" type="1f31426a:PackageElementNode" />
+              <item name="java.airport" type="1f31426a:PackageElementNode" />
+              <item name="app" type="1f31426a:PackageElementNode" />
+              <item name="person" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="naprawa2" type="58d84e3e:PackageViewProjectNode" />
+              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
+              <item name="main" type="1f31426a:PackageElementNode" />
+              <item name="java.airport" type="1f31426a:PackageElementNode" />
+              <item name="app" type="1f31426a:PackageElementNode" />
+              <item name="place" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="naprawa2" type="58d84e3e:PackageViewProjectNode" />
+              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
+              <item name="main" type="1f31426a:PackageElementNode" />
+              <item name="java.airport" type="1f31426a:PackageElementNode" />
+              <item name="gui" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="naprawa2" type="58d84e3e:PackageViewProjectNode" />
+              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
+              <item name="main" type="1f31426a:PackageElementNode" />
+              <item name="java.airport" type="1f31426a:PackageElementNode" />
+              <item name="simulation" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="naprawa2" type="58d84e3e:PackageViewProjectNode" />
+              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
+              <item name="main" type="1f31426a:PackageElementNode" />
+              <item name="resources" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -241,70 +393,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="airportSimulation" type="58d84e3e:PackageViewProjectNode" />
-              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="airportSimulation" type="58d84e3e:PackageViewProjectNode" />
-              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
-              <item name="main" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="airportSimulation" type="58d84e3e:PackageViewProjectNode" />
-              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
-              <item name="main" type="1f31426a:PackageElementNode" />
-              <item name="java.airport" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="airportSimulation" type="58d84e3e:PackageViewProjectNode" />
-              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
-              <item name="main" type="1f31426a:PackageElementNode" />
-              <item name="java.airport" type="1f31426a:PackageElementNode" />
-              <item name="app" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="airportSimulation" type="58d84e3e:PackageViewProjectNode" />
-              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
-              <item name="main" type="1f31426a:PackageElementNode" />
-              <item name="java.airport" type="1f31426a:PackageElementNode" />
-              <item name="app" type="1f31426a:PackageElementNode" />
-              <item name="person" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="airportSimulation" type="58d84e3e:PackageViewProjectNode" />
-              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
-              <item name="main" type="1f31426a:PackageElementNode" />
-              <item name="java.airport" type="1f31426a:PackageElementNode" />
-              <item name="app" type="1f31426a:PackageElementNode" />
-              <item name="place" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="airportSimulation" type="58d84e3e:PackageViewProjectNode" />
-              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
-              <item name="main" type="1f31426a:PackageElementNode" />
-              <item name="java.airport" type="1f31426a:PackageElementNode" />
-              <item name="simulation" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="airportSimulation" type="58d84e3e:PackageViewProjectNode" />
-              <item name="airportSimulation" type="616d4139:PackageViewModuleNode" />
-              <item name="main" type="1f31426a:PackageElementNode" />
-              <item name="resources" type="1f31426a:PackageElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558651900275" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559254375326" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.gitignore" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -428,7 +522,14 @@
       <option name="project" value="LOCAL" />
       <updated>1559243387705</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="A - indexes">
+      <created>1559253359613</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1559253359613</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView">
@@ -441,10 +542,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1096" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11486486" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15436241" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -462,8 +563,8 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3427762" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32917964" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50067115" side_tool="true" weight="0.33002833" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49932885" weight="0.33333334" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32606438" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49932885" weight="0.33286119" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32577905" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24966443" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -559,7 +660,8 @@
     <MESSAGE value="A-places and airplane to simulation" />
     <MESSAGE value="A-simulation cycle" />
     <MESSAGE value="R-.gitkeep from resources" />
-    <option name="LAST_COMMIT_MESSAGE" value="R-.gitkeep from resources" />
+    <MESSAGE value="A - indexes" />
+    <option name="LAST_COMMIT_MESSAGE" value="A - indexes" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -597,29 +699,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/place/DutyFreeZone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="31" column="61" lean-forward="true" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/lang/NumberFormatException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/controllers.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/lang/NumberFormatException.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/controllers.csv" />
     <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/airplane/Airplane.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -669,16 +750,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/airplanes.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="462">
-          <caret line="98" column="49" lean-forward="true" selection-start-line="98" selection-start-column="49" selection-end-line="98" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/airplanes.csv" />
     <entry file="jar://$PROJECT_DIR$/lib/opencsv-4.6.jar!/com/opencsv/CSVReader.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="191">
@@ -696,71 +768,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/place/BaggageControlPoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="64" column="57" selection-start-line="64" selection-start-column="57" selection-end-line="64" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/airport/simulation/OpenCSVReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/place/ControlPoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="46" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/lang/Runnable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="67" column="25" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/util/TimerTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="95" column="25" selection-start-line="95" selection-start-column="25" selection-end-line="95" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/vendors.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="879">
-          <caret line="99" column="18" lean-forward="true" selection-start-line="99" selection-start-column="16" selection-end-line="99" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/passenger.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="-1428">
-          <caret line="3" column="23" lean-forward="true" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/lang/Runnable.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/util/TimerTask.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/vendors.csv" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/passenger.csv" />
     <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/belongings/Baggage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="33" column="21" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="25" />
+        <state relative-caret-position="697">
+          <caret line="49" column="38" selection-start-line="49" selection-start-column="38" selection-end-line="49" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -783,35 +798,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="142" column="21" lean-forward="true" selection-start-line="142" selection-start-column="4" selection-end-line="142" selection-end-column="21" />
-          <folding>
-            <element signature="e#11595#11596#0" expanded="true" />
-            <element signature="e#11622#11623#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/text/DateFormat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="389" column="16" selection-start-line="389" selection-start-column="16" selection-end-line="389" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/util/Objects.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="371" column="29" selection-start-line="371" selection-start-column="29" selection-end-line="371" selection-end-column="29" />
-          <folding>
-            <element signature="e#14874#14875#0" expanded="true" />
-            <element signature="e#14942#14943#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/util/ArrayList.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/text/DateFormat.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-12/lib/src.zip!/java.base/java/util/Objects.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/airport/simulation/Clock.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -824,43 +813,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/airport/simulation/Schedule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="50" column="29" lean-forward="true" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1480#1481#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/airport/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        <state relative-caret-position="102">
+          <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/place/SalePoint.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/airport/simulation/Schedule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="77" lean-forward="true" selection-start-line="77" selection-end-line="77" />
+        <state relative-caret-position="510">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#591#592#0" expanded="true" />
-            <element signature="e#635#636#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/airport/simulation/Simulation.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/airport/simulation/OpenCSVReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2295">
-          <caret line="135" column="37" selection-start-line="135" selection-start-column="37" selection-end-line="135" selection-end-column="37" />
+        <state relative-caret-position="255">
+          <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -869,8 +845,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/place/Place.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+        <state relative-caret-position="46">
+          <caret line="34" column="37" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#671#672#0" expanded="true" />
+            <element signature="e#721#722#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/place/DutyFreeZone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/place/SalePoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="95" column="4" lean-forward="true" selection-start-line="95" selection-start-column="4" selection-end-line="97" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1356#1357#0" expanded="true" />
+            <element signature="e#1408#1409#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/place/ControlPoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="53" column="5" lean-forward="true" selection-start-line="41" selection-start-column="3" selection-end-line="53" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/airport/app/place/BaggageControlPoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="88" column="79" selection-start-line="88" selection-start-column="79" selection-end-line="88" selection-end-column="79" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/airport/simulation/Simulation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-665">
+          <caret line="162" column="122" selection-start-line="162" selection-start-column="122" selection-end-line="162" selection-end-column="122" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

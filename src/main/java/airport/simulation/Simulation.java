@@ -11,10 +11,6 @@ import java.util.*;
 
 public class Simulation {
 
-    int openedSalePoints;
-    int openedControlPoints;
-    int openedBaggageControlPoints;
-
     private Schedule schedule;
     private ArrayList<Ticket> allAvailableTickets = new ArrayList<>();
     private ArrayList<Vendor> allVendors = new ArrayList<>();
@@ -44,6 +40,7 @@ public class Simulation {
         this.airplanes.addAll(addNewRandomAirplane(flightsAmount));
 
         this.dutyFreeZone = new DutyFreeZone("Strefa bezcłowa", 10000, 100);
+
     }
 
     private void start(Integer simulationSpeedInMiliseconds, Integer timeShift) {
@@ -149,14 +146,14 @@ public class Simulation {
     private void openRandomSalePoints(Integer amount) throws ParseException {
         List randomIDs = getRandomNumbers(0, salePoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
-            salePoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allVendors, "00:00",openedSalePoints);
+            salePoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allVendors, "00:00");
         }
     }
 
     private void openRandomControlPoints(Integer amount) throws ParseException {
         List randomIDs = getRandomNumbers(0, controlPoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
-            controlPoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allControllers, "00:00",openedControlPoints);
+            controlPoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allControllers, "00:00");
         }
     }
 
@@ -231,4 +228,6 @@ public class Simulation {
     }
 
 }
+
+
 

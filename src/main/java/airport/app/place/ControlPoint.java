@@ -39,18 +39,18 @@ public class ControlPoint extends Place {
 
     Integer getControllerEfficiency() { return this.controller.getEfficiency(); }
 
-    public void openPoint(ArrayList<Controller> controllers, String time, int index) throws ParseException {
+    public void openPoint(ArrayList<Controller> controllers, String time) throws ParseException {
 
         isOpen = true;
         setRandomAvailableController(controllers, time);
-        index =+ 1;
+        controlPointIndex += 1;
     }
 
-    public void closePoint(ArrayList<Controller> controllers, int index){
+    public void closePoint(ArrayList<Controller> controllers){
 
         isOpen = false;
         removeController(controllers);
-        index =- 1;
+        controlPointIndex -= 1;
     }
 
     void setRandomAvailableController(ArrayList<Controller> controllers, String time) throws ParseException {
@@ -76,5 +76,9 @@ public class ControlPoint extends Place {
 
         dutyFreeZone.addPassengers(passengersToMove);
 
+    }
+
+    public int getOpenSalePointIndex() {
+        return controlPointIndex;
     }
 }
