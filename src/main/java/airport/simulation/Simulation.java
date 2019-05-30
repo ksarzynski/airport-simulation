@@ -3,6 +3,8 @@ package main.java.airport.simulation;
 import main.java.airport.app.airplane.Airplane;
 import main.java.airport.app.belongings.Ticket;
 import main.java.airport.app.person.*;
+import main.java.airport.app.place.ControlPoint;
+import main.java.airport.app.place.SalePoint;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ public class Simulation {
     private ArrayList<Vendor> allVendors = new ArrayList<>();
     private ArrayList<Controller> allControllers = new ArrayList<>();
     private ArrayList<Airplane> airplanes = new ArrayList<>();
+    private ArrayList<SalePoint> salePoints = new ArrayList<>();
+    private ArrayList<ControlPoint> controlPoints = new ArrayList<>();
 
     public void start() throws IOException {
 
@@ -23,9 +27,14 @@ public class Simulation {
         run(500, 10);
     }
 
-    private void initialization(Integer sellPointsAmout, Integer vendorsAmount, Integer controlPointsAmount, Integer baggageControlPointsAmount, Integer controllersAmount, Integer flightsAmount) throws IOException {
+    private void initialization(Integer salePointsAmout, Integer vendorsAmount, Integer controlPointsAmount, Integer baggageControlPointsAmount, Integer controllersAmount, Integer flightsAmount) throws IOException {
         this.allVendors.addAll(addNewRandomVendors(vendorsAmount));
-//        this.airplanes.addAll(addNewRandomAirplane(flightsAmount));
+        this.salePoints.addAll(createSalePoints(salePointsAmout, 10, 25));
+
+        this.allControllers.addAll(addNewRandomControllers(controllersAmount));
+        this.controlPoints.addAll(createControllPoints(controlPointsAmount, 10, 25));
+
+        this.airplanes.addAll(addNewRandomAirplane(flightsAmount));
     }
 
     private void run(Integer simulationSpeedInMiliseconds, Integer timeShift) {
@@ -54,29 +63,27 @@ public class Simulation {
         OpenCSVReader openCSVReader = new OpenCSVReader();
         Integer randomID = getRandomNumber(0, 99);
         String[] pilotData = openCSVReader.readCSV("pilots.csv", randomID);
-        Pilot pilot = new Pilot(pilotData[1]);
-        return pilot;
+        return new Pilot(pilotData[1]);
     }
 
-//    private ArrayList<Airplane> addNewRandomAirplane(Integer amount) throws IOException {
-//        OpenCSVReader openCSVReader = new OpenCSVReader();
-//        ArrayList<Airplane> airplanes = new ArrayList<>();
-//        List randomID = getRandomNumbers(0, 99, amount);
-//        for (int i=0; i<amount; i++){
-//            System.out.println(Integer.parseInt(randomID.get(i).toString()));
-//            String[] airplaneData = openCSVReader.readCSV("airplanes.csv", Integer.parseInt(randomID.get(i).toString()));
-//            Airplane airplane = new Airplane(
-//                    airplaneData[1],
-//                    airplaneData[2],
-//                    Integer.parseInt(airplaneData[3]),
-//                    Integer.parseInt(airplaneData[4]),
-//                    addNewRandomPilot(),
-//                    new Date()
-//            );
-//            airplanes.add(airplane);
-//        }
-//        return airplanes;
-//    }
+    private ArrayList<Airplane> addNewRandomAirplane(Integer amount) throws IOException {
+        OpenCSVReader openCSVReader = new OpenCSVReader();
+        ArrayList<Airplane> airplanes = new ArrayList<>();
+        List randomID = getRandomNumbers(0, 99, amount);
+        for (int i=0; i<amount; i++){
+            String[] airplaneData = openCSVReader.readCSV("airplanes.csv", Integer.parseInt(randomID.get(i).toString()));
+            Airplane airplane = new Airplane(
+                    airplaneData[1],
+                    airplaneData[2],
+                    Integer.parseInt(airplaneData[3]),
+                    Integer.parseInt(airplaneData[4]),
+                    addNewRandomPilot(),
+                    new Date()
+            );
+            airplanes.add(airplane);
+        }
+        return airplanes;
+    }
 
     private ArrayList<Controller> addNewRandomControllers(Integer amount) throws IOException {
         OpenCSVReader openCSVReader = new OpenCSVReader();
@@ -88,6 +95,26 @@ public class Simulation {
             controllers.add(controller);
         }
         return controllers;
+    }
+
+    private ArrayList<SalePoint> createSalePoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
+        ArrayList<SalePoint> salePoints = new ArrayList<>();
+        for(int i=0; i<amount; i++) {
+            Integer queueSize = getRandomNumber(minAvailableQueue, maxAvailableQueue);
+            SalePoint salePoint = new SalePoint("Punkt sprzedaży nr " + (i+1), queueSize);
+            salePoints.add(salePoint);
+        }
+        return salePoints;
+    }
+
+    private ArrayList<ControlPoint> createControllPoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
+        ArrayList<ControlPoint> controlPoints = new ArrayList<>();
+        for(int i=0; i<amount; i++) {
+            Integer queueSize = getRandomNumber(minAvailableQueue, maxAvailableQueue);
+            ControlPoint controlPoint = new ControlPoint("Punkt kontrolny nr " + (i+1), queueSize);
+            controlPoints.add(controlPoint);
+        }
+        return controlPoints;
     }
 
     public Ticket getAvailableTicket() {
@@ -111,7 +138,7 @@ public class Simulation {
     }
 
     private List getRandomNumbers(Integer min, Integer max, Integer amount){
-        ArrayList numbers = new ArrayList();
+        ArrayList<Integer> numbers = new ArrayList();
         for(int i = min-1; i < max; i++)
         {
             numbers.add(i+1);
@@ -121,7 +148,7 @@ public class Simulation {
     }
 
     private Integer getRandomNumber(Integer min, Integer max){
-        ArrayList numbers = new ArrayList();
+        ArrayList<Integer> numbers = new ArrayList();
         for(int i = min-1; i < max; i++)
         {
             numbers.add(i+1);

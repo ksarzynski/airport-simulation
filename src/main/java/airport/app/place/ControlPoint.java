@@ -12,11 +12,11 @@ import java.util.Random;
 
 public class ControlPoint extends Place {
 
-    boolean isOpen;
+    private boolean isOpen;
 
     private Controller controller;
 
-    ControlPoint(String name, Integer maxPeopleAmount)
+    public ControlPoint(String name, Integer maxPeopleAmount)
     {
         super(name, maxPeopleAmount);
     }

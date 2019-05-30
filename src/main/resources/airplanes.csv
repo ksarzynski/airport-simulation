@@ -1,101 +1,101 @@
 id;flightName;direction;maxPassengers;maxBaggageWeight
-0;faucibus lectus, a sollicitudin;Finland;131;2882
-1;amet, dapibus id,;Grenada;105;2310
+0;faucibus lectus a sollicitudin;Finland;131;2882
+1;amet dapibus id;Grenada;105;2310
 2;mattis velit justo nec;Egypt;116;2552
-3;mollis nec, cursus a,;Peru;42;924
-4;a, aliquet vel, vulputate;Seychelles;98;2156
-5;ac risus.;Nicaragua;34;748
-6;Mauris eu turpis. Nulla;Burundi;38;836
+3;mollis nec cursus a;Peru;42;924
+4;a aliquet vel vulputate;Seychelles;98;2156
+5;ac risus;Nicaragua;34;748
+6;Mauris eu turpis Nulla;Burundi;38;836
 7;nisl arcu iaculis;Bahamas;98;2156
-8;Curae; Phasellus ornare.;Nepal;62;1364
+8;Curae  Phasellus ornare;Nepal;62;1364
 9;vel arcu eu;Somalia;40;880
-10;Mauris vestibulum, neque sed;Eritrea;71;1562
+10;Mauris vestibulum neque sed;Eritrea;71;1562
 11;Nullam feugiat;Christmas Island;32;704
-12;lacinia. Sed;Zimbabwe;38;836
-13;ac, eleifend vitae, erat.;Oman;128;2816
+12;lacinia Sed;Zimbabwe;38;836
+13;ac eleifend vitae erat;Oman;128;2816
 14;Mauris blandit;Brunei;82;1804
 15;Nunc ut;Argentina;33;726
-16;a, auctor non, feugiat;Macao;69;1518
-17;ut cursus luctus,;American Samoa;106;2332
-18;fermentum arcu. Vestibulum;Gibraltar;110;2420
-19;ipsum. Donec;Falkland Islands;67;1474
-20;dolor. Fusce mi lorem,;Egypt;71;1562
+16;a auctor non feugiat;Macao;69;1518
+17;ut cursus luctus;American Samoa;106;2332
+18;fermentum arcu Vestibulum;Gibraltar;110;2420
+19;ipsum Donec;Falkland Islands;67;1474
+20;dolor Fusce mi lorem;Egypt;71;1562
 21;morbi tristique;French Southern Territories;112;2464
-22;sodales at, velit. Pellentesque;Bangladesh;31;682
-23;Pellentesque tincidunt tempus risus.;Netherlands;73;1606
-24;nonummy ac,;Nepal;139;3058
-25;lorem, luctus;Sierra Leone;92;2024
-26;sit amet orci.;Kuwait;68;1496
-27;nonummy ut, molestie in,;Botswana;117;2574
+22;sodales at velit Pellentesque;Bangladesh;31;682
+23;Pellentesque tincidunt tempus risus;Netherlands;73;1606
+24;nonummy ac;Nepal;139;3058
+25;lorem luctus;Sierra Leone;92;2024
+26;sit amet orci;Kuwait;68;1496
+27;nonummy ut molestie in;Botswana;117;2574
 28;natoque penatibus et magnis;Norfolk Island;110;2420
-29;nunc. In;Maldives;31;682
-30;justo eu arcu.;Wallis and Futuna;108;2376
-31;ligula. Donec luctus aliquet;Dominican Republic;74;1628
-32;a, arcu.;Cook Islands;60;1320
-33;eget ipsum. Suspendisse sagittis.;Thailand;130;2860
-34;Aenean sed;?…land Islands;66;1452
+29;nunc In;Maldives;31;682
+30;justo eu arcu;Wallis and Futuna;108;2376
+31;ligula Donec luctus aliquet;Dominican Republic;74;1628
+32;a arcu;Cook Islands;60;1320
+33;eget ipsum Suspendisse sagittis;Thailand;130;2860
+34;Aenean sed;land Islands;66;1452
 35;et malesuada;Palau;139;3058
-36;iaculis odio. Nam;Central African Republic;68;1496
-37;euismod urna. Nullam;Nauru;55;1210
-38;Integer mollis.;Nicaragua;82;1804
+36;iaculis odio Nam;Central African Republic;68;1496
+37;euismod urna Nullam;Nauru;55;1210
+38;Integer mollis;Nicaragua;82;1804
 39;et ultrices posuere;Iraq;134;2948
-40;nibh. Donec est;Ecuador;52;1144
-41;a, arcu. Sed;Italy;104;2288
-42;Praesent eu dui.;Somalia;119;2618
+40;nibh Donec est;Ecuador;52;1144
+41;a arcu Sed;Italy;104;2288
+42;Praesent eu dui;Somalia;119;2618
 43;non massa non;Antigua and Barbuda;37;814
-44;rutrum magna.;Algeria;99;2178
-45;neque sed dictum eleifend,;Finland;87;1914
+44;rutrum magna;Algeria;99;2178
+45;neque sed dictum eleifend;Finland;87;1914
 46;vitae purus gravida;Dominican Republic;38;836
-47;purus, accumsan interdum libero;Poland;43;946
-48;In condimentum. Donec;Timor-Leste;55;1210
+47;purus accumsan interdum libero;Poland;43;946
+48;In condimentum Donec;Timor-Leste;55;1210
 49;ante ipsum;Mozambique;76;1672
-50;mi pede, nonummy;United Arab Emirates;53;1166
+50;mi pede nonummy;United Arab Emirates;53;1166
 51;Pellentesque habitant morbi tristique;Sierra Leone;98;2156
-52;lectus, a sollicitudin orci;Czech Republic;41;902
+52;lectus a sollicitudin orci;Czech Republic;41;902
 53;luctus et;Kenya;123;2706
-54;mollis. Phasellus;Barbados;41;902
+54;mollis Phasellus;Barbados;41;902
 55;Aliquam nec;Bouvet Island;73;1606
-56;magna. Lorem ipsum;Bhutan;143;3146
+56;magna Lorem ipsum;Bhutan;143;3146
 57;erat vel pede;Hong Kong;76;1672
 58;luctus felis purus ac;Laos;137;3014
-59;Sed eget lacus.;Gabon;108;2376
+59;Sed eget lacus;Gabon;108;2376
 60;natoque penatibus et;Cape Verde;37;814
-61;sit amet, consectetuer adipiscing;Guinea-Bissau;65;1430
-62;a ultricies;Virgin Islands, United States;119;2618
+61;sit amet consectetuer adipiscing;Guinea-Bissau;65;1430
+62;a ultricies;Virgin Islands United States;119;2618
 63;Vivamus euismod;Bolivia;38;836
-64;nec, diam. Duis mi;Tunisia;116;2552
+64;nec diam Duis mi;Tunisia;116;2552
 65;Maecenas libero;Venezuela;87;1914
-66;Donec tincidunt. Donec vitae;United Kingdom (Great Britain);75;1650
-67;facilisis. Suspendisse commodo tincidunt;French Polynesia;142;3124
-68;urna. Vivamus molestie;Austria;43;946
-69;id, ante.;Iran;141;3102
-70;mauris a nunc.;Uzbekistan;119;2618
-71;interdum ligula eu enim.;Egypt;30;660
+66;Donec tincidunt Donec vitae;United Kingdom (Great Britain);75;1650
+67;facilisis Suspendisse commodo tincidunt;French Polynesia;142;3124
+68;urna Vivamus molestie;Austria;43;946
+69;id ante;Iran;141;3102
+70;mauris a nunc;Uzbekistan;119;2618
+71;interdum ligula eu enim;Egypt;30;660
 72;Duis a mi;Heard Island and Mcdonald Islands;127;2794
-73;luctus lobortis. Class aptent;Romania;36;792
-74;sociis natoque penatibus;Cura?§ao;110;2420
-75;purus sapien, gravida;Palau;38;836
+73;luctus lobortis Class aptent;Romania;36;792
+74;sociis natoque penatibus;Curaao;110;2420
+75;purus sapien gravida;Palau;38;836
 76;lobortis tellus justo sit;Swaziland;41;902
-77;ipsum dolor sit amet,;Tanzania;31;682
-78;orci, adipiscing non,;Sri Lanka;83;1826
+77;ipsum dolor sit amet;Tanzania;31;682
+78;orci adipiscing non;Sri Lanka;83;1826
 79;justo sit;Lesotho;72;1584
 80;mauris ut;Kyrgyzstan;65;1430
-81;ut, pellentesque;Slovakia;77;1694
+81;ut pellentesque;Slovakia;77;1694
 82;id risus quis diam;Malaysia;35;770
-83;feugiat placerat velit. Quisque;Chile;102;2244
-84;Maecenas mi felis,;India;146;3212
-85;eu, eleifend;Cura?§ao;77;1694
+83;feugiat placerat velit Quisque;Chile;102;2244
+84;Maecenas mi felis;India;146;3212
+85;eu eleifend;Curaao;77;1694
 86;Nulla eu neque pellentesque;Guyana;107;2354
-87;dui. Cum sociis;Falkland Islands;142;3124
-88;Sed nulla ante,;Saint Lucia;47;1034
-89;neque. In;Malta;149;3278
-90;lacus. Cras interdum.;Macao;108;2376
-91;sit amet, dapibus id,;Monaco;125;2750
-92;egestas ligula. Nullam;Iceland;72;1584
-93;nisl. Maecenas malesuada fringilla;French Polynesia;110;2420
-94;sed dui.;Jersey;94;2068
+87;dui Cum sociis;Falkland Islands;142;3124
+88;Sed nulla ante;Saint Lucia;47;1034
+89;neque In;Malta;149;3278
+90;lacus Cras interdum;Macao;108;2376
+91;sit amet dapibus id;Monaco;125;2750
+92;egestas ligula Nullam;Iceland;72;1584
+93;nisl Maecenas malesuada fringilla;French Polynesia;110;2420
+94;sed dui;Jersey;94;2068
 95;a sollicitudin orci sem;Holy See (Vatican City State);83;1826
-96;a, auctor;Australia;120;2640
-97;cursus purus. Nullam scelerisque;Macao;127;2794
-98;Fusce mi lorem, vehicula;Ethiopia;98;2156
+96;a auctor;Australia;120;2640
+97;cursus purus Nullam scelerisque;Macao;127;2794
+98;Fusce mi lorem vehicula;Ethiopia;98;2156
 99;et magnis;South Georgia and The South Sandwich Islands;77;1694
