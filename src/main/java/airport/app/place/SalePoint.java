@@ -14,8 +14,6 @@ import java.util.Random;
 
 public class SalePoint extends Place {
 
-    private boolean isOpen;
-
     private Vendor vendor;
 
     private static int openSalePointIndex;
@@ -96,4 +94,5 @@ public class SalePoint extends Place {
     public int getOpenSalePointIndex() {
         return openSalePointIndex;
     }
+
 }

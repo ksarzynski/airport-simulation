@@ -12,18 +12,16 @@ import java.util.Random;
 
 public class ControlPoint extends Place {
 
-    boolean isOpen;
-
     private Controller controller;
 
-    static int controlPointIndex;
+    private static int controlPointIndex;
 
     public ControlPoint(String name, Integer maxPeopleAmount)
     {
         super(name, maxPeopleAmount);
     }
 
-    void setController(Controller controller) {
+    private void setController(Controller controller) {
 
         this.employee = controller;
         this.controller = (Controller)employee;
@@ -81,4 +79,5 @@ public class ControlPoint extends Place {
     public int getOpenSalePointIndex() {
         return controlPointIndex;
     }
+
 }

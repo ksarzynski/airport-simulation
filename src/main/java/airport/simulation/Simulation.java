@@ -54,7 +54,7 @@ public class Simulation {
         for (int i=0; i<amount; i++){
             String[] passengerData = openCSVReader.readCSV("passenger.csv", Integer.parseInt(randomID.get(i).toString()));
             Passenger passenger = new Passenger(passengerData[0]);
-            if(passengerData[1] != "0"){
+            if(passengerData[1].equals( "0")){
                 passenger.setBaggage(Integer.parseInt(passengerData[2]));
             }
 
@@ -208,7 +208,7 @@ public class Simulation {
     }
 
     private List getRandomNumbers(Integer min, Integer max, Integer amount){
-        ArrayList<Integer> numbers = new ArrayList();
+        ArrayList<Integer> numbers = new ArrayList<>();
         for(int i = min-1; i < max; i++)
         {
             numbers.add(i+1);
@@ -218,7 +218,7 @@ public class Simulation {
     }
 
     private Integer getRandomNumber(Integer min, Integer max){
-        ArrayList<Integer> numbers = new ArrayList();
+        ArrayList<Integer> numbers = new ArrayList<>();
         for(int i = min-1; i < max; i++)
         {
             numbers.add(i+1);
@@ -227,6 +227,45 @@ public class Simulation {
         return Integer.parseInt(numbers.get(0).toString());
     }
 
+    void moveFromSalePoints()
+    {
+        int index = 0;
+        for(SalePoint salePoint : salePoints)
+        {
+            if(salePoint.getIsOpen())
+            {
+                while(!baggageControlPoints.get(index).getIsOpen())
+                {
+                    index = getRandomNumber(0, baggageControlPoints.size()-1);
+                }
+
+                if(salePoint.getEmployee().getEfficiency() > salePoint.getPassangers().size())
+                    salePoint.movePassengersPoli(baggageControlPoints.get(index),salePoint.getPassangers().size());
+                else
+                    salePoint.movePassengersPoli(baggageControlPoints.get(index),salePoint.getEmployee().getEfficiency());
+            }
+        }
+    }
+
+    public void moveFromPlaces(ArrayList<Place> places)
+    {
+        int index = 0;
+        for(Place place : places)
+        {
+            if(place.getIsOpen())
+            {
+                while(!baggageControlPoints.get(index).getIsOpen())
+                {
+                    index = getRandomNumber(0, baggageControlPoints.size()-1);
+                }
+
+                if(place.getEmployee().getEfficiency() > place.getPassangers().size())
+                    place.movePassengersPoli(baggageControlPoints.get(index), place.getPassangers().size());
+                else
+                    place.movePassengersPoli(baggageControlPoints.get(index), place.getEmployee().getEfficiency());
+            }
+        }
+    }
 }
 
 

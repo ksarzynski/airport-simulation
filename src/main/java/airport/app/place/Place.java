@@ -9,6 +9,7 @@ import java.util.List;
 public abstract class Place {
     private String name;
     private int maxPeopleAmount;
+    boolean isOpen;
     List<Passenger> passengers;
     Employee employee;
 
@@ -30,7 +31,7 @@ public abstract class Place {
         this.passengers.addAll(passengers);
     }
 
-    public void addPassengers(List<Passenger> passengers) {
+    void addPassengers(List<Passenger> passengers) {
 
        this.passengers.addAll(passengers);
 
@@ -61,6 +62,8 @@ public abstract class Place {
         place.addPassengers(passengersToMove);
 
     }
+
+    public boolean getIsOpen() { return isOpen; }
 
 }
 
