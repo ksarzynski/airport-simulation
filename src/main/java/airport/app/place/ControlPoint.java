@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class ControlPoint extends Place {
 
-    boolean isOpen;
+    private boolean isOpen;
 
     private Controller controller;
 
@@ -21,19 +21,21 @@ public class ControlPoint extends Place {
         super(name, maxPeopleAmount);
     }
 
-    public void setController(Controller controller)
-    {
-        this.controller = controller;
+    private void setController(Controller controller) {
+
+        this.employee = controller;
+        this.controller = (Controller)employee;
+
     }
 
-    public void removeController(ArrayList <Controller> controllers){
+    private void removeController(ArrayList <Controller> controllers){
 
         controllers.add(this.controller);
-        this.controller = null;
+        this.employee = null;
 
     }
 
-    public Integer getControllerEfficiency() { return this.controller.getEfficiency(); }
+    Integer getControllerEfficiency() { return this.controller.getEfficiency(); }
 
     public void openPoint(ArrayList<Controller> controllers, Clock clock) throws ParseException {
 
@@ -49,7 +51,7 @@ public class ControlPoint extends Place {
 
     }
 
-    public void setRandomAvailableController(ArrayList<Controller> controllers, Clock clock) throws ParseException {
+    private void setRandomAvailableController(ArrayList<Controller> controllers, Clock clock) throws ParseException {
         Random r = new Random();
         int a = r.nextInt(controllers.size());
         Controller controller = controllers.get(a);

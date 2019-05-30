@@ -1,14 +1,16 @@
 package main.java.airport.app.place;
 
+import main.java.airport.app.person.Employee;
 import main.java.airport.app.person.Passenger;
 
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class Place {
+public abstract class Place {
     private String name;
     private int maxPeopleAmount;
     List<Passenger> passengers;
+    Employee employee;
 
     Place(String name, Integer maxPeopleAmount)
     {
@@ -28,7 +30,7 @@ abstract class Place {
         this.passengers.addAll(passengers);
     }
 
-    public void addPassengers(List<Passenger> passengers) {
+    void addPassengers(List<Passenger> passengers) {
 
        this.passengers.addAll(passengers);
 
@@ -37,6 +39,21 @@ abstract class Place {
     public int getQueueSize()
     {
         return this.maxPeopleAmount;
+    }
+
+    public Employee getEmployee(){ return this.employee;}
+
+    public void movePassengersPoli(Place place, int howMany){
+
+        ArrayList<Passenger> passengersToMove = new ArrayList<>();
+
+        for(int i = 0; i < howMany; i++)
+        {
+            passengersToMove.add(this.passengers.get(i));
+        }
+
+        place.addPassengers(passengersToMove);
+
     }
 
 }

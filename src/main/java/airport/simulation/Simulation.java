@@ -3,12 +3,11 @@ package main.java.airport.simulation;
 import main.java.airport.app.airplane.Airplane;
 import main.java.airport.app.belongings.Ticket;
 import main.java.airport.app.person.*;
+import main.java.airport.app.place.ControlPoint;
+import main.java.airport.app.place.Place;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Simulation {
     private Schedule schedule;
@@ -91,23 +90,42 @@ public class Simulation {
     }
 
     public Ticket getAvailableTicket() {
-        return allAvailableTickets.remove(0);
+
+        Random r = new Random();
+        int a = r.nextInt(allAvailableTickets.size());
+        return allAvailableTickets.remove(a);
+
     }
 
     public Vendor getAvailableVendor() {
-        return allVendors.remove(0);
+
+        Random r = new Random();
+        int a = r.nextInt(allVendors.size());
+        return allVendors.remove(a);
+
     }
 
     public Controller getAvailableController() {
+
+        Random r = new Random();
+        int a = r.nextInt(allControllers.size());
         return allControllers.remove(0);
     }
 
-    public void addVendor(Vendor vendor) {
-        // TODO: metoda
-    }
+    public void returnEmployeeToList(Place place) {
 
-    public void addController(Controller controller) {
-        // TODO: metoda
+        if(place.getEmployee() instanceof Controller){
+
+            allControllers.add((Controller)place.getEmployee());
+
+        }
+
+        else {
+
+            allVendors.add((Vendor)place.getEmployee());
+
+        }
+
     }
 
     private List getRandomNumbers(Integer min, Integer max, Integer amount){
@@ -129,4 +147,6 @@ public class Simulation {
         Collections.shuffle(numbers);
         return Integer.parseInt(numbers.get(1).toString());
     }
+
 }
+

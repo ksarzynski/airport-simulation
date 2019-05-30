@@ -5,7 +5,6 @@ import main.java.airport.app.person.Passenger;
 import main.java.airport.app.person.Vendor;
 import main.java.airport.simulation.Clock;
 
-import javax.naming.ldap.Control;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,12 +23,14 @@ public class SalePoint extends Place {
         super(name, maxPeopleAmount);
     }
 
-    public void setVendor(Vendor vendor)
-    {
-        this.vendor = vendor;
+    private void setVendor(Vendor vendor) {
+
+        this.employee = vendor;
+        this.vendor = (Vendor)employee;
+
     }
 
-    public void setRandomVendor (ArrayList<Vendor> vendors, Clock clock) throws ParseException {
+    private void setRandomVendor (ArrayList<Vendor> vendors, Clock clock) throws ParseException {
 
         Random r = new Random();
         int a = r.nextInt(vendors.size());
@@ -44,15 +45,15 @@ public class SalePoint extends Place {
 
     }
 
-    public void removeVendor(ArrayList<Vendor> vendors){
+    private void removeVendor(ArrayList<Vendor> vendors){
 
         vendors.add(this.vendor);
-        this.vendor = null;
+        this.employee = null;
     }
 
-    public Integer getVendorsEfficiency()
+    private Integer getVendorsEfficiency()
     {
-        return this.vendor.getEfficiency();
+        return this.employee.getEfficiency();
     }
 
     public void openPoint(ArrayList<Vendor> vendors, Clock clock) throws ParseException {
