@@ -56,18 +56,18 @@ public class SalePoint extends Place {
         return this.employee.getEfficiency();
     }
 
-    public void openPoint(ArrayList<Vendor> vendors, String time) throws ParseException {
+    public void openPoint(ArrayList<Vendor> vendors, String time, int index) throws ParseException {
         setRandomVendor(vendors, time);
         isOpen = true;
-        openSalePointIndex =+ 1;
+        index =+ 1;
 
     }
 
-    public void closePoint(ArrayList<Vendor> vendors){
+    public void closePoint(ArrayList<Vendor> vendors, int index){
 
         removeVendor(vendors);
         this.isOpen = false;
-        openSalePointIndex =- 1;
+        index =- 1;
 
     }
 

@@ -13,8 +13,6 @@ public class BaggageControlPoint extends ControlPoint {
 
     private Controller controller;
 
-    static int baggageControlPointIndex;
-
     private ArrayList<Baggage> baggages = new ArrayList<>();
 
     public BaggageControlPoint(String name, Integer maxPeopleAmount) {
@@ -70,20 +68,6 @@ public class BaggageControlPoint extends ControlPoint {
         }
 
         controlPoint.addPassengers(passengersToMove);
-    }
-
-    public void openPoint(ArrayList<Controller> controllers, String time) throws ParseException {
-
-        isOpen = true;
-        setRandomAvailableController(controllers, time);
-        baggageControlPointIndex =+ 1;
-    }
-
-    public void closePoint(ArrayList<Controller> controllers){
-
-        isOpen = false;
-        removeController(controllers);
-        baggageControlPointIndex =- 1;
     }
 
 }
