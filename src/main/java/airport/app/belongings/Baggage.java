@@ -3,26 +3,25 @@ package main.java.airport.app.belongings;
 import java.util.Random;
 
 public class Baggage {
-    private Double weight;
+    private Integer weight;
     private Integer dangerLevel;
     private Ticket ticket;
     private String status;
 
-    public Baggage(Double weight, Ticket ticket) {
+    public Baggage(Integer weight, Ticket ticket) {
         this.weight = weight;
         this.ticket = ticket;
         this.status = "not boarded";
         setRandomDangerLevel(1000);
     }
 
-    public Baggage(Double weight) {
+    public Baggage(Integer weight) {
         this.weight = weight;
         this.status = "not boarded";
         setRandomDangerLevel(1000);
-
     }
 
-    public Double getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
@@ -48,7 +47,7 @@ public class Baggage {
         int a = r.nextInt(accuracy);
         if(a==0)
             this.dangerLevel = 2;
-        else if(a % accuracy/5 == 0)
+        else if(a % accuracy/250 == 0)
             this.dangerLevel = 1;
         else this.dangerLevel = 0;
     }

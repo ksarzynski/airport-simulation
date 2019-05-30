@@ -3,8 +3,6 @@ package main.java.airport.app.person;
 import main.java.airport.app.belongings.Baggage;
 import main.java.airport.app.belongings.Ticket;
 
-import java.util.ArrayList;
-
 public class Passenger extends Person {
     private Baggage baggage;
     private Ticket ticket;
@@ -14,9 +12,9 @@ public class Passenger extends Person {
         super(name);
     }
 
-    public void setBaggage (Baggage baggage)
+    public void setBaggage (Integer weight)
     {
-        this.baggage = baggage;
+        this.baggage = new Baggage(weight);
     }
 
     public void setTicket (Ticket ticket)

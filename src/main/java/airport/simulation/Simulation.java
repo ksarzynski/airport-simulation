@@ -4,6 +4,7 @@ import main.java.airport.app.airplane.Airplane;
 import main.java.airport.app.belongings.Ticket;
 import main.java.airport.app.person.*;
 import main.java.airport.app.place.ControlPoint;
+import main.java.airport.app.place.DutyFreeZone;
 import main.java.airport.app.place.SalePoint;
 import main.java.airport.app.place.Place;
 
@@ -18,31 +19,44 @@ public class Simulation {
     private ArrayList<Airplane> airplanes = new ArrayList<>();
     private ArrayList<SalePoint> salePoints = new ArrayList<>();
     private ArrayList<ControlPoint> controlPoints = new ArrayList<>();
+    private DutyFreeZone dutyFreeZone;
 
     public void start() throws IOException {
 
         initialization(3,10,3, 3,10,6);
-        run(500, 10);
+        start(500, 10);
     }
 
-    private void initialization(Integer salePointsAmout, Integer vendorsAmount, Integer controlPointsAmount, Integer baggageControlPointsAmount, Integer controllersAmount, Integer flightsAmount) throws IOException {
+    private void initialization(Integer salePointsAmount, Integer vendorsAmount, Integer controlPointsAmount, Integer baggageControlPointsAmount, Integer controllersAmount, Integer flightsAmount) throws IOException {
         this.allVendors.addAll(addNewRandomVendors(vendorsAmount));
-        this.salePoints.addAll(createSalePoints(salePointsAmout, 10, 25));
+        this.salePoints.addAll(createSalePoints(salePointsAmount, 10, 25));
 
         this.allControllers.addAll(addNewRandomControllers(controllersAmount));
-        this.controlPoints.addAll(createControllPoints(controlPointsAmount, 10, 25));
+        this.controlPoints.addAll(createControlPoints(controlPointsAmount, 10, 25));
 
         this.airplanes.addAll(addNewRandomAirplane(flightsAmount));
+
+        this.dutyFreeZone = new DutyFreeZone("Strefa bezcłowa", 10000, 100);
     }
 
-    private void run(Integer simulationSpeedInMiliseconds, Integer timeShift) {
-        this.schedule = new Schedule(simulationSpeedInMiliseconds, timeShift);
+    private void start(Integer simulationSpeedInMiliseconds, Integer timeShift) {
+        this.schedule = new Schedule(simulationSpeedInMiliseconds, timeShift, this);
         schedule.runTimer();
     }
 
-    private ArrayList<Passenger> addNewRandomPassangers(Integer amount) {
-        // TODO: metoda
-        return new ArrayList<>();
+    ArrayList<Passenger> addNewRandomPassangers(Integer amount) throws IOException {
+        OpenCSVReader openCSVReader = new OpenCSVReader();
+        ArrayList<Passenger> passengers = new ArrayList<>();
+        List randomID = getRandomNumbers(0, 99, amount);
+        for (int i=0; i<amount; i++){
+            String[] passengerData = openCSVReader.readCSV("passenger.csv", Integer.parseInt(randomID.get(i).toString()));
+            Passenger passenger = new Passenger(passengerData[0]);
+            if(passengerData[1] != "0"){
+                passenger.setBaggage(Integer.parseInt(passengerData[2]));
+            }
+            passengers.add(passenger);
+        }
+        return passengers;
     }
 
     private ArrayList<Vendor> addNewRandomVendors(Integer amount) throws IOException {
@@ -105,7 +119,7 @@ public class Simulation {
         return salePoints;
     }
 
-    private ArrayList<ControlPoint> createControllPoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
+    private ArrayList<ControlPoint> createControlPoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
         ArrayList<ControlPoint> controlPoints = new ArrayList<>();
         for(int i=0; i<amount; i++) {
             Integer queueSize = getRandomNumber(minAvailableQueue, maxAvailableQueue);
