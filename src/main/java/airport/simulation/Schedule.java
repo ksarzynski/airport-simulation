@@ -47,4 +47,9 @@ class Schedule extends TimerTask {
     public void setSimulationSpeedInMilliseconds(Integer simulationSpeedInMilliseconds) {
         this.simulationSpeedInMilliseconds = simulationSpeedInMilliseconds;
     }
+
+    public String getTime() {
+        return this.clock.getTime();
+    }
+
 }
