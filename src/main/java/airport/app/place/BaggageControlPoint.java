@@ -72,10 +72,10 @@ public class BaggageControlPoint extends ControlPoint {
         controlPoint.addPassengers(passengersToMove);
     }
 
-    public void openPoint(ArrayList<Controller> controllers, Clock clock) throws ParseException {
+    public void openPoint(ArrayList<Controller> controllers, String time) throws ParseException {
 
         isOpen = true;
-        setRandomAvailableController(controllers, clock);
+        setRandomAvailableController(controllers, time);
         baggageControlPointIndex =+ 1;
     }
 

@@ -32,7 +32,7 @@ public class SalePoint extends Place {
 
     }
 
-    private void setRandomVendor (ArrayList<Vendor> vendors, Clock clock) throws ParseException {
+    private void setRandomVendor (ArrayList<Vendor> vendors, String time) throws ParseException {
 
         Random r = new Random();
         int a = r.nextInt(vendors.size());
@@ -40,11 +40,9 @@ public class SalePoint extends Place {
         vendors.remove(a);
         setVendor(vendor);
 
-        String string = clock.getTime();
         DateFormat format = new SimpleDateFormat("HH:mm");
-        Date date = format.parse(string);
+        Date date = format.parse(time);
         vendor.setShiftStartTime(date);
-
     }
 
     private void removeVendor(ArrayList<Vendor> vendors){
@@ -58,9 +56,8 @@ public class SalePoint extends Place {
         return this.employee.getEfficiency();
     }
 
-    public void openPoint(ArrayList<Vendor> vendors, Clock clock) throws ParseException {
-
-        setRandomVendor(vendors, clock);
+    public void openPoint(ArrayList<Vendor> vendors, String time) throws ParseException {
+        setRandomVendor(vendors, time);
         isOpen = true;
         openSalePointIndex =+ 1;
 

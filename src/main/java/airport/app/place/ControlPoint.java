@@ -39,10 +39,10 @@ public class ControlPoint extends Place {
 
     Integer getControllerEfficiency() { return this.controller.getEfficiency(); }
 
-    public void openPoint(ArrayList<Controller> controllers, Clock clock) throws ParseException {
+    public void openPoint(ArrayList<Controller> controllers, String time) throws ParseException {
 
         isOpen = true;
-        setRandomAvailableController(controllers, clock);
+        setRandomAvailableController(controllers, time);
         controlPointIndex =+ 1;
     }
 
@@ -53,16 +53,15 @@ public class ControlPoint extends Place {
         controlPointIndex =- 1;
     }
 
-    void setRandomAvailableController(ArrayList<Controller> controllers, Clock clock) throws ParseException {
+    void setRandomAvailableController(ArrayList<Controller> controllers, String time) throws ParseException {
         Random r = new Random();
         int a = r.nextInt(controllers.size());
         Controller controller = controllers.get(a);
         setController(controller);
         controllers.remove(a);
 
-        String string = clock.getTime();
         DateFormat format = new SimpleDateFormat("HH:mm");
-        Date date = format.parse(string);
+        Date date = format.parse(time);
         controller.setShiftStartTime(date);
     }
 
