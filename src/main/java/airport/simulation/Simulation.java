@@ -3,10 +3,7 @@ package main.java.airport.simulation;
 import main.java.airport.app.airplane.Airplane;
 import main.java.airport.app.belongings.Ticket;
 import main.java.airport.app.person.*;
-import main.java.airport.app.place.ControlPoint;
-import main.java.airport.app.place.DutyFreeZone;
-import main.java.airport.app.place.SalePoint;
-import main.java.airport.app.place.Place;
+import main.java.airport.app.place.*;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -20,6 +17,7 @@ public class Simulation {
     private ArrayList<Airplane> airplanes = new ArrayList<>();
     private ArrayList<SalePoint> salePoints = new ArrayList<>();
     private ArrayList<ControlPoint> controlPoints = new ArrayList<>();
+    private ArrayList<BaggageControlPoint> baggageControlPoints = new ArrayList<>();
     private DutyFreeZone dutyFreeZone;
 
     public void start() throws IOException, ParseException {
@@ -35,6 +33,8 @@ public class Simulation {
         this.allControllers.addAll(addNewRandomControllers(controllersAmount));
         this.controlPoints.addAll(createControlPoints(controlPointsAmount, 10, 25));
         openRandomControlPoints(openControlPointsAmount);
+        this.baggageControlPoints.addAll(createBaggageControlPoints(baggageControlPointsAmount, 10, 25));
+        openRandomBaggageControlPoints(openControlPointsAmount);
 
         this.airplanes.addAll(addNewRandomAirplane(flightsAmount));
 
@@ -131,6 +131,16 @@ public class Simulation {
         return controlPoints;
     }
 
+    private ArrayList<BaggageControlPoint> createBaggageControlPoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
+        ArrayList<BaggageControlPoint> baggageControlPoints = new ArrayList<>();
+        for(int i=0; i<amount; i++) {
+            Integer queueSize = getRandomNumber(minAvailableQueue, maxAvailableQueue);
+            BaggageControlPoint baggageControlPoint = new BaggageControlPoint("Punkt kontrolny bagażu nr " + (i+1), queueSize);
+            baggageControlPoints.add(baggageControlPoint);
+        }
+        return baggageControlPoints;
+    }
+
     private void openRandomSalePoints(Integer amount) throws ParseException {
         List randomIDs = getRandomNumbers(0, salePoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
@@ -142,6 +152,13 @@ public class Simulation {
         List randomIDs = getRandomNumbers(0, controlPoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
             controlPoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allControllers, "00:00");
+        }
+    }
+
+    private void openRandomBaggageControlPoints(Integer amount) throws ParseException {
+        List randomIDs = getRandomNumbers(0, controlPoints.size()-1, amount);
+        for(int i=0; i<amount; i++) {
+            baggageControlPoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allControllers, "00:00");
         }
     }
 
