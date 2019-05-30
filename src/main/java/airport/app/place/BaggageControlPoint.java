@@ -4,12 +4,16 @@ import main.java.airport.app.airplane.Airplane;
 import main.java.airport.app.belongings.Baggage;
 import main.java.airport.app.person.Controller;
 import main.java.airport.app.person.Passenger;
+import main.java.airport.simulation.Clock;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class BaggageControlPoint extends ControlPoint {
 
     private Controller controller;
+
+    static int baggageControlPointIndex;
 
     private ArrayList<Baggage> baggages = new ArrayList<>();
 
@@ -67,5 +71,19 @@ public class BaggageControlPoint extends ControlPoint {
 
         controlPoint.addPassengers(passengersToMove);
     }
-}
 
+    public void openPoint(ArrayList<Controller> controllers, Clock clock) throws ParseException {
+
+        isOpen = true;
+        setRandomAvailableController(controllers, clock);
+        baggageControlPointIndex =+ 1;
+    }
+
+    public void closePoint(ArrayList<Controller> controllers){
+
+        isOpen = false;
+        removeController(controllers);
+        baggageControlPointIndex =- 1;
+    }
+
+}

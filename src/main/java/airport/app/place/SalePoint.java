@@ -18,6 +18,8 @@ public class SalePoint extends Place {
 
     private Vendor vendor;
 
+    static int openSalePointIndex;
+
     public SalePoint(String name, Integer maxPeopleAmount)
     {
         super(name, maxPeopleAmount);
@@ -60,6 +62,7 @@ public class SalePoint extends Place {
 
         setRandomVendor(vendors, clock);
         isOpen = true;
+        openSalePointIndex =+ 1;
 
     }
 
@@ -67,6 +70,7 @@ public class SalePoint extends Place {
 
         removeVendor(vendors);
         this.isOpen = false;
+        openSalePointIndex =- 1;
 
     }
 
@@ -90,5 +94,9 @@ public class SalePoint extends Place {
         }
 
         baggageControlPoint.addPassengers(passengersToMove);
+    }
+
+    public static int getOpenSalePointIndex() {
+        return openSalePointIndex;
     }
 }

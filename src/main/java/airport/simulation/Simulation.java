@@ -137,6 +137,7 @@ public class Simulation {
 
     }
 
+    /*
     public Vendor getAvailableVendor() {
 
         Random r = new Random();
@@ -144,13 +145,16 @@ public class Simulation {
         return allVendors.remove(a);
 
     }
+    */
 
+    /*
     public Controller getAvailableController() {
 
         Random r = new Random();
         int a = r.nextInt(allControllers.size());
         return allControllers.remove(0);
     }
+    */
 
     public void returnEmployeeToList(Place place) {
 

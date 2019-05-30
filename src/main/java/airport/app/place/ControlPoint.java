@@ -12,23 +12,25 @@ import java.util.Random;
 
 public class ControlPoint extends Place {
 
-    private boolean isOpen;
+    boolean isOpen;
 
     private Controller controller;
+
+    static int controlPointIndex;
 
     public ControlPoint(String name, Integer maxPeopleAmount)
     {
         super(name, maxPeopleAmount);
     }
 
-    private void setController(Controller controller) {
+    void setController(Controller controller) {
 
         this.employee = controller;
         this.controller = (Controller)employee;
 
     }
 
-    private void removeController(ArrayList <Controller> controllers){
+    void removeController(ArrayList <Controller> controllers){
 
         controllers.add(this.controller);
         this.employee = null;
@@ -41,22 +43,22 @@ public class ControlPoint extends Place {
 
         isOpen = true;
         setRandomAvailableController(controllers, clock);
-
+        controlPointIndex =+ 1;
     }
 
     public void closePoint(ArrayList<Controller> controllers){
 
         isOpen = false;
         removeController(controllers);
-
+        controlPointIndex =- 1;
     }
 
-    private void setRandomAvailableController(ArrayList<Controller> controllers, Clock clock) throws ParseException {
+    void setRandomAvailableController(ArrayList<Controller> controllers, Clock clock) throws ParseException {
         Random r = new Random();
         int a = r.nextInt(controllers.size());
         Controller controller = controllers.get(a);
-        controllers.remove(a);
         setController(controller);
+        controllers.remove(a);
 
         String string = clock.getTime();
         DateFormat format = new SimpleDateFormat("HH:mm");

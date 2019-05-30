@@ -28,7 +28,10 @@ class Schedule extends TimerTask {
     }
 
     public void runCycle() throws IOException {
+
         simulation.addNewRandomPassangers(5);
+
+
     }
 
     void runTimer() {

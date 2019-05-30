@@ -30,9 +30,15 @@ public abstract class Place {
         this.passengers.addAll(passengers);
     }
 
-    void addPassengers(List<Passenger> passengers) {
+    public void addPassengers(List<Passenger> passengers) {
 
        this.passengers.addAll(passengers);
+
+    }
+
+    public void addPassenger(Passenger passenger) {
+
+        this.passengers.add(passenger);
 
     }
 
