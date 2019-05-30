@@ -58,7 +58,7 @@ public class Simulation {
                 passenger.setBaggage(Integer.parseInt(passengerData[2]));
             }
 
-            Integer salePointIndex = getRandomNumber(0, salePoints.size()-1);
+            Integer salePointIndex = getRandomNumber(0, salePoints.get(0).getOpenSalePointIndex()-1);
             salePoints.get(salePointIndex).addPassenger(passenger);
         }
     }
@@ -224,7 +224,7 @@ public class Simulation {
             numbers.add(i+1);
         }
         Collections.shuffle(numbers);
-        return Integer.parseInt(numbers.get(1).toString());
+        return Integer.parseInt(numbers.get(0).toString());
     }
 
 }
