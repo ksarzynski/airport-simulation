@@ -29,7 +29,8 @@ class Schedule extends TimerTask {
     private void runCycle() throws IOException {
         simulation.checkWorkingHours();
         simulation.checkDepartureTimes();
-        simulation.addNewRandomPassengers(Helpers.getRandomNumber(0, 15));
+        simulation.addNewRandomPassengers(5);
+        //simulation.addNewRandomPassengers(Helpers.getRandomNumber(0, 15));
         simulation.addNewRandomAirplanes(Helpers.getRandomNumber(0, 1));
         simulation.moveFromSalePoints();
         simulation.moveFromBaggageControlPoints();

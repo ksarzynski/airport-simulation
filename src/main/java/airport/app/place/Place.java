@@ -10,7 +10,7 @@ public abstract class Place {
     private String name;
     private int maxPeopleAmount;
     boolean isOpen;
-    List<Passenger> passengers;
+    ArrayList<Passenger> passengers;
     Employee employee;
 
     Place(String name, Integer maxPeopleAmount)
@@ -57,6 +57,7 @@ public abstract class Place {
         for(int i = 0; i < howMany; i++)
         {
             passengersToMove.add(this.passengers.get(i));
+            this.passengers.remove(i);
         }
 
         place.addPassengers(passengersToMove);

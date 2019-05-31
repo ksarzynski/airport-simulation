@@ -80,8 +80,8 @@ public class BaggageControlPoint extends ControlPoint {
 
     public void openPoint(Controller controller, Date date) {
         isOpen = true;
-        setController(controller);
         baggageControlPointIndex += 1;
+        setController(controller);
 
         setShiftStartTime(date);
     }
