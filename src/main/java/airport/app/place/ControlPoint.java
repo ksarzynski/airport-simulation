@@ -5,7 +5,6 @@ import main.java.airport.app.person.Passenger;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Random;
 
 public class ControlPoint extends Place {
 
@@ -37,10 +36,10 @@ public class ControlPoint extends Place {
 
     Integer getControllerEfficiency() { return this.controller.getEfficiency(); }
 
-    public void openPoint(ArrayList<Controller> controllers, Date date) {
+    public void openPoint(Controller controller, Date date) {
         isOpen = true;
-        setRandomAvailableController(controllers);
         controlPointIndex += 1;
+        setController(controller);
 
         setShiftStartTime(date);
     }
@@ -50,14 +49,6 @@ public class ControlPoint extends Place {
         controlPointIndex -= 1;
         setShiftStartTime(null);
         return removeController();
-    }
-
-    void setRandomAvailableController(ArrayList<Controller> controllers) {
-        Random r = new Random();
-        int a = r.nextInt(controllers.size());
-        Controller controller = controllers.get(a);
-        setController(controller);
-        controllers.remove(a);
     }
 
     public void movePassengers(int basicFlow, DutyFreeZone dutyFreeZone) {

@@ -144,21 +144,21 @@ public class Simulation {
         List randomIDs = Helpers.getRandomNumbers(0, salePoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
             System.out.print("otworzono salepoint nr " + i + "\n");
-            salePoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allVendors, this.schedule.getDate());
+            salePoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(getAvailableVendor(), this.schedule.getDate());
         }
     }
 
     private void openRandomControlPoints(Integer amount) {
         List randomIDs = Helpers.getRandomNumbers(0, controlPoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
-            controlPoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allControllers, this.schedule.getDate());
+            controlPoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(getAvailableController(), this.schedule.getDate());
         }
     }
 
     private void openRandomBaggageControlPoints(Integer amount) {
         List randomIDs = Helpers.getRandomNumbers(0, controlPoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
-            baggageControlPoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allControllers, this.schedule.getDate());
+            baggageControlPoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(getAvailableController(), this.schedule.getDate());
         }
     }
 
@@ -173,24 +173,19 @@ public class Simulation {
         return ticket;
     }
 
-    /*
     public Vendor getAvailableVendor() {
-
-        Random r = new Random();
-        int a = r.nextInt(allVendors.size());
-        return allVendors.remove(a);
-
+        Integer randomId = Helpers.getRandomNumber(0, allVendors.size()-1);
+        Vendor vendor = this.allVendors.get(randomId);
+        allVendors.remove(randomId);
+        return vendor;
     }
-    */
 
-    /*
     public Controller getAvailableController() {
-
-        Random r = new Random();
-        int a = r.nextInt(allControllers.size());
-        return allControllers.remove(0);
+        Integer randomId = Helpers.getRandomNumber(0, allControllers.size()-1);
+        Controller controller = this.allControllers.get(randomId);
+        allControllers.remove(randomId);
+        return controller;
     }
-    */
 
     public void returnEmployeeToList(Place place) {
 

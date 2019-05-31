@@ -25,14 +25,6 @@ public class SalePoint extends Place {
         this.vendor = (Vendor)employee;
     }
 
-    private void setRandomVendor (ArrayList<Vendor> vendors) {
-        Random r = new Random();
-        int a = r.nextInt(vendors.size());
-        Vendor vendor = vendors.get(a);
-        vendors.remove(a);
-        setVendor(vendor);
-    }
-
     private void setShiftStartTime(Date shiftStartTime) {
         this.shiftStartTime = shiftStartTime;
     }
@@ -47,8 +39,8 @@ public class SalePoint extends Place {
         return this.employee.getEfficiency();
     }
 
-    public void openPoint(ArrayList<Vendor> vendors, Date date) {
-        setRandomVendor(vendors);
+    public void openPoint(Vendor vendor, Date date) {
+        setVendor(vendor);
         openSalePointIndex += 1;
         this.isOpen = true;
         setShiftStartTime(date);

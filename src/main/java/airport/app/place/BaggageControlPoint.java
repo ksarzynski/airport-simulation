@@ -62,6 +62,10 @@ public class BaggageControlPoint extends ControlPoint {
         }
     }
 
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
     public void movePassengers(int basicFlow, ControlPoint controlPoint) {
 
         ArrayList<Passenger> passengersToMove = new ArrayList<>();
@@ -74,9 +78,9 @@ public class BaggageControlPoint extends ControlPoint {
         controlPoint.addPassengers(passengersToMove);
     }
 
-    public void openPoint(ArrayList<Controller> controllers, String time) throws ParseException {
+    public void openPoint(Controller controller, String time) throws ParseException {
         isOpen = true;
-        setRandomAvailableController(controllers);
+        setController(controller);
         baggageControlPointIndex += 1;
 
         DateFormat format = new SimpleDateFormat("HH:mm");
