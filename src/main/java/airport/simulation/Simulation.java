@@ -26,17 +26,17 @@ public class Simulation {
     }
 
     private void initialization(Integer salePointsAmount, Integer vendorsAmount, Integer openSalePointsAmount, Integer controlPointsAmount, Integer openControlPointsAmount, Integer baggageControlPointsAmount, Integer controllersAmount, Integer flightsAmount) throws IOException {
-        this.allVendors.addAll(addNewRandomVendors(vendorsAmount));
-        this.salePoints.addAll(createSalePoints(salePointsAmount, 10, 25));
+        addNewRandomVendors(vendorsAmount);
+        createSalePoints(salePointsAmount, 10, 25);
         openRandomSalePoints(openSalePointsAmount);
 
-        this.allControllers.addAll(addNewRandomControllers(controllersAmount));
-        this.controlPoints.addAll(createControlPoints(controlPointsAmount, 10, 25));
+        addNewRandomControllers(controllersAmount);
+        createControlPoints(controlPointsAmount, 10, 25);
         openRandomControlPoints(openControlPointsAmount);
-        this.baggageControlPoints.addAll(createBaggageControlPoints(baggageControlPointsAmount, 10, 25));
+        createBaggageControlPoints(baggageControlPointsAmount, 10, 25);
         openRandomBaggageControlPoints(openControlPointsAmount);
 
-        this.airplanes.addAll(addNewRandomAirplane(flightsAmount));
+        addNewRandomAirplanes(flightsAmount);
 
         this.dutyFreeZone = new DutyFreeZone("Strefa bezcłowa", 10000, 100);
 
@@ -50,7 +50,7 @@ public class Simulation {
 
     void addNewRandomPassengers(Integer amount) throws IOException {
         OpenCSVReader openCSVReader = new OpenCSVReader();
-        List randomID = getRandomNumbers(0, 99, amount);
+        List randomID = Helpers.getRandomNumbers(0, 99, amount);
         for (int i=0; i<amount; i++){
             String[] passengerData = openCSVReader.readCSV("passenger.csv", Integer.parseInt(randomID.get(i).toString()));
             Passenger passenger = new Passenger(passengerData[0]);
@@ -58,34 +58,31 @@ public class Simulation {
                 passenger.setBaggage(Integer.parseInt(passengerData[2]));
             }
 
-            Integer salePointIndex = getRandomNumber(0, salePoints.get(0).getOpenSalePointIndex());
+            Integer salePointIndex = Helpers.getRandomNumber(0, salePoints.get(0).getOpenSalePointIndex());
             salePoints.get(salePointIndex).addPassenger(passenger);
         }
     }
 
-    private ArrayList<Vendor> addNewRandomVendors(Integer amount) throws IOException {
+    private void addNewRandomVendors(Integer amount) throws IOException {
         OpenCSVReader openCSVReader = new OpenCSVReader();
-        ArrayList<Vendor> vendors = new ArrayList<>();
-        List randomID = getRandomNumbers(0, 99, amount);
+        List randomID = Helpers.getRandomNumbers(0, 99, amount);
         for (int i=0; i<amount; i++){
             String[] vendorData = openCSVReader.readCSV("vendors.csv", Integer.parseInt(randomID.get(i).toString()));
             Vendor vendor = new Vendor(vendorData[1], Integer.parseInt(vendorData[2]));
-            vendors.add(vendor);
+            this.allVendors.add(vendor);
         }
-        return vendors;
     }
 
     private Pilot addNewRandomPilot() throws IOException {
         OpenCSVReader openCSVReader = new OpenCSVReader();
-        Integer randomID = getRandomNumber(0, 99);
+        Integer randomID = Helpers.getRandomNumber(0, 99);
         String[] pilotData = openCSVReader.readCSV("pilots.csv", randomID);
         return new Pilot(pilotData[1]);
     }
 
-    private ArrayList<Airplane> addNewRandomAirplane(Integer amount) throws IOException {
+    public void addNewRandomAirplanes(Integer amount) throws IOException {
         OpenCSVReader openCSVReader = new OpenCSVReader();
-        ArrayList<Airplane> airplanes = new ArrayList<>();
-        List randomID = getRandomNumbers(0, 99, amount);
+        List randomID = Helpers.getRandomNumbers(0, 99, amount);
         for (int i=0; i<amount; i++){
             String[] airplaneData = openCSVReader.readCSV("airplanes.csv", Integer.parseInt(randomID.get(i).toString()));
             Airplane airplane = new Airplane(
@@ -94,58 +91,57 @@ public class Simulation {
                     Integer.parseInt(airplaneData[3]),
                     Integer.parseInt(airplaneData[4]),
                     addNewRandomPilot(),
-                    new Date()
+                    new Date(schedule.getDate().getTime() + (Helpers.getRandomNumber(3, 10) * 60 * 60 * 1000))
             );
-            airplanes.add(airplane);
+            Ticket ticket = new Ticket(airplane.getFlightName());
+            for(int ii=0; ii<airplane.getMaxPassenger(); ii++) {
+                this.addTicket(ticket);
+            }
+            this.airplanes.add(airplane);
         }
-        return airplanes;
     }
 
-    private ArrayList<Controller> addNewRandomControllers(Integer amount) throws IOException {
+    private void addNewRandomControllers(Integer amount) throws IOException {
         OpenCSVReader openCSVReader = new OpenCSVReader();
-        ArrayList<Controller> controllers = new ArrayList<>();
-        List randomID = getRandomNumbers(0, 99, amount);
+        List randomID = Helpers.getRandomNumbers(0, 99, amount);
         for (int i=0; i<amount; i++){
             String[] controllerData = openCSVReader.readCSV("controllers.csv", Integer.parseInt(randomID.get(i).toString()));
             Controller controller = new Controller(controllerData[1], Integer.parseInt(controllerData[2]));
-            controllers.add(controller);
+            this.allControllers.add(controller);
         }
-        return controllers;
     }
 
-    private ArrayList<SalePoint> createSalePoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
-        ArrayList<SalePoint> salePoints = new ArrayList<>();
+    private void addTicket(Ticket ticket) {
+        this.allAvailableTickets.add(ticket);
+    }
+
+    private void createSalePoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
         for(int i=0; i<amount; i++) {
-            Integer queueSize = getRandomNumber(minAvailableQueue, maxAvailableQueue);
+            Integer queueSize = Helpers.getRandomNumber(minAvailableQueue, maxAvailableQueue);
             SalePoint salePoint = new SalePoint("Punkt sprzedaży nr " + (i+1), queueSize);
-            salePoints.add(salePoint);
+            this.salePoints.add(salePoint);
         }
-        return salePoints;
     }
 
-    private ArrayList<ControlPoint> createControlPoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
-        ArrayList<ControlPoint> controlPoints = new ArrayList<>();
+    private void createControlPoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
         for(int i=0; i<amount; i++) {
-            Integer queueSize = getRandomNumber(minAvailableQueue, maxAvailableQueue);
+            Integer queueSize = Helpers.getRandomNumber(minAvailableQueue, maxAvailableQueue);
             ControlPoint controlPoint = new ControlPoint("Punkt kontrolny nr " + (i+1), queueSize);
-            controlPoints.add(controlPoint);
+            this.controlPoints.add(controlPoint);
         }
-        return controlPoints;
     }
 
-    private ArrayList<BaggageControlPoint> createBaggageControlPoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
-        ArrayList<BaggageControlPoint> baggageControlPoints = new ArrayList<>();
+    private void createBaggageControlPoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
         for(int i=0; i<amount; i++) {
             System.out.print("otworzono baggagecontrolpoint nr " + i + "\n");
-            Integer queueSize = getRandomNumber(minAvailableQueue, maxAvailableQueue);
+            Integer queueSize = Helpers.getRandomNumber(minAvailableQueue, maxAvailableQueue);
             BaggageControlPoint baggageControlPoint = new BaggageControlPoint("Punkt kontrolny bagażu nr " + (i+1), queueSize);
-            baggageControlPoints.add(baggageControlPoint);
+            this.baggageControlPoints.add(baggageControlPoint);
         }
-        return baggageControlPoints;
     }
 
     private void openRandomSalePoints(Integer amount) {
-        List randomIDs = getRandomNumbers(0, salePoints.size()-1, amount);
+        List randomIDs = Helpers.getRandomNumbers(0, salePoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
             System.out.print("otworzono salepoint nr " + i + "\n");
             salePoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allVendors, this.schedule.getDate());
@@ -153,17 +149,21 @@ public class Simulation {
     }
 
     private void openRandomControlPoints(Integer amount) {
-        List randomIDs = getRandomNumbers(0, controlPoints.size()-1, amount);
+        List randomIDs = Helpers.getRandomNumbers(0, controlPoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
             controlPoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allControllers, this.schedule.getDate());
         }
     }
 
     private void openRandomBaggageControlPoints(Integer amount) {
-        List randomIDs = getRandomNumbers(0, controlPoints.size()-1, amount);
+        List randomIDs = Helpers.getRandomNumbers(0, controlPoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
             baggageControlPoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allControllers, this.schedule.getDate());
         }
+    }
+
+    public Integer getAirplanesAmount() {
+        return this.airplanes.size();
     }
 
     public Ticket getAvailableTicket() {
@@ -240,24 +240,10 @@ public class Simulation {
         }
     }
 
-    private List getRandomNumbers(Integer min, Integer max, Integer amount){
-        ArrayList<Integer> numbers = new ArrayList<>();
-        for(int i = min-1; i < max; i++)
-        {
-            numbers.add(i+1);
+    void checkDepartureTimes() {
+        for(Airplane airplane : this.airplanes) {
+            airplane.checkDepartureTime(schedule.getDate());
         }
-        Collections.shuffle(numbers);
-        return numbers.subList(0, amount);
-    }
-
-    private Integer getRandomNumber(Integer min, Integer max){
-        ArrayList<Integer> numbers = new ArrayList<>();
-        for(int i = min-1; i < max; i++)
-        {
-            numbers.add(i+1);
-        }
-        Collections.shuffle(numbers);
-        return Integer.parseInt(numbers.get(0).toString());
     }
 
     void moveFromSalePoints()
@@ -275,7 +261,7 @@ public class Simulation {
                 for (int i = 0; i < howMany; i++) {
 
                     while (!baggageControlPoints.get(index).getIsOpen()) {
-                        index = getRandomNumber(0, baggageControlPoints.size() - 1);
+                        index = Helpers.getRandomNumber(0, baggageControlPoints.size() - 1);
                         if (salePoint.getEmployee().getEfficiency() > salePoint.getPassangers().size())
                             salePoint.movePassengersPoli(baggageControlPoints.get(index), salePoint.getPassangers().size());
                         else
@@ -305,7 +291,7 @@ public class Simulation {
                 for (int i = 0; i < howMany; i++) {
 
                     while (!controlPoints.get(index).getIsOpen()) {
-                        index = getRandomNumber(0, controlPoints.size() - 1);
+                        index = Helpers.getRandomNumber(0, controlPoints.size() - 1);
                         if (baggageControlPoint.getEmployee().getEfficiency() > baggageControlPoint.getPassangers().size())
                             baggageControlPoint.movePassengersPoli(controlPoints.get(index), baggageControlPoint.getPassangers().size());
                         else
@@ -339,6 +325,7 @@ public class Simulation {
         System.out.print("salePoints ppl amount: "+salePoint.getPassangers().size()+"\n");
         for(BaggageControlPoint baggageControlPoint : baggageControlPoints)
         System.out.print("baggageControlPoints ppl amount: "+baggageControlPoint.getPassangers().size()+"\n");
+        System.out.print("Airplanes amount: " + getAirplanesAmount() + "\n");
 //        System.out.print("otworzonych salepointow: " + salePoints.get(0).getOpenSalePointIndex()+"\n");
   //      System.out.print("otworzonych baggagecontrolpointow: " + baggageControlPoints.get(0).getOpenSalePointIndex()+"\n");
     //    System.out.print();

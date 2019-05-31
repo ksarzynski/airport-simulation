@@ -1,10 +1,6 @@
 package main.java.airport.simulation;
 
-import main.java.airport.app.place.Place;
-import main.java.airport.app.place.SalePoint;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -32,7 +28,9 @@ class Schedule extends TimerTask {
 
     private void runCycle() throws IOException {
         simulation.checkWorkingHours();
-        simulation.addNewRandomPassengers(5);
+        simulation.checkDepartureTimes();
+        simulation.addNewRandomPassengers(Helpers.getRandomNumber(0, 15));
+        simulation.addNewRandomAirplanes(Helpers.getRandomNumber(0, 1));
         simulation.moveFromSalePoints();
         simulation.moveFromBaggageControlPoints();
         simulation.moveFromControlPoints();

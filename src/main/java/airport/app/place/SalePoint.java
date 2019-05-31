@@ -48,7 +48,6 @@ public class SalePoint extends Place {
     }
 
     public void openPoint(ArrayList<Vendor> vendors, Date date) {
-//        System.out.print("otwieranko\n");
         setRandomVendor(vendors);
         openSalePointIndex += 1;
         this.isOpen = true;
