@@ -29,6 +29,7 @@ class Schedule extends TimerTask {
     private void runCycle() throws IOException {
         simulation.checkWorkingHours();
         simulation.addNewRandomPassengers(5);
+        simulation.moveFromSalePoints();
     }
 
     void runTimer() {
