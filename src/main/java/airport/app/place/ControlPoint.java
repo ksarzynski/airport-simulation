@@ -8,7 +8,6 @@ import java.util.Date;
 
 public class ControlPoint extends Place {
 
-    boolean isOpen=false;
     private Date shiftStartTime;
 
     private Controller controller;
@@ -45,8 +44,8 @@ public class ControlPoint extends Place {
     }
 
     public Controller closePoint(){
-        isOpen = false;
-        controlPointIndex -= 1;
+        this.isOpen = false;
+        this.controlPointIndex -= 1;
         setShiftStartTime(null);
         return removeController();
     }

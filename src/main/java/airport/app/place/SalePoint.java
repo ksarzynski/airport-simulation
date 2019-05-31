@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Random;
 
 public class SalePoint extends Place {
-    private boolean isOpen = false;
+
     private Date shiftStartTime;
 
     private Vendor vendor;

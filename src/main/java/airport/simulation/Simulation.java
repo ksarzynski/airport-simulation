@@ -240,71 +240,44 @@ public class Simulation {
         }
     }
 
-    void moveFromSalePoints()
-    {
+    void moveFromSalePoints() {
+
+        int index;
         int howMany;
-        int index = 0;
+
         for(SalePoint salePoint : salePoints)
         {
-            if(salePoint.getIsOpen()) { System.out.print("CHUJEEEEEEEEE \n" );
-                if (salePoint.getEmployee().getEfficiency() > salePoint.getPassangers().size())
+
+            if(salePoint.getIsOpen())
+            {
+                if(salePoint.getEmployee().getEfficiency() > salePoint.getPassangers().size())
                     howMany = salePoint.getPassangers().size();
                 else
                     howMany = salePoint.getEmployee().getEfficiency();
 
-                for (int i = 0; i < howMany; i++) {
+                    System.out.print("jakis sellpoint\n");
+                    System.out.print("ILE JEST BAGGAGE POINTOW"+ baggageControlPoints.get(0).getOpenSalePointIndex()+"\n");
+                do{
 
-                    while (!baggageControlPoints.get(index).getIsOpen()) {
-                        index = Helpers.getRandomNumber(0, baggageControlPoints.size() - 1);
-                        if (salePoint.getEmployee().getEfficiency() > salePoint.getPassangers().size())
-                            salePoint.movePassengersPoli(baggageControlPoints.get(index), salePoint.getPassangers().size());
-                        else
-                            salePoint.movePassengersPoli(baggageControlPoints.get(index), salePoint.getEmployee().getEfficiency());
-                    }
-                }
+                    index = Helpers.getRandomNumber(0,baggageControlPoints.size()-1);
+                    System.out.print("UWAGA "+baggageControlPoints.get(index).getIsOpen()+index+"\n");
+
+                }while(!baggageControlPoints.get(index).getIsOpen());
+
+                salePoint.movePassengersPoli(baggageControlPoints.get(index), howMany);
             }
         }
+
     }
 
 
-    void moveFromBaggageControlPoints()
-    {
-        int howMany;
-        int index = 0;
-        for(BaggageControlPoint baggageControlPoint : baggageControlPoints)
-        {
-            if(baggageControlPoint.getIsOpen()) {
+    void moveFromBaggageControlPoints() {
 
-                baggageControlPoint.checkBaggage(airplanes, 100);
-
-                if (baggageControlPoint.getEmployee().getEfficiency() > baggageControlPoint.getPassangers().size())
-                    howMany = baggageControlPoint.getPassangers().size();
-                else
-                    howMany = baggageControlPoint.getEmployee().getEfficiency();
-
-                for (int i = 0; i < howMany; i++) {
-
-                    while (!controlPoints.get(index).getIsOpen()) {
-                        index = Helpers.getRandomNumber(0, controlPoints.size() - 1);
-                        if (baggageControlPoint.getEmployee().getEfficiency() > baggageControlPoint.getPassangers().size())
-                            baggageControlPoint.movePassengersPoli(controlPoints.get(index), baggageControlPoint.getPassangers().size());
-                        else
-                            baggageControlPoint.movePassengersPoli(controlPoints.get(index), baggageControlPoint.getEmployee().getEfficiency());
-                    }
-                }
-            }
-        }
     }
 
     void moveFromControlPoints() {
 
-         for(ControlPoint controlPoint : controlPoints)
-        {
-            if(controlPoint.getIsOpen())
-            {
-                controlPoint.movePassengersPoli(dutyFreeZone, controlPoint.getEmployee().getEfficiency());
-            }
-        }
+
     }
 
     void MoveFromDutyFreeZone() {
