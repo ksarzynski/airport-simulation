@@ -256,11 +256,11 @@ public class Simulation {
                     howMany = salePoint.getEmployee().getEfficiency();
 
                     System.out.print("jakis sellpoint\n");
-                    System.out.print("ILE JEST BAGGAGE POINTOW"+ baggageControlPoints.get(0).getOpenSalePointIndex()+"\n");
+                    System.out.print("ILE JEST BAGGAGE POINTOW "+ baggageControlPoints.get(0).getOpenBaggageControlPointIndex()+"\n");
                 do{
 
                     index = Helpers.getRandomNumber(0,baggageControlPoints.size()-1);
-                    System.out.print("UWAGA "+baggageControlPoints.get(index).getIsOpen()+index+"\n");
+                    System.out.print("UWAGA "+baggageControlPoints.get(index).getIsOpen()+" "+index+"\n");
 
                 }while(!baggageControlPoints.get(index).getIsOpen());
 

@@ -78,13 +78,11 @@ public class BaggageControlPoint extends ControlPoint {
         controlPoint.addPassengers(passengersToMove);
     }
 
-    public void openPoint(Controller controller, String time) throws ParseException {
+    public void openPoint(Controller controller, Date date) {
         isOpen = true;
         setController(controller);
         baggageControlPointIndex += 1;
 
-        DateFormat format = new SimpleDateFormat("HH:mm");
-        Date date = format.parse(time);
         setShiftStartTime(date);
     }
 
@@ -95,6 +93,6 @@ public class BaggageControlPoint extends ControlPoint {
         return removeController();
     }
 
-    public int getBaggageControlPointIndex() { return baggageControlPointIndex; }
+    public int getOpenBaggageControlPointIndex() { return baggageControlPointIndex; }
 
 }
