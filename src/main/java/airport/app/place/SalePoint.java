@@ -48,13 +48,14 @@ public class SalePoint extends Place {
     }
 
     public void openPoint(ArrayList<Vendor> vendors, Date date) {
+//        System.out.print("otwieranko\n");
         setRandomVendor(vendors);
         openSalePointIndex += 1;
-        isOpen = true;
+        this.isOpen = true;
         setShiftStartTime(date);
     }
 
-    public Vendor closePoint(){
+    private Vendor closePoint(){
         this.isOpen = false;
         openSalePointIndex -= 1;
         setShiftStartTime(null);
@@ -84,7 +85,7 @@ public class SalePoint extends Place {
         return openSalePointIndex;
     }
 
-    public Date getShiftEndTime() {
+    private Date getShiftEndTime() {
         return new Date(shiftStartTime.getTime() + (8 * 60 * 60 * 1000));
     }
 

@@ -1,6 +1,10 @@
 package main.java.airport.simulation;
 
+import main.java.airport.app.place.Place;
+import main.java.airport.app.place.SalePoint;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,6 +34,11 @@ class Schedule extends TimerTask {
         simulation.checkWorkingHours();
         simulation.addNewRandomPassengers(5);
         simulation.moveFromSalePoints();
+        simulation.moveFromBaggageControlPoints();
+        simulation.moveFromControlPoints();
+        simulation.display();
+
+//        simulation.moveFromPlaces();
     }
 
     void runTimer() {
@@ -50,7 +59,7 @@ class Schedule extends TimerTask {
         return this.clock.getTime();
     }
 
-    public Date getDate() {
+    Date getDate() {
         return this.clock.getDate();
     }
 

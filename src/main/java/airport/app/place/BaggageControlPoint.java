@@ -23,10 +23,10 @@ public class BaggageControlPoint extends ControlPoint {
         super(name, maxPeopleAmount);
     }
 
-    public void checkBaggages(ArrayList<Passenger> passengers, ArrayList<Airplane> airplanes, int basicFlow, int brutalityLevel) {
+    public void checkBaggage(ArrayList<Airplane> airplanes, int brutalityLevel) {
 
         int dangerLevel;
-        for (int i = 0; i < getControllerEfficiency() * basicFlow; i++) {
+        for (int i = 0; i < getControllerEfficiency(); i++) {
             dangerLevel = passengers.get(i).getBaggage().getDangerLevel();
             if (dangerLevel == 0) {
 
@@ -39,7 +39,7 @@ public class BaggageControlPoint extends ControlPoint {
                 passengers.remove(i);
 
             } else {
-                for (int j = i; j < brutalityLevel && j < getControllerEfficiency() * basicFlow; j++) {
+                for (int j = i; j < brutalityLevel && j < getControllerEfficiency(); j++) {
 
                     passengers.get(j).removeTicket();
                     passengers.get(j).removeBaggage();

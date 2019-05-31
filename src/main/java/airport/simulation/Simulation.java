@@ -6,7 +6,6 @@ import main.java.airport.app.person.*;
 import main.java.airport.app.place.*;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.*;
 
 public class Simulation {
@@ -137,6 +136,7 @@ public class Simulation {
     private ArrayList<BaggageControlPoint> createBaggageControlPoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
         ArrayList<BaggageControlPoint> baggageControlPoints = new ArrayList<>();
         for(int i=0; i<amount; i++) {
+            System.out.print("otworzono baggagecontrolpoint nr " + i + "\n");
             Integer queueSize = getRandomNumber(minAvailableQueue, maxAvailableQueue);
             BaggageControlPoint baggageControlPoint = new BaggageControlPoint("Punkt kontrolny bagażu nr " + (i+1), queueSize);
             baggageControlPoints.add(baggageControlPoint);
@@ -147,6 +147,7 @@ public class Simulation {
     private void openRandomSalePoints(Integer amount) {
         List randomIDs = getRandomNumbers(0, salePoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
+            System.out.print("otworzono salepoint nr " + i + "\n");
             salePoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allVendors, this.schedule.getDate());
         }
     }
@@ -261,43 +262,114 @@ public class Simulation {
 
     void moveFromSalePoints()
     {
+        int howMany;
         int index = 0;
         for(SalePoint salePoint : salePoints)
         {
-            if(salePoint.getIsOpen())
-            {
-                while(!baggageControlPoints.get(index).getIsOpen())
-                {
-                    index = getRandomNumber(0, baggageControlPoints.size()-1);
-                }
-
-                if(salePoint.getEmployee().getEfficiency() > salePoint.getPassangers().size())
-                    salePoint.movePassengersPoli(baggageControlPoints.get(index),salePoint.getPassangers().size());
+            if(salePoint.getIsOpen()) { System.out.print("CHUJEEEEEEEEE \n" );
+                if (salePoint.getEmployee().getEfficiency() > salePoint.getPassangers().size())
+                    howMany = salePoint.getPassangers().size();
                 else
-                    salePoint.movePassengersPoli(baggageControlPoints.get(index),salePoint.getEmployee().getEfficiency());
+                    howMany = salePoint.getEmployee().getEfficiency();
+
+                for (int i = 0; i < howMany; i++) {
+
+                    while (!baggageControlPoints.get(index).getIsOpen()) {
+                        index = getRandomNumber(0, baggageControlPoints.size() - 1);
+                        if (salePoint.getEmployee().getEfficiency() > salePoint.getPassangers().size())
+                            salePoint.movePassengersPoli(baggageControlPoints.get(index), salePoint.getPassangers().size());
+                        else
+                            salePoint.movePassengersPoli(baggageControlPoints.get(index), salePoint.getEmployee().getEfficiency());
+                    }
+                }
             }
         }
     }
 
-    public void moveFromPlaces(ArrayList<Place> places)
+
+    void moveFromBaggageControlPoints()
     {
+        int howMany;
         int index = 0;
-        for(Place place : places)
+        for(BaggageControlPoint baggageControlPoint : baggageControlPoints)
         {
-            if(place.getIsOpen())
-            {
-                while(!baggageControlPoints.get(index).getIsOpen())
-                {
-                    index = getRandomNumber(0, baggageControlPoints.size()-1);
-                }
+            if(baggageControlPoint.getIsOpen()) {
 
-                if(place.getEmployee().getEfficiency() > place.getPassangers().size())
-                    place.movePassengersPoli(baggageControlPoints.get(index), place.getPassangers().size());
+                baggageControlPoint.checkBaggage(airplanes, 100);
+
+                if (baggageControlPoint.getEmployee().getEfficiency() > baggageControlPoint.getPassangers().size())
+                    howMany = baggageControlPoint.getPassangers().size();
                 else
-                    place.movePassengersPoli(baggageControlPoints.get(index), place.getEmployee().getEfficiency());
+                    howMany = baggageControlPoint.getEmployee().getEfficiency();
+
+                for (int i = 0; i < howMany; i++) {
+
+                    while (!controlPoints.get(index).getIsOpen()) {
+                        index = getRandomNumber(0, controlPoints.size() - 1);
+                        if (baggageControlPoint.getEmployee().getEfficiency() > baggageControlPoint.getPassangers().size())
+                            baggageControlPoint.movePassengersPoli(controlPoints.get(index), baggageControlPoint.getPassangers().size());
+                        else
+                            baggageControlPoint.movePassengersPoli(controlPoints.get(index), baggageControlPoint.getEmployee().getEfficiency());
+                    }
+                }
             }
         }
     }
+
+    void moveFromControlPoints() {
+
+         for(ControlPoint controlPoint : controlPoints)
+        {
+            if(controlPoint.getIsOpen())
+            {
+                controlPoint.movePassengersPoli(dutyFreeZone, controlPoint.getEmployee().getEfficiency());
+            }
+        }
+    }
+
+    void MoveFromDutyFreeZone() {
+
+
+
+    }
+
+    void display() {
+
+        for(SalePoint salePoint : salePoints)
+        System.out.print("salePoints ppl amount: "+salePoint.getPassangers().size()+"\n");
+        for(BaggageControlPoint baggageControlPoint : baggageControlPoints)
+        System.out.print("baggageControlPoints ppl amount: "+baggageControlPoint.getPassangers().size()+"\n");
+//        System.out.print("otworzonych salepointow: " + salePoints.get(0).getOpenSalePointIndex()+"\n");
+  //      System.out.print("otworzonych baggagecontrolpointow: " + baggageControlPoints.get(0).getOpenSalePointIndex()+"\n");
+    //    System.out.print();
+
+    }
+
+/*    public void moveFromPlaces(ArrayList<Object> objects) {
+
+        if(objects.get(0) instanceof SalePoint)
+        {
+            int index = 0;
+            for(SalePoint salePoint : salePoints)
+            {
+                if(salePoint.getIsOpen())
+                {
+                    while(!baggageControlPoints.get(index).getIsOpen())
+                    {
+                        index = getRandomNumber(0, baggageControlPoints.size()-1);
+                    }
+
+                    if(salePoint.getEmployee().getEfficiency() > salePoint.getPassangers().size())
+                        salePoint.movePassengersPoli(baggageControlPoints.get(index),salePoint.getPassangers().size());
+                    else
+                        salePoint.movePassengersPoli(baggageControlPoints.get(index),salePoint.getEmployee().getEfficiency());
+                }
+            }
+        }
+
+    }
+*/
+
 }
 
 
