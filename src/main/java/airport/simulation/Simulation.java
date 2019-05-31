@@ -167,11 +167,10 @@ public class Simulation {
     }
 
     public Ticket getAvailableTicket() {
-
-        Random r = new Random();
-        int a = r.nextInt(allAvailableTickets.size());
-        return allAvailableTickets.remove(a);
-
+        Integer randomId = Helpers.getRandomNumber(0, allAvailableTickets.size()-1);
+        Ticket ticket = this.allAvailableTickets.get(randomId);
+        this.allAvailableTickets.remove(randomId);
+        return ticket;
     }
 
     /*
