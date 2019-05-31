@@ -1,6 +1,7 @@
 package main.java.airport.simulation;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -10,11 +11,9 @@ class Schedule extends TimerTask {
     private Integer simulationSpeedInMilliseconds;
     private Simulation simulation;
 
-    Schedule(Integer simulationSpeedInMilliseconds, Integer timeShiftInMilliseconds, Simulation simulation) {
+    Schedule(Simulation simulation) {
         this.clock = new Clock();
         this.simulation = simulation;
-        this.timeShiftInMilliseconds = timeShiftInMilliseconds;
-        this.simulationSpeedInMilliseconds = simulationSpeedInMilliseconds;
     }
 
     public void run() {
@@ -27,11 +26,9 @@ class Schedule extends TimerTask {
         System.out.println(clock.getTime());
     }
 
-    public void runCycle() throws IOException {
-
+    private void runCycle() throws IOException {
+        simulation.checkWorkingHours();
         simulation.addNewRandomPassengers(5);
-
-
     }
 
     void runTimer() {
@@ -40,16 +37,20 @@ class Schedule extends TimerTask {
         timer.scheduleAtFixedRate(this, 0, simulationSpeedInMilliseconds);
     }
 
-    public void setTimeShiftInMilliseconds(Integer milliseconds) {
+    void setTimeShiftInMilliseconds(Integer milliseconds) {
         this.timeShiftInMilliseconds = milliseconds;
     }
 
-    public void setSimulationSpeedInMilliseconds(Integer simulationSpeedInMilliseconds) {
+    void setSimulationSpeedInMilliseconds(Integer simulationSpeedInMilliseconds) {
         this.simulationSpeedInMilliseconds = simulationSpeedInMilliseconds;
     }
 
     public String getTime() {
         return this.clock.getTime();
+    }
+
+    public Date getDate() {
+        return this.clock.getDate();
     }
 
 }

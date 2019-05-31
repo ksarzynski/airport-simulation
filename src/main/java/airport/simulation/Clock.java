@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Clock {
+class Clock {
     private Date currentTime;
 
     Clock() {
@@ -15,9 +15,13 @@ public class Clock {
         this.currentTime = new Date(this.currentTime.getTime() + (minutes * 60 * 1000));
     }
 
-    public String getTime() {
+    String getTime() {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         return timeFormat.format(this.currentTime);
+    }
+
+    Date getDate() {
+        return this.currentTime;
     }
 
     private static Date removeTime(Date date) {

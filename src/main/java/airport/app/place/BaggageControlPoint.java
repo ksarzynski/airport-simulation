@@ -4,14 +4,16 @@ import main.java.airport.app.airplane.Airplane;
 import main.java.airport.app.belongings.Baggage;
 import main.java.airport.app.person.Controller;
 import main.java.airport.app.person.Passenger;
-import main.java.airport.simulation.Clock;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BaggageControlPoint extends ControlPoint {
 
-    static int baggageControlPointIndex;
+    private static int baggageControlPointIndex;
 
     private Controller controller;
 
@@ -73,17 +75,20 @@ public class BaggageControlPoint extends ControlPoint {
     }
 
     public void openPoint(ArrayList<Controller> controllers, String time) throws ParseException {
-
         isOpen = true;
-        setRandomAvailableController(controllers, time);
+        setRandomAvailableController(controllers);
         baggageControlPointIndex += 1;
+
+        DateFormat format = new SimpleDateFormat("HH:mm");
+        Date date = format.parse(time);
+        setShiftStartTime(date);
     }
 
-    public void closePoint(ArrayList<Controller> controllers){
-
+    public Controller closePoint(){
         isOpen = false;
-        removeController(controllers);
         baggageControlPointIndex -= 1;
+        setShiftStartTime(null);
+        return removeController();
     }
 
     public int getBaggageControlPointIndex() { return baggageControlPointIndex; }

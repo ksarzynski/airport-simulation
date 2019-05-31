@@ -11,7 +11,7 @@ import java.util.*;
 
 public class Simulation {
 
-    private Schedule schedule;
+    private Schedule schedule = new Schedule(this);
     private ArrayList<Ticket> allAvailableTickets = new ArrayList<>();
     private ArrayList<Vendor> allVendors = new ArrayList<>();
     private ArrayList<Controller> allControllers = new ArrayList<>();
@@ -21,12 +21,12 @@ public class Simulation {
     private ArrayList<BaggageControlPoint> baggageControlPoints = new ArrayList<>();
     private DutyFreeZone dutyFreeZone;
 
-    public void start() throws IOException, ParseException {
+    public void start() throws IOException {
         initialization(3,10,2,3, 1,3,10,6);
         start(500, 10);
     }
 
-    private void initialization(Integer salePointsAmount, Integer vendorsAmount, Integer openSalePointsAmount, Integer controlPointsAmount, Integer openControlPointsAmount, Integer baggageControlPointsAmount, Integer controllersAmount, Integer flightsAmount) throws IOException, ParseException {
+    private void initialization(Integer salePointsAmount, Integer vendorsAmount, Integer openSalePointsAmount, Integer controlPointsAmount, Integer openControlPointsAmount, Integer baggageControlPointsAmount, Integer controllersAmount, Integer flightsAmount) throws IOException {
         this.allVendors.addAll(addNewRandomVendors(vendorsAmount));
         this.salePoints.addAll(createSalePoints(salePointsAmount, 10, 25));
         openRandomSalePoints(openSalePointsAmount);
@@ -44,7 +44,8 @@ public class Simulation {
     }
 
     private void start(Integer simulationSpeedInMiliseconds, Integer timeShift) {
-        this.schedule = new Schedule(simulationSpeedInMiliseconds, timeShift, this);
+        this.schedule.setSimulationSpeedInMilliseconds(simulationSpeedInMiliseconds);
+        this.schedule.setTimeShiftInMilliseconds(timeShift);
         schedule.runTimer();
     }
 
@@ -54,11 +55,11 @@ public class Simulation {
         for (int i=0; i<amount; i++){
             String[] passengerData = openCSVReader.readCSV("passenger.csv", Integer.parseInt(randomID.get(i).toString()));
             Passenger passenger = new Passenger(passengerData[0]);
-            if(passengerData[1] != "0"){
+            if(passengerData[1].equals("0")){
                 passenger.setBaggage(Integer.parseInt(passengerData[2]));
             }
 
-            Integer salePointIndex = getRandomNumber(0, salePoints.get(0).getOpenSalePointIndex()-1);
+            Integer salePointIndex = getRandomNumber(0, salePoints.get(0).getOpenSalePointIndex());
             salePoints.get(salePointIndex).addPassenger(passenger);
         }
     }
@@ -143,24 +144,24 @@ public class Simulation {
         return baggageControlPoints;
     }
 
-    private void openRandomSalePoints(Integer amount) throws ParseException {
+    private void openRandomSalePoints(Integer amount) {
         List randomIDs = getRandomNumbers(0, salePoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
-            salePoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allVendors, "00:00");
+            salePoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allVendors, this.schedule.getDate());
         }
     }
 
-    private void openRandomControlPoints(Integer amount) throws ParseException {
+    private void openRandomControlPoints(Integer amount) {
         List randomIDs = getRandomNumbers(0, controlPoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
-            controlPoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allControllers, "00:00");
+            controlPoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allControllers, this.schedule.getDate());
         }
     }
 
-    private void openRandomBaggageControlPoints(Integer amount) throws ParseException {
+    private void openRandomBaggageControlPoints(Integer amount) {
         List randomIDs = getRandomNumbers(0, controlPoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
-            baggageControlPoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allControllers, "00:00");
+            baggageControlPoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(this.allControllers, this.schedule.getDate());
         }
     }
 
@@ -207,8 +208,39 @@ public class Simulation {
 
     }
 
+    private void returnVendorToPool(Vendor vendor){
+        this.allVendors.add(vendor);
+    }
+
+    private void returnControllerToPool(Controller controller){
+        this.allControllers.add(controller);
+    }
+
+    void checkWorkingHours() {
+        for (SalePoint salePoint : this.salePoints) {
+            Vendor vendor = salePoint.checkWorkingHour(schedule.getDate());
+            if (vendor != null) {
+                returnVendorToPool(vendor);
+            }
+        }
+
+        for (ControlPoint controlPoint : this.controlPoints) {
+            Controller controller = controlPoint.checkWorkingHour(schedule.getDate());
+            if (controller != null) {
+                returnControllerToPool(controller);
+            }
+        }
+
+        for (BaggageControlPoint baggageControlPoint : this.baggageControlPoints) {
+            Controller controller = baggageControlPoint.checkWorkingHour(schedule.getDate());
+            if (controller != null) {
+                returnControllerToPool(controller);
+            }
+        }
+    }
+
     private List getRandomNumbers(Integer min, Integer max, Integer amount){
-        ArrayList<Integer> numbers = new ArrayList();
+        ArrayList<Integer> numbers = new ArrayList<>();
         for(int i = min-1; i < max; i++)
         {
             numbers.add(i+1);
@@ -218,7 +250,7 @@ public class Simulation {
     }
 
     private Integer getRandomNumber(Integer min, Integer max){
-        ArrayList<Integer> numbers = new ArrayList();
+        ArrayList<Integer> numbers = new ArrayList<>();
         for(int i = min-1; i < max; i++)
         {
             numbers.add(i+1);
