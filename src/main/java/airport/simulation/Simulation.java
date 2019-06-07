@@ -5,10 +5,16 @@ import main.java.airport.app.belongings.Ticket;
 import main.java.airport.app.person.*;
 import main.java.airport.app.place.*;
 
+import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.util.*;
 
 public class Simulation {
+    public static final String SALEPOINTS = "salePoints";
+    public static final String CONTROLLPOINTS = "controllPoints";
+    public static final String BAGGAGECONTROLLPOINTS = "baggageControllPoints";
+    public static final String DUTYFREEZONE = "dutyFreeZone";
+    public static final String AIRPLANES = "airplanes";
 
     private Schedule schedule = new Schedule(this);
     private ArrayList<Ticket> allAvailableTickets = new ArrayList<>();
@@ -19,13 +25,47 @@ public class Simulation {
     private ArrayList<ControlPoint> controlPoints = new ArrayList<>();
     private ArrayList<BaggageControlPoint> baggageControlPoints = new ArrayList<>();
     private DutyFreeZone dutyFreeZone;
+    private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
-    public void start() throws IOException {
-        initialization(3,10,2,3, 1,3,10,6);
-        start(500, 10);
+    public void start(
+            Integer salePointsAmount,
+            Integer vendorsAmount,
+            Integer openSalePointsAmount,
+            Integer controlPointsAmount,
+            Integer openControlPointsAmount,
+            Integer controllersAmount,
+            Integer baggageControlPointsAmount,
+            Integer openBaggageControlPointsAmount,
+            Integer flightsAmount,
+            Integer simulationSpeedInMiliseconds,
+            Integer timeShift
+    ) throws IOException {
+        initialization(
+                salePointsAmount,
+                vendorsAmount,
+                openSalePointsAmount,
+                controlPointsAmount,
+                openControlPointsAmount,
+                controllersAmount,
+                baggageControlPointsAmount,
+                openBaggageControlPointsAmount,
+                flightsAmount
+        );
+        start(simulationSpeedInMiliseconds, timeShift);
     }
 
-    private void initialization(Integer salePointsAmount, Integer vendorsAmount, Integer openSalePointsAmount, Integer controlPointsAmount, Integer openControlPointsAmount, Integer baggageControlPointsAmount, Integer controllersAmount, Integer flightsAmount) throws IOException {
+    private void initialization(
+            Integer salePointsAmount,
+            Integer vendorsAmount,
+            Integer openSalePointsAmount,
+            Integer controlPointsAmount,
+            Integer openControlPointsAmount,
+            Integer controllersAmount,
+            Integer baggageControlPointsAmount,
+            Integer openBaggageControlPointsAmount,
+            Integer flightsAmount
+    ) throws IOException {
+
         addNewRandomVendors(vendorsAmount);
         createSalePoints(salePointsAmount, 10, 25);
         openRandomSalePoints(openSalePointsAmount);
@@ -34,7 +74,7 @@ public class Simulation {
         createControlPoints(controlPointsAmount, 10, 25);
         openRandomControlPoints(openControlPointsAmount);
         createBaggageControlPoints(baggageControlPointsAmount, 10, 25);
-        openRandomBaggageControlPoints(openControlPointsAmount);
+        openRandomBaggageControlPoints(openBaggageControlPointsAmount);
 
         addNewRandomAirplanes(flightsAmount);
 
@@ -46,6 +86,10 @@ public class Simulation {
         this.schedule.setSimulationSpeedInMilliseconds(simulationSpeedInMiliseconds);
         this.schedule.setTimeShiftInMilliseconds(timeShift);
         schedule.runTimer();
+    }
+
+    public PropertyChangeSupport getPropertyChangeSupport() {
+        return propertyChangeSupport;
     }
 
     void addNewRandomPassengers(Integer amount) throws IOException {
@@ -106,6 +150,7 @@ public class Simulation {
                 this.addTicket(ticket);
             }
             this.airplanes.add(airplane);
+            getPropertyChangeSupport().firePropertyChange(AIRPLANES, null, airplane);
         }
     }
 
@@ -123,11 +168,12 @@ public class Simulation {
         this.allAvailableTickets.add(ticket);
     }
 
-    private void createSalePoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
+    public void createSalePoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
         for(int i=0; i<amount; i++) {
             Integer queueSize = Helpers.getRandomNumber(minAvailableQueue, maxAvailableQueue);
             SalePoint salePoint = new SalePoint("Punkt sprzedaży nr " + (i+1), queueSize);
             this.salePoints.add(salePoint);
+            getPropertyChangeSupport().firePropertyChange(SALEPOINTS, null, salePoint);
         }
     }
 
@@ -136,6 +182,7 @@ public class Simulation {
             Integer queueSize = Helpers.getRandomNumber(minAvailableQueue, maxAvailableQueue);
             ControlPoint controlPoint = new ControlPoint("Punkt kontrolny nr " + (i+1), queueSize);
             this.controlPoints.add(controlPoint);
+            getPropertyChangeSupport().firePropertyChange(CONTROLLPOINTS, null, controlPoint);
         }
     }
 
@@ -145,6 +192,7 @@ public class Simulation {
             Integer queueSize = Helpers.getRandomNumber(minAvailableQueue, maxAvailableQueue);
             BaggageControlPoint baggageControlPoint = new BaggageControlPoint("Punkt kontrolny bagażu nr " + (i+1), queueSize);
             this.baggageControlPoints.add(baggageControlPoint);
+            getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLLPOINTS, null, baggageControlPoint);
         }
     }
 
@@ -279,6 +327,21 @@ public class Simulation {
 
     }
 
+    public ArrayList<SalePoint> getSalePoints() {
+        return salePoints;
+    }
+
+    public ArrayList<ControlPoint> getControlPoints() {
+        return controlPoints;
+    }
+
+    public ArrayList<Airplane> getAirplanes() {
+        return airplanes;
+    }
+
+    public ArrayList<BaggageControlPoint> getBaggageControlPoints() {
+        return baggageControlPoints;
+    }
 
     void moveFromBaggageControlPoints() throws NullPointerException {
 
@@ -320,7 +383,6 @@ public class Simulation {
     }
 
     void display() {
-
         for(SalePoint salePoint : salePoints)
             System.out.print("salePoints ppl amount: "+salePoint.getPassangers().size()+"\n");
         for(BaggageControlPoint baggageControlPoint : baggageControlPoints)
@@ -333,7 +395,6 @@ public class Simulation {
 //        System.out.print("otworzonych salepointow: " + salePoints.get(0).getOpenSalePointIndex()+"\n");
   //      System.out.print("otworzonych baggagecontrolpointow: " + baggageControlPoints.get(0).getOpenSalePointIndex()+"\n");
     //    System.out.print();
-
     }
 
 /*    public void moveFromPlaces(ArrayList<Object> objects) {
