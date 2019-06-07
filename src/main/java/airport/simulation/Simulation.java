@@ -54,9 +54,9 @@ public class Simulation {
         List randomID = Helpers.getRandomNumbers(0, 300, amount);
         for (int i=0; i<amount; i++){
             String[] passengerData = openCSVReader.readCSV("passenger.csv", Integer.parseInt(randomID.get(i).toString()));
-            Passenger passenger = new Passenger(passengerData[0]);
-            if(passengerData[1].equals("0")){
-                passenger.setBaggage(Integer.parseInt(passengerData[2]));
+            Passenger passenger = new Passenger(passengerData[1]);
+            if(passengerData[2].equals("0")){
+                passenger.setBaggage(Integer.parseInt(passengerData[3]));
             }
 
             do {
