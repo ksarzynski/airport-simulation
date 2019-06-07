@@ -39,7 +39,6 @@ public class ControlPoint extends Place {
         isOpen = true;
         controlPointIndex += 1;
         setController(controller);
-
         setShiftStartTime(date);
     }
 

@@ -49,8 +49,9 @@ public class Simulation {
     }
 
     void addNewRandomPassengers(Integer amount) throws IOException {
+        Integer salePointIndex;
         OpenCSVReader openCSVReader = new OpenCSVReader();
-        List randomID = Helpers.getRandomNumbers(0, 99, amount);
+        List randomID = Helpers.getRandomNumbers(0, 300, amount);
         for (int i=0; i<amount; i++){
             String[] passengerData = openCSVReader.readCSV("passenger.csv", Integer.parseInt(randomID.get(i).toString()));
             Passenger passenger = new Passenger(passengerData[0]);
@@ -58,8 +59,15 @@ public class Simulation {
                 passenger.setBaggage(Integer.parseInt(passengerData[2]));
             }
 
-            Integer salePointIndex = Helpers.getRandomNumber(0, salePoints.get(0).getOpenSalePointIndex());
+            do {
+                salePointIndex = Helpers.getRandomNumber(0, salePoints.get(0).getOpenSalePointIndex());
+//                System.out.print("CZY TA KASA JEST OTWARTA: " + salePoints.get(salePointIndex).getName() + " ---> "+ salePoints.get(salePointIndex).getIsOpen() + "\n");
+            }while(!salePoints.get(salePointIndex).getIsOpen());
+
+
+//            System.out.print("TO INDEX " + salePointIndex + " A TO NAZWA: " + salePoints.get(salePointIndex).getName() + "\n");
             salePoints.get(salePointIndex).addPassenger(passenger);
+//            System.out.print("dodaje pasazera do "+" o nazwie: " + passenger.getName() + " " + salePoints.get(salePointIndex).getName() + "\n");
         }
     }
 
@@ -143,8 +151,11 @@ public class Simulation {
     private void openRandomSalePoints(Integer amount) {
         List randomIDs = Helpers.getRandomNumbers(0, salePoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
-            System.out.print("otworzono salepoint nr " + i + "\n");
+
             salePoints.get(Integer.parseInt(randomIDs.get(i).toString())).openPoint(getAvailableVendor(), this.schedule.getDate());
+            System.out.print("otworzono salepoint nr " + i + " " + salePoints.get(Integer.parseInt(randomIDs.get(i).toString())).getName() + " "
+                    + salePoints.get(Integer.parseInt(randomIDs.get(i).toString())).getIsOpen()+  "\n");
+
         }
     }
 
@@ -250,17 +261,15 @@ public class Simulation {
 
             if(salePoint.getIsOpen())
             {
+//                System.out.print("PRODUKTYWNOSC PRACOWNIKA: " + salePoint.getEmployee().getEfficiency() + "\n");
                 if(salePoint.getEmployee().getEfficiency() > salePoint.getPassangers().size())
                     howMany = salePoint.getPassangers().size();
                 else
                     howMany = salePoint.getEmployee().getEfficiency();
 
-                    System.out.print("jakis sellpoint\n");
-                    System.out.print("ILE JEST BAGGAGE POINTOW "+ baggageControlPoints.get(0).getOpenBaggageControlPointIndex()+"\n");
                 do{
-
                     index = Helpers.getRandomNumber(0,baggageControlPoints.size()-1);
-                    System.out.print("UWAGA "+baggageControlPoints.get(index).getIsOpen()+" "+index+"\n");
+//                    System.out.print("KONTROLA BAGAZU: " + baggageControlPoints.get(index).getName()+"\n");
 
                 }while(!baggageControlPoints.get(index).getIsOpen());
 
@@ -271,7 +280,31 @@ public class Simulation {
     }
 
 
-    void moveFromBaggageControlPoints() {
+    void moveFromBaggageControlPoints() throws NullPointerException {
+
+        int index;
+        int howMany;
+
+        for(BaggageControlPoint baggageControlPoint : baggageControlPoints)
+        {
+
+            if(baggageControlPoint.getIsOpen())
+            {
+
+//                System.out.print("PRODUKTYWNOSC PRACOWNIKA: " + baggageControlPoint.getEmployee().getEfficiency() + "\n");
+//                if(baggageControlPoint.getEmployee().getEfficiency() > baggageControlPoint.getPassangers().size())
+                    howMany = baggageControlPoint.getPassangers().size();
+//                else
+//                    howMany = baggageControlPoint.getEmployee().getEfficiency();
+
+                do{
+                    index = Helpers.getRandomNumber(0, controlPoints.size()-1);
+
+                }while(!controlPoints.get(index).getIsOpen());
+
+                baggageControlPoint.movePassengersPoli(controlPoints.get(index), howMany);
+            }
+        }
 
     }
 
@@ -289,10 +322,14 @@ public class Simulation {
     void display() {
 
         for(SalePoint salePoint : salePoints)
-        System.out.print("salePoints ppl amount: "+salePoint.getPassangers().size()+"\n");
+            System.out.print("salePoints ppl amount: "+salePoint.getPassangers().size()+"\n");
         for(BaggageControlPoint baggageControlPoint : baggageControlPoints)
-        System.out.print("baggageControlPoints ppl amount: "+baggageControlPoint.getPassangers().size()+"\n");
-        System.out.print("Airplanes amount: " + getAirplanesAmount() + "\n");
+            System.out.print("baggageControlPoints ppl amount: "+baggageControlPoint.getPassangers().size()+"\n");
+        for(ControlPoint controlPoint : controlPoints)
+            System.out.print("controlPoints ppl amount: "+controlPoint.getPassangers().size()+"\n");
+//        for(Controller controller : allControllers)
+//            System.out.print("Kontrolerzy: " + controller.getName() + "\n");
+        //System.out.print("Airplanes amount: " + getAirplanesAmount() + "\n");
 //        System.out.print("otworzonych salepointow: " + salePoints.get(0).getOpenSalePointIndex()+"\n");
   //      System.out.print("otworzonych baggagecontrolpointow: " + baggageControlPoints.get(0).getOpenSalePointIndex()+"\n");
     //    System.out.print();
