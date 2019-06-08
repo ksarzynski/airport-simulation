@@ -55,7 +55,7 @@ public class ControlPointRenderer extends JPanel implements ListCellRenderer<Con
             status.setText("[" + timeFormat.format(value.getShiftStartTime()) + " - " + timeFormat.format(value.getShiftEndTime()) + "]");
             status.setForeground(Color.GREEN);
             status.setHorizontalTextPosition(SwingConstants.RIGHT);
-            efficiency.setText("Efektywność: " + value.getVendorsEfficiency() + "%");
+            efficiency.setText("Efektywność: " + value.getControllersEfficiency() + "%");
         } else {
             status.setText("ZAMKNIĘTE");
             status.setForeground(Color.RED);

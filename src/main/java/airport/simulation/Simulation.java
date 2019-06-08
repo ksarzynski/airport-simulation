@@ -397,6 +397,23 @@ public class Simulation {
 
     void moveFromControlPoints() {
 
+        int howMany;
+
+        for(ControlPoint controlPoint : controlPoints)
+        {
+
+            if(controlPoint.getIsOpen())
+            {
+                if(controlPoint.getControllersEfficiency() > controlPoint.getPassangers().size())
+                    howMany = controlPoint.getPassangers().size();
+
+                else
+                    howMany = controlPoint.getControllersEfficiency();
+
+                    controlPoint.movePassengersPoli(dutyFreeZone,howMany);
+            }
+
+        }
 
     }
 

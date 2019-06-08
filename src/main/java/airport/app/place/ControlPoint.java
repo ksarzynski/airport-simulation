@@ -1,6 +1,7 @@
 package main.java.airport.app.place;
 
 import main.java.airport.app.person.Controller;
+import main.java.airport.app.person.Employee;
 import main.java.airport.app.person.Passenger;
 
 import java.util.ArrayList;
@@ -81,8 +82,10 @@ public class ControlPoint extends Place {
         }
     }
 
-    public Integer getVendorsEfficiency() {
+    public Integer getControllersEfficiency() {
         return controller.getEfficiency();
     }
+
+    public Employee getEmployee(){ return this.employee;}
 
 }
