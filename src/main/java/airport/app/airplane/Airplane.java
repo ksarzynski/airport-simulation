@@ -17,6 +17,7 @@ public class Airplane {
     private String isReady;
     private Date flightStart;
     private ArrayList<Passenger> passengers = new ArrayList<>();
+    private Integer purchasedTicketsAmount;
     private ArrayList<Baggage> baggagesOnBoard;
 
     public Airplane(String flightName, String direction, Integer maxPassenger, Integer maxBaggageWeight, Pilot pilot, Date flightStart) {
@@ -27,6 +28,7 @@ public class Airplane {
         this.pilot = pilot;
         this.isReady = "not ready";
         this.flightStart = flightStart;
+        this.purchasedTicketsAmount = 0;
     }
 
     public String getDirection() {
@@ -37,8 +39,20 @@ public class Airplane {
         return flightName;
     }
 
+    public void increasePurchasedTicketsAmount() {
+        purchasedTicketsAmount++;
+    }
+
+    public Integer getPurchasedTicketsAmount() {
+        return purchasedTicketsAmount;
+    }
+
     public Integer getMaxPassenger() {
         return maxPassenger;
+    }
+
+    public Integer getPassengersOnBoardAmount() {
+        return passengers.size();
     }
 
     public Integer getMaxBaggageWeight() {

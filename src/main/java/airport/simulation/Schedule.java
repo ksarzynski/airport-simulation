@@ -36,6 +36,9 @@ class Schedule extends TimerTask {
         simulation.moveFromBaggageControlPoints();
         simulation.moveFromControlPoints();
         simulation.display();
+        simulation.updateGUIClock();
+
+        simulation.openRandomSalePoints(1);
 
 //        simulation.moveFromPlaces();
     }

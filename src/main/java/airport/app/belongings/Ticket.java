@@ -1,14 +1,23 @@
 package main.java.airport.app.belongings;
 
+import main.java.airport.app.airplane.Airplane;
+
 public class Ticket {
 
-    private String flightName;
+    private Airplane airplane;
 
-    public Ticket(String flightName)
+    public Ticket(Airplane airplane)
     {
-        this.flightName = flightName;
+        this.airplane = airplane;
     }
 
-    public String getFlightName(){return this.flightName;}
+    public String getFlightName(){return this.airplane.getFlightName();}
 
+    public void bought() {
+        airplane.increasePurchasedTicketsAmount();
+    }
+
+    public Airplane getAirplane() {
+        return airplane;
+    }
 }

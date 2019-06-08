@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java/airport/gui/AirplaneRenderer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/airport/gui/BaggageControlPointRenderer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/airport/gui/ControlPointRenderer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/airport/gui/SalePointRenderer.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/airport/simulation/Simulation.java" charset="UTF-8" />
     <file url="PROJECT" charset="windows-1252" />
   </component>

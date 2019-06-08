@@ -65,7 +65,11 @@ public class ControlPoint extends Place {
         return controlPointIndex;
     }
 
-    private Date getShiftEndTime() {
+    public Date getShiftStartTime() {
+        return shiftStartTime;
+    }
+
+    public Date getShiftEndTime() {
         return new Date(shiftStartTime.getTime() + (8 * 60 * 60 * 1000));
     }
 
@@ -75,6 +79,10 @@ public class ControlPoint extends Place {
         } else {
             return null;
         }
+    }
+
+    public Integer getVendorsEfficiency() {
+        return controller.getEfficiency();
     }
 
 }

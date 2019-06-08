@@ -1,16 +1,12 @@
 package main.java.airport.gui;
 
-import main.java.airport.app.place.SalePoint;
+import main.java.airport.app.place.ControlPoint;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 
-public class SalePointRenderer extends JPanel implements ListCellRenderer<SalePoint>{
+public class ControlPointRenderer extends JPanel implements ListCellRenderer<ControlPoint>{
     JLabel name = new JLabel(" ");
     JLabel status = new JLabel(" ");
     JLabel queue = new JLabel(" ");
@@ -21,7 +17,7 @@ public class SalePointRenderer extends JPanel implements ListCellRenderer<SalePo
     private JPanel efficiencyJP;
     private JPanel rootPanel;
 
-    public SalePointRenderer() {
+    public ControlPointRenderer() {
         add(rootPanel);
         rootPanel.setOpaque(false);
 
@@ -49,7 +45,7 @@ public class SalePointRenderer extends JPanel implements ListCellRenderer<SalePo
     }
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends SalePoint> list, SalePoint value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList<? extends ControlPoint> list, ControlPoint value, int index, boolean isSelected, boolean cellHasFocus) {
         setComponentOrientation(list.getComponentOrientation());
 
         name.setText(value.getName());

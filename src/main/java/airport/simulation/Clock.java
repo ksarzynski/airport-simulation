@@ -11,6 +11,7 @@ class Clock {
         this.currentTime = removeTime(new Date());
     }
 
+
     void increaseTime(Integer minutes) {
         this.currentTime = new Date(this.currentTime.getTime() + (minutes * 60 * 1000));
     }

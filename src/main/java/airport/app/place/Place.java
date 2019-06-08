@@ -25,6 +25,10 @@ public abstract class Place {
         return this.passengers;
 
     }
+    
+    public Integer getPassengersAmountInQueue() {
+        return passengers.size();
+    }
 
     public void getPassangers(List<Passenger> passengers)
     {

@@ -1,5 +1,6 @@
 package main.java.airport.gui;
 
+import main.java.airport.app.place.SalePoint;
 import main.java.airport.simulation.Simulation;
 
 import javax.swing.*;
@@ -7,10 +8,10 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
+import java.time.Clock;
 
 public class MainScreen extends JFrame implements  PropertyChangeListener {
     private final Simulation simulation;
-    private JLabel clockLabel;
     private JTextField simulationSpeedTF;
     private JTextField timeShiftTF;
     private JButton add5PassengersBtn;
@@ -32,17 +33,17 @@ public class MainScreen extends JFrame implements  PropertyChangeListener {
     private JPanel salePointsJP;
     private JScrollPane salePointsSP;
     private DefaultListModel<Object> salePointsListModel;
-    private JList<Object> salePointsList;
+    private JList<SalePoint> salePointsList;
 
-    private JPanel controllPointsJP;
-    private JScrollPane controllPointsSP;
-    private DefaultListModel controllPointsListModel;
-    private JList controllPointsList;
+    private JPanel controlPointsJP;
+    private JScrollPane controlPointsSP;
+    private DefaultListModel controlPointsListModel;
+    private JList controlPointsList;
 
-    private JPanel baggageControllPointsJP;
-    private JScrollPane baggageControllPointsSP;
-    private DefaultListModel baggageControllPointsListModel;
-    private JList baggageControllPointsList;
+    private JPanel baggageControlPointsJP;
+    private JScrollPane baggageControlPointsSP;
+    private DefaultListModel baggageControlPointsListModel;
+    private JList baggageControlPointsList;
 
     private JPanel dutyFreeZoneJP;
     private JScrollPane dutyFreeZoneSP;
@@ -50,6 +51,7 @@ public class MainScreen extends JFrame implements  PropertyChangeListener {
     private JList dutyFreeZoneList;
 
     private JPanel airplanesJP;
+    private JLabel clockJL;
     private JScrollPane airplanesSP;
     private DefaultListModel airplanesListModel;
     private JList airplanesList;
@@ -59,7 +61,7 @@ public class MainScreen extends JFrame implements  PropertyChangeListener {
         add(rootPanel);
 
         setTitle("Airport simulation");
-        setSize(1000, 750);
+        setSize(1600, 750);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         STARTBtn.addActionListener(e -> {
@@ -84,27 +86,30 @@ public class MainScreen extends JFrame implements  PropertyChangeListener {
 
         salePointsListModel = new DefaultListModel<>();
         salePointsListModel.addAll(simulation.getSalePoints());
-        salePointsList = new JList<>(salePointsListModel);
+        salePointsList = new JList(salePointsListModel);
+        salePointsList.setCellRenderer(new SalePointRenderer());
         simulation.getPropertyChangeSupport().addPropertyChangeListener(Simulation.SALEPOINTS, this);
         salePointsSP = new JScrollPane(salePointsList);
         salePointsJP.setLayout(new GridLayout(1, 1));
         salePointsJP.add(salePointsSP);
 
-        controllPointsListModel = new DefaultListModel<>();
-        controllPointsListModel.addAll(simulation.getControlPoints());
-        controllPointsList = new JList<>(controllPointsListModel);
-        simulation.getPropertyChangeSupport().addPropertyChangeListener(Simulation.CONTROLLPOINTS, this);
-        controllPointsSP = new JScrollPane(controllPointsList);
-        controllPointsJP.setLayout(new GridLayout(1, 1));
-        controllPointsJP.add(controllPointsSP);
+        controlPointsListModel = new DefaultListModel<>();
+        controlPointsListModel.addAll(simulation.getControlPoints());
+        controlPointsList = new JList<>(controlPointsListModel);
+        controlPointsList.setCellRenderer(new ControlPointRenderer());
+        simulation.getPropertyChangeSupport().addPropertyChangeListener(Simulation.CONTROLPOINTS, this);
+        controlPointsSP = new JScrollPane(controlPointsList);
+        controlPointsJP.setLayout(new GridLayout(1, 1));
+        controlPointsJP.add(controlPointsSP);
 
-        baggageControllPointsListModel = new DefaultListModel<>();
-        baggageControllPointsListModel.addAll(simulation.getBaggageControlPoints());
-        baggageControllPointsList = new JList<>(baggageControllPointsListModel);
-        simulation.getPropertyChangeSupport().addPropertyChangeListener(Simulation.BAGGAGECONTROLLPOINTS, this);
-        baggageControllPointsSP = new JScrollPane(baggageControllPointsList);
-        baggageControllPointsJP.setLayout(new GridLayout(1, 1));
-        baggageControllPointsJP.add(baggageControllPointsSP);
+        baggageControlPointsListModel = new DefaultListModel<>();
+        baggageControlPointsListModel.addAll(simulation.getBaggageControlPoints());
+        baggageControlPointsList = new JList<>(baggageControlPointsListModel);
+        baggageControlPointsList.setCellRenderer(new BaggageControlPointRenderer());
+        simulation.getPropertyChangeSupport().addPropertyChangeListener(Simulation.BAGGAGECONTROLPOINTS, this);
+        baggageControlPointsSP = new JScrollPane(baggageControlPointsList);
+        baggageControlPointsJP.setLayout(new GridLayout(1, 1));
+        baggageControlPointsJP.add(baggageControlPointsSP);
 
         dutyFreeZoneListModel = new DefaultListModel<>();
         dutyFreeZoneListModel.addAll(simulation.getBaggageControlPoints());
@@ -112,15 +117,19 @@ public class MainScreen extends JFrame implements  PropertyChangeListener {
         simulation.getPropertyChangeSupport().addPropertyChangeListener(Simulation.DUTYFREEZONE, this);
         dutyFreeZoneSP = new JScrollPane(dutyFreeZoneList);
         dutyFreeZoneJP.setLayout(new GridLayout(1, 1));
-        dutyFreeZoneJP.add(dutyFreeZoneSP);
+//        dutyFreeZoneJP.add(dutyFreeZoneSP);
 
         airplanesListModel = new DefaultListModel<>();
         airplanesListModel.addAll(simulation.getBaggageControlPoints());
         airplanesList = new JList<>(airplanesListModel);
+        airplanesList.setCellRenderer(new AirplaneRenderer());
         simulation.getPropertyChangeSupport().addPropertyChangeListener(Simulation.AIRPLANES, this);
         airplanesSP = new JScrollPane(airplanesList);
         airplanesJP.setLayout(new GridLayout(1, 1));
         airplanesJP.add(airplanesSP);
+
+        clockJL.setText("00:00");
+        simulation.getPropertyChangeSupport().addPropertyChangeListener(Simulation.CLOCK, this);
     }
 
     @Override
@@ -135,18 +144,20 @@ public class MainScreen extends JFrame implements  PropertyChangeListener {
                     salePointsListModel.removeElement(evt.getOldValue());
                 } else if (evt.getOldValue() == null && evt.getNewValue() != null) {
                     salePointsListModel.addElement(evt.getNewValue());
+                } else if (evt.getOldValue() != null && evt.getNewValue() != null) {
+                    salePointsListModel.setElementAt(evt.getNewValue(), salePointsListModel.indexOf(evt.getNewValue()));
                 }
-            } else if (Simulation.CONTROLLPOINTS.equals(evt.getPropertyName())) {
+            } else if (Simulation.CONTROLPOINTS.equals(evt.getPropertyName())) {
                 if (evt.getOldValue() != null && evt.getNewValue() == null) {
-                    controllPointsListModel.removeElement(evt.getOldValue());
+                    controlPointsListModel.removeElement(evt.getOldValue());
                 } else if (evt.getOldValue() == null && evt.getNewValue() != null) {
-                    controllPointsListModel.addElement(evt.getNewValue());
+                    controlPointsListModel.addElement(evt.getNewValue());
                 }
-            } else if (Simulation.BAGGAGECONTROLLPOINTS.equals(evt.getPropertyName())) {
+            } else if (Simulation.BAGGAGECONTROLPOINTS.equals(evt.getPropertyName())) {
                 if (evt.getOldValue() != null && evt.getNewValue() == null) {
-                    baggageControllPointsListModel.removeElement(evt.getOldValue());
+                    baggageControlPointsListModel.removeElement(evt.getOldValue());
                 } else if (evt.getOldValue() == null && evt.getNewValue() != null) {
-                    baggageControllPointsListModel.addElement(evt.getNewValue());
+                    baggageControlPointsListModel.addElement(evt.getNewValue());
                 }
             } else if (Simulation.DUTYFREEZONE.equals(evt.getPropertyName())) {
                 if (evt.getOldValue() != null && evt.getNewValue() == null) {
@@ -159,6 +170,10 @@ public class MainScreen extends JFrame implements  PropertyChangeListener {
                     airplanesListModel.removeElement(evt.getOldValue());
                 } else if (evt.getOldValue() == null && evt.getNewValue() != null) {
                     airplanesListModel.addElement(evt.getNewValue());
+                }
+            } else if (Simulation.CLOCK.equals(evt.getPropertyName())) {
+                if (evt.getOldValue() != null && evt.getNewValue() != null) {
+                    clockJL.setText(evt.getNewValue().toString());
                 }
             }
         }

@@ -20,6 +20,10 @@ public class SalePoint extends Place {
         super(name, maxPeopleAmount);
     }
 
+    public SalePoint(SalePoint salePoint) {
+        super(salePoint.getName(), salePoint.getQueueSize());
+    }
+
     private void setVendor(Vendor vendor) {
         this.employee = vendor;
         this.vendor = (Vendor)employee;
@@ -35,8 +39,8 @@ public class SalePoint extends Place {
         return tempVendor;
     }
 
-    private Integer getVendorsEfficiency() {
-        return this.employee.getEfficiency();
+    public Integer getVendorsEfficiency() {
+        return vendor.getEfficiency();
     }
 
     public void openPoint(Vendor vendor, Date date) {
@@ -76,7 +80,11 @@ public class SalePoint extends Place {
         return openSalePointIndex;
     }
 
-    private Date getShiftEndTime() {
+    public Date getShiftStartTime() {
+        return shiftStartTime;
+    }
+
+    public Date getShiftEndTime() {
         return new Date(shiftStartTime.getTime() + (8 * 60 * 60 * 1000));
     }
 
