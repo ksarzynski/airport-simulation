@@ -105,16 +105,14 @@ public class Simulation {
             }
 
             do {
-                salePointIndex = Helpers.getRandomNumber(0, salePoints.get(0).getOpenSalePointIndex());
-//                System.out.print("CZY TA KASA JEST OTWARTA: " + salePoints.get(salePointIndex).getName() + " ---> "+ salePoints.get(salePointIndex).getIsOpen() + "\n");
+                salePointIndex = Helpers.getRandomNumber(0, (salePoints.get(0).getOpenSalePointIndex()-1));
+
             }while(!salePoints.get(salePointIndex).getIsOpen());
 
-
-//            System.out.print("TO INDEX " + salePointIndex + " A TO NAZWA: " + salePoints.get(salePointIndex).getName() + "\n");
             SalePoint salePoint = salePoints.get(salePointIndex);
             salePoint.addPassenger(passenger);
             getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
-//            System.out.print("dodaje pasazera do "+" o nazwie: " + passenger.getName() + " " + salePoints.get(salePointIndex).getName() + "\n");
+
         }
     }
 

@@ -5,8 +5,10 @@ import main.java.airport.app.belongings.Baggage;
 import main.java.airport.app.person.Controller;
 import main.java.airport.app.person.Passenger;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class BaggageControlPoint extends ControlPoint {
 
@@ -21,6 +23,8 @@ public class BaggageControlPoint extends ControlPoint {
     }
 
     public void checkBaggage(ArrayList<Airplane> airplanes, int brutalityLevel) {
+
+        ArrayList<Integer> list = new ArrayList<>();
 
         int dangerLevel;
         int index;
@@ -51,7 +55,8 @@ public class BaggageControlPoint extends ControlPoint {
 
                     passengers.get(i).removeTicket();
                     passengers.get(i).removeBaggage();
-                    passengers.remove(i);
+                    list.add(i);
+//                    passengers.remove(i);
 
                 }
                 else {
@@ -59,13 +64,23 @@ public class BaggageControlPoint extends ControlPoint {
 
                         passengers.get(j).removeTicket();
                         passengers.get(j).removeBaggage();
-                        passengers.remove(i);
+                        list.add(i);
+//                        passengers.remove(i);
+
                     }
                 }
+
             }
 
         }
 
+        int repair = 0;
+
+        for(int j = 0; j < list.size(); j++)
+        {
+            passengers.remove(list.get(j) - repair);
+            repair++;
+        }
 
     }
 
