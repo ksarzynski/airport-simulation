@@ -68,13 +68,13 @@ public class Simulation {
             Integer flightsAmount
     ) throws IOException {
         addNewRandomVendors(vendorsAmount);
-        createSalePoints(salePointsAmount, 10, 25);
+        createSalePoints(salePointsAmount, 10, 2000);
         openRandomSalePoints(openSalePointsAmount);
 
         addNewRandomControllers(controllersAmount);
-        createControlPoints(controlPointsAmount, 10, 25);
+        createControlPoints(controlPointsAmount, 10, 2000);
         openRandomControlPoints(openControlPointsAmount);
-        createBaggageControlPoints(baggageControlPointsAmount, 10, 25);
+        createBaggageControlPoints(baggageControlPointsAmount, 10, 2000);
         openRandomBaggageControlPoints(openBaggageControlPointsAmount);
 
         addNewRandomAirplanes(flightsAmount);
@@ -119,7 +119,7 @@ public class Simulation {
             do {
                 salePointIndex = Helpers.getRandomNumber(0, (salePoints.get(0).getOpenSalePointIndex()-1));
 
-            }while(!salePoints.get(salePointIndex).getIsOpen());
+            }while(!salePoints.get(salePointIndex).getIsOpen()& !salePoints.get(salePointIndex).isPlaceFull());
 
             SalePoint salePoint = salePoints.get(salePointIndex);
             salePoint.addPassenger(passenger);
@@ -382,7 +382,7 @@ public class Simulation {
                     index = Helpers.getRandomNumber(0,baggageControlPoints.size()-1);
 //                    System.out.print("KONTROLA BAGAZU: " + baggageControlPoints.get(index).getName()+"\n");
 
-                }while(!baggageControlPoints.get(index).getIsOpen());
+                }while(!baggageControlPoints.get(index).getIsOpen() && !baggageControlPoints.get(index).isPlaceFull());
 
                 ArrayList<Ticket> tickets = new ArrayList<>();
                 for(int i=0; i<howMany; i++) {
@@ -417,7 +417,7 @@ public class Simulation {
                 do{
                     index = Helpers.getRandomNumber(0, controlPoints.size()-1);
 
-                }while(!controlPoints.get(index).getIsOpen());
+                }while(!controlPoints.get(index).getIsOpen() && !controlPoints.get(index).isPlaceFull());
 
                 baggageControlPoint.movePassengersPoli(controlPoints.get(index), howMany);
                 getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoint);
