@@ -370,7 +370,9 @@ public class Simulation {
         {
             if(salePoint.getIsOpen())
             {
-//                System.out.print("PRODUKTYWNOSC PRACOWNIKA: " + salePoint.getEmployee().getEfficiency() + "\n");
+                if(salePoint.isPlaceFull())
+                    openClosedSalePoints();
+
                 if(salePoint.getEmployee().getEfficiency() > salePoint.getPassangers().size())
                     howMany = salePoint.getPassangers().size();
                 else
@@ -401,6 +403,8 @@ public class Simulation {
 
         for(BaggageControlPoint baggageControlPoint : baggageControlPoints)
         {
+            if(baggageControlPoint.isPlaceFull())
+                openClosedBaggageControlPoints();
 
             if(baggageControlPoint.getIsOpen())
             {
@@ -429,6 +433,8 @@ public class Simulation {
 
         for(ControlPoint controlPoint : controlPoints)
         {
+            if(controlPoint.isPlaceFull())
+                openClosedControlPoints();
 
             if(controlPoint.getIsOpen())
             {
