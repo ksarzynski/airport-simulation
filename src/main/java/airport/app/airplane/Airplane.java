@@ -74,7 +74,6 @@ public class Airplane {
     }
 
     public void addBaggage(Baggage baggage) {
-        System.out.println(baggage.getTicket());
         this.baggagesOnBoard.add(baggage);
     }
 

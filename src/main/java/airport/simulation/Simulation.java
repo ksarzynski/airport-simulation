@@ -105,7 +105,7 @@ public class Simulation {
         return propertyChangeSupport;
     }
 
-    void addNewRandomPassengers(Integer amount) throws IOException {
+    public void addNewRandomPassengers(Integer amount) throws IOException {
         int salePointIndex;
         OpenCSVReader openCSVReader = new OpenCSVReader();
         List randomID = Helpers.getRandomNumbers(0, 300, amount);
@@ -144,7 +144,7 @@ public class Simulation {
         return new Pilot(pilotData[1]);
     }
 
-    void addNewRandomAirplanes(Integer amount) throws IOException {
+    public void addNewRandomAirplanes(Integer amount) throws IOException {
         OpenCSVReader openCSVReader = new OpenCSVReader();
         List randomID = Helpers.getRandomNumbers(0, 99, amount);
         for (int i=0; i<amount; i++){
@@ -220,7 +220,17 @@ public class Simulation {
         }
     }
 
-    private void openRandomControlPoints(Integer amount) {
+    public void openClosedSalePoints() {
+        for(SalePoint salePoint : salePoints){
+            if(!salePoint.getIsOpen()){
+                salePoint.openPoint(getAvailableVendor(), this.schedule.getDate());
+                getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
+                break;
+            }
+        }
+    }
+
+    public void openRandomControlPoints(Integer amount) {
         List randomIDs = Helpers.getRandomNumbers(0, controlPoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
             ControlPoint controlPoint = controlPoints.get(Integer.parseInt(randomIDs.get(i).toString()));
@@ -229,12 +239,32 @@ public class Simulation {
         }
     }
 
-    private void openRandomBaggageControlPoints(Integer amount) {
+    public void openClosedControlPoints() {
+        for(ControlPoint controlPoint : controlPoints){
+            if(!controlPoint.getIsOpen()){
+                controlPoint.openPoint(getAvailableController(), this.schedule.getDate());
+                getPropertyChangeSupport().firePropertyChange(CONTROLPOINTS, "update", controlPoint);
+                break;
+            }
+        }
+    }
+
+    public void openRandomBaggageControlPoints(Integer amount) {
         List randomIDs = Helpers.getRandomNumbers(0, controlPoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
             BaggageControlPoint baggageControlPoint = baggageControlPoints.get(Integer.parseInt(randomIDs.get(i).toString()));
             baggageControlPoint.openPoint(getAvailableController(), this.schedule.getDate());
             getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoint);
+        }
+    }
+
+    public void openClosedBaggageControlPoints() {
+        for(BaggageControlPoint baggageControlPoint : baggageControlPoints){
+            if(!baggageControlPoint.getIsOpen()){
+                baggageControlPoint.openPoint(getAvailableController(), this.schedule.getDate());
+                getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoint);
+                break;
+            }
         }
     }
 
@@ -417,8 +447,6 @@ public class Simulation {
     }
 
     void MoveFromDutyFreeZone() {
-
-
 
     }
 

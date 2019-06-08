@@ -1,6 +1,7 @@
 package main.java.airport.gui;
 
 import main.java.airport.app.place.SalePoint;
+import main.java.airport.simulation.Simulation;
 
 import javax.swing.*;
 import javax.swing.border.Border;

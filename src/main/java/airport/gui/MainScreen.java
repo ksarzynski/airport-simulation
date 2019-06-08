@@ -52,6 +52,10 @@ public class MainScreen extends JFrame implements  PropertyChangeListener {
     private JPanel airplanesJP;
     private JLabel clockJL;
     private JLabel dutyFreeZoneJL;
+    private JButton openSPBtn;
+    private JButton openBCPBtn;
+    private JButton openCPBtn;
+    private JButton addAirplaneBtn;
     private JScrollPane airplanesSP;
     private DefaultListModel<Object> airplanesListModel;
     private JList<Airplane> airplanesList;
@@ -92,6 +96,50 @@ public class MainScreen extends JFrame implements  PropertyChangeListener {
             setSimulationStatus(false);
             clearOldSimulationData();
             simulation.stop();
+        });
+
+        openSPBtn.addActionListener(e -> {
+            simulation.openClosedSalePoints();
+        });
+
+        openBCPBtn.addActionListener(e -> {
+            simulation.openClosedBaggageControlPoints();
+        });
+
+        openCPBtn.addActionListener(e -> {
+            simulation.openClosedControlPoints();
+        });
+
+        addAirplaneBtn.addActionListener(e -> {
+            try {
+                simulation.addNewRandomAirplanes(1);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        add5PassengersBtn.addActionListener(e -> {
+            try {
+                simulation.addNewRandomPassengers(5);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        add25PassengersBtn.addActionListener(e -> {
+            try {
+                simulation.addNewRandomPassengers(25);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        add50PassengersBtn.addActionListener(e -> {
+            try {
+                simulation.addNewRandomPassengers(50);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         });
 
         salePointsListModel = new DefaultListModel<>();
@@ -155,6 +203,10 @@ public class MainScreen extends JFrame implements  PropertyChangeListener {
         add5PassengersBtn.setEnabled(status);
         add25PassengersBtn.setEnabled(status);
         add50PassengersBtn.setEnabled(status);
+        openCPBtn.setEnabled(status);
+        openBCPBtn.setEnabled(status);
+        openSPBtn.setEnabled(status);
+        addAirplaneBtn.setEnabled(status);
 
         salePointsAmountTF.setEnabled(!status);
         openSalePointsAmountTF.setEnabled(!status);

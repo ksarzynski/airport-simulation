@@ -9,8 +9,8 @@
       <background color="-16777216"/>
       <doubleBuffered value="false"/>
       <enabled value="false"/>
-      <minimumSize width="250" height="60"/>
-      <preferredSize width="250" height="60"/>
+      <minimumSize width="250" height="70"/>
+      <preferredSize width="250" height="70"/>
     </properties>
     <border type="line"/>
     <children>
