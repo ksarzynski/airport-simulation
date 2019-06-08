@@ -1,6 +1,7 @@
 package main.java.airport.app.place;
 
 import main.java.airport.app.airplane.Airplane;
+import main.java.airport.app.person.Passenger;
 
 import java.util.ArrayList;
 
@@ -19,5 +20,19 @@ public class DutyFreeZone extends Place {
         return this.flow;
     }
 
+    public void movePassengersPoli(ArrayList<Airplane> airplanes, int howMany){
+
+        for(int i = 0; i < howMany; i++)
+        {
+            for(Airplane airplane : airplanes)
+                if(passengers.size()!=0)
+                    if(passengers.get(0).getTicket() != null)
+                        if(passengers.get(0).getTicket().getFlightName().equals(airplane.getFlightName()))
+                            airplane.addPassenger(passengers.get(0));
+            if(passengers.size()!=0)
+            passengers.remove(0);
+        }
+
+    }
 
 }

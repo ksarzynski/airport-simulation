@@ -71,6 +71,7 @@ public class Airplane {
             passenger.removeBaggage();
             passenger.removeTicket();
         }
+
     }
 
     public void addBaggage(Baggage baggage) {
@@ -80,15 +81,15 @@ public class Airplane {
     public void checkBaggagesReady() {
         for(Passenger passenger: passengers) {
 
-            if(!(passenger.getBaggage().getStatus().equals("boarded")))
-            {
-                this.isReady = "baggage not on board";
-                delayFlight(Helpers.getRandomNumber(5, 60));
-            }
+            if(passenger.getBaggage()!=null) {
+                if (!(passenger.getBaggage().getStatus().equals("boarded"))) {
+                     this.isReady = "baggage not on board";
+                     delayFlight(Helpers.getRandomNumber(5, 60));
+                    }
 
-            if(!this.isReady.equals("baggage not on board"));
-            this.isReady = "baggage on board";
-
+                if (!this.isReady.equals("baggage not on board")) ;
+                     this.isReady = "baggage on board";
+                }
         }
     }
 

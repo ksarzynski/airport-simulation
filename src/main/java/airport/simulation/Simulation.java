@@ -446,7 +446,9 @@ public class Simulation {
 
     }
 
-    void MoveFromDutyFreeZone() {
+    public void moveFromDutyFreeZone() {
+
+        dutyFreeZone.movePassengersPoli(airplanes, dutyFreeZone.getFlow());
 
     }
 
@@ -457,6 +459,7 @@ public class Simulation {
             System.out.print("baggageControlPoints ppl amount: "+baggageControlPoint.getPassangers().size()+"\n");
         for(ControlPoint controlPoint : controlPoints)
             System.out.print("controlPoints ppl amount: "+controlPoint.getPassangers().size()+"\n");
+        System.out.print("dutyFreeZone ppl amount: "+dutyFreeZone.getPassangers().size()+"\n");
 //        for(Controller controller : allControllers)
 //            System.out.print("Kontrolerzy: " + controller.getName() + "\n");
         //System.out.print("Airplanes amount: " + getAirplanesAmount() + "\n");
