@@ -35,10 +35,10 @@ class Schedule extends TimerTask {
         simulation.moveFromSalePoints();
         simulation.moveFromBaggageControlPoints();
         simulation.moveFromControlPoints();
+        simulation.moveFromDutyFreeZone();
         simulation.display();
         simulation.updateGUIClock();
 
-//        simulation.moveFromPlaces();
     }
 
     void runTimer() {

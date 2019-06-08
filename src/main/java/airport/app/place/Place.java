@@ -71,6 +71,12 @@ public abstract class Place {
 
     public String getName() { return name; }
 
+    public boolean isPlaceFull (){
+
+        return passengers.size() > maxPeopleAmount;
+
+    }
+
 }
 
 

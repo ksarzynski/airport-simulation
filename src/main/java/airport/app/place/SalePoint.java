@@ -52,7 +52,7 @@ public class SalePoint extends Place {
     }
 
     private Vendor closePoint(){
-        this.isOpen = false;
+        isOpen = false;
         openSalePointIndex -= 1;
         setShiftStartTime(null);
         return removeVendor();

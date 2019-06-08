@@ -46,7 +46,7 @@ public class ControlPoint extends Place {
 
     public Controller closePoint(){
         this.isOpen = false;
-        this.controlPointIndex -= 1;
+        controlPointIndex -= 1;
         setShiftStartTime(null);
         return removeController();
     }
