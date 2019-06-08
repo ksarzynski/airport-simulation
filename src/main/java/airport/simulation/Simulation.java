@@ -325,8 +325,10 @@ public class Simulation {
 
     void checkDepartureTimes() {
         for(Airplane airplane : this.airplanes) {
-            airplane.checkDepartureTime(schedule.getDate());
-            getPropertyChangeSupport().firePropertyChange(AIRPLANES, "update", airplane);
+            if(airplane.checkDepartureTime(schedule.getDate()))
+                getPropertyChangeSupport().firePropertyChange(AIRPLANES, airplane, null);
+            else
+                getPropertyChangeSupport().firePropertyChange(AIRPLANES, "update", airplane);
         }
     }
 
@@ -336,7 +338,6 @@ public class Simulation {
 
         for(SalePoint salePoint : salePoints)
         {
-
             if(salePoint.getIsOpen())
             {
 //                System.out.print("PRODUKTYWNOSC PRACOWNIKA: " + salePoint.getEmployee().getEfficiency() + "\n");
@@ -351,7 +352,12 @@ public class Simulation {
 
                 }while(!baggageControlPoints.get(index).getIsOpen());
 
-                salePoint.movePassengersPoli(baggageControlPoints.get(index), howMany);
+                ArrayList<Ticket> tickets = new ArrayList<>();
+                for(int i=0; i<howMany; i++) {
+                    tickets.add(getAvailableTicket());
+                }
+
+                salePoint.movePassengers(baggageControlPoints.get(index), howMany, tickets);
                 getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
                 getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoints.get(index));
             }

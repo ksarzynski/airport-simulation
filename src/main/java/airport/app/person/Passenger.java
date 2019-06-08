@@ -17,9 +17,18 @@ public class Passenger extends Person {
         this.baggage = new Baggage(weight);
     }
 
+    private boolean isBaggage() {
+        if(baggage != null)
+            return true;
+        else
+            return false;
+    }
+
     public void setTicket (Ticket ticket)
     {
         this.ticket = ticket;
+        if(isBaggage())
+            this.baggage.setTicket(ticket);
     }
 
     public Baggage getBaggage ()

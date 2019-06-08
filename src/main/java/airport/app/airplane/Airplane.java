@@ -18,7 +18,7 @@ public class Airplane {
     private Date flightStart;
     private ArrayList<Passenger> passengers = new ArrayList<>();
     private Integer purchasedTicketsAmount;
-    private ArrayList<Baggage> baggagesOnBoard;
+    private ArrayList<Baggage> baggagesOnBoard = new ArrayList<>();
 
     public Airplane(String flightName, String direction, Integer maxPassenger, Integer maxBaggageWeight, Pilot pilot, Date flightStart) {
         this.flightName = flightName;
@@ -74,8 +74,8 @@ public class Airplane {
     }
 
     public void addBaggage(Baggage baggage) {
-
-        baggagesOnBoard.add(baggage);
+        System.out.println(baggage.getTicket());
+        this.baggagesOnBoard.add(baggage);
     }
 
     public void checkBaggagesReady() {
@@ -101,12 +101,14 @@ public class Airplane {
         this.flightStart = new Date(this.flightStart.getTime() + (minutes * 60 * 1000));
     }
 
-    public void checkDepartureTime(Date now) {
+    public boolean checkDepartureTime(Date now) {
         if( now.after(getFlightStart()) ){
             checkBaggagesReady();
             if(isReady.equals("ready")) {
                 startFlight();
+                return true;
             }
         }
+        return false;
     }
 }

@@ -3,6 +3,7 @@ package main.java.airport.app.place;
 import main.java.airport.app.belongings.Ticket;
 import main.java.airport.app.person.Passenger;
 import main.java.airport.app.person.Vendor;
+import main.java.airport.simulation.Simulation;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -85,12 +86,15 @@ public class SalePoint extends Place {
         return null;
     }
 
-    public void movePassengersPoli(Place place, int howMany, ArrayList<Ticket> availableTickets){
+    public void movePassengers(Place place, int howMany, ArrayList<Ticket> availableTickets){
         ArrayList<Passenger> passengersToMove = new ArrayList<>();
 
         for(int i = 0; i < howMany; i++)
         {
-            passengersToMove.add(this.passengers.get(i));
+            Passenger passenger = passengers.get(i);
+            Ticket ticket = availableTickets.remove(0);
+            passenger.setTicket(ticket);
+            passengersToMove.add(passenger);
         }
 
         place.addPassengers(passengersToMove);
