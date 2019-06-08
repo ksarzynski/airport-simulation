@@ -10,7 +10,7 @@ public class ControlPoint extends Place {
 
     private Date shiftStartTime;
 
-    private Controller controller;
+    Controller controller;
 
     private static int controlPointIndex;
 
@@ -19,7 +19,7 @@ public class ControlPoint extends Place {
         super(name, maxPeopleAmount);
     }
 
-    private void setController(Controller controller) {
+    void setController(Controller controller) {
         this.controller = controller;
     }
 
@@ -39,6 +39,7 @@ public class ControlPoint extends Place {
         isOpen = true;
         controlPointIndex += 1;
         setController(controller);
+
         setShiftStartTime(date);
     }
 
@@ -64,7 +65,7 @@ public class ControlPoint extends Place {
         return controlPointIndex;
     }
 
-    public Date getShiftEndTime() {
+    private Date getShiftEndTime() {
         return new Date(shiftStartTime.getTime() + (8 * 60 * 60 * 1000));
     }
 

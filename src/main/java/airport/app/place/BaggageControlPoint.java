@@ -15,7 +15,7 @@ public class BaggageControlPoint extends ControlPoint {
 
     private static int baggageControlPointIndex;
 
-    private Controller controller;
+//    private Controller controller;
 
     private ArrayList<Baggage> baggages = new ArrayList<>();
 
@@ -26,26 +26,47 @@ public class BaggageControlPoint extends ControlPoint {
     public void checkBaggage(ArrayList<Airplane> airplanes, int brutalityLevel) {
 
         int dangerLevel;
-        for (int i = 0; i < getControllerEfficiency(); i++) {
-            dangerLevel = passengers.get(i).getBaggage().getDangerLevel();
-            if (dangerLevel == 0) {
+        int index;
+        if (passengers.size() < controller.getEfficiency()) {
+            index = passengers.size();
+            System.out.print("1 " + " \n");
+            System.out.print("rozmiar kolejki " + passengers.size() + " \n");
+            System.out.print("wydajnosc " + controller.getEfficiency() + " \n");
+            System.out.print("index " + index + " \n");
+        } else{
+            index = controller.getEfficiency();
+            System.out.print("2 " + " \n");
+            System.out.print("rozmiar kolejki " + passengers.size() + " \n");
+            System.out.print("wydajnosc " + controller.getEfficiency() + " \n");
+            System.out.print("index " + index + " \n");
+        }
+        for (int i = 0; i < index; i++) {
 
-                moveBaggage(passengers.get(i), airplanes);
+            if(passengers.get(i).getBaggage()!=null)
+            {
+                dangerLevel = passengers.get(i).getBaggage().getDangerLevel();
+                if (dangerLevel == 0) {
 
-            } else if (dangerLevel == 1) {
+                    moveBaggage(passengers.get(i), airplanes);
 
-                passengers.get(i).removeTicket();
-                passengers.get(i).removeBaggage();
-                passengers.remove(i);
+                }
+                else if (dangerLevel == 1) {
 
-            } else {
-                for (int j = i; j < brutalityLevel && j < getControllerEfficiency(); j++) {
-
-                    passengers.get(j).removeTicket();
-                    passengers.get(j).removeBaggage();
+                    passengers.get(i).removeTicket();
+                    passengers.get(i).removeBaggage();
                     passengers.remove(i);
+
+                }
+                else {
+                    for (int j = i; j < brutalityLevel && j < getControllerEfficiency(); j++) {
+
+                        passengers.get(j).removeTicket();
+                        passengers.get(j).removeBaggage();
+                        passengers.remove(i);
+                    }
                 }
             }
+
         }
 
 
@@ -53,18 +74,22 @@ public class BaggageControlPoint extends ControlPoint {
 
     private void moveBaggage(Passenger passenger, ArrayList<Airplane> airplanes) {
 
-        String flightName = passenger.getTicket().getFlightName();
-        for (Airplane airplane : airplanes) {
-            if (flightName.equals(airplane.getFlightName())) {
-                airplane.addBaggage(passenger.getBaggage());
-                passenger.getBaggage().setStatus("boarded");
+        if(passenger.getTicket()!=null)
+        {
+            String flightName = passenger.getTicket().getFlightName();
+            for (Airplane airplane : airplanes) {
+                if (flightName.equals(airplane.getFlightName())) {
+                    airplane.addBaggage(passenger.getBaggage());
+                    passenger.getBaggage().setStatus("boarded");
+                }
             }
         }
+
     }
 
-    public void setController(Controller controller) {
-        this.controller = controller;
-    }
+//    public void setController(Controller controller) {
+//        controller = controller;
+//    }
 
     public void movePassengers(int basicFlow, ControlPoint controlPoint) {
 

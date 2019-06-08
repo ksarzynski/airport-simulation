@@ -93,7 +93,7 @@ public class Simulation {
     }
 
     void addNewRandomPassengers(Integer amount) throws IOException {
-        Integer salePointIndex;
+        int salePointIndex;
         OpenCSVReader openCSVReader = new OpenCSVReader();
         List randomID = Helpers.getRandomNumbers(0, 300, amount);
         for (int i=0; i<amount; i++){
@@ -132,7 +132,7 @@ public class Simulation {
         return new Pilot(pilotData[1]);
     }
 
-    public void addNewRandomAirplanes(Integer amount) throws IOException {
+    void addNewRandomAirplanes(Integer amount) throws IOException {
         OpenCSVReader openCSVReader = new OpenCSVReader();
         List randomID = Helpers.getRandomNumbers(0, 99, amount);
         for (int i=0; i<amount; i++){
@@ -168,7 +168,7 @@ public class Simulation {
         this.allAvailableTickets.add(ticket);
     }
 
-    public void createSalePoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
+    private void createSalePoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
         for(int i=0; i<amount; i++) {
             Integer queueSize = Helpers.getRandomNumber(minAvailableQueue, maxAvailableQueue);
             SalePoint salePoint = new SalePoint("Punkt sprzedaży nr " + (i+1), queueSize);
@@ -232,14 +232,14 @@ public class Simulation {
         return ticket;
     }
 
-    public Vendor getAvailableVendor() {
+    private Vendor getAvailableVendor() {
         Integer randomId = Helpers.getRandomNumber(0, allVendors.size()-1);
         Vendor vendor = this.allVendors.get(randomId);
         allVendors.remove(randomId);
         return vendor;
     }
 
-    public Controller getAvailableController() {
+    private Controller getAvailableController() {
         Integer randomId = Helpers.getRandomNumber(0, allControllers.size()-1);
         Controller controller = this.allControllers.get(randomId);
         allControllers.remove(randomId);
@@ -354,6 +354,7 @@ public class Simulation {
             if(baggageControlPoint.getIsOpen())
             {
 
+                baggageControlPoint.checkBaggage(airplanes, 10);
 //                System.out.print("PRODUKTYWNOSC PRACOWNIKA: " + baggageControlPoint.getEmployee().getEfficiency() + "\n");
 //                if(baggageControlPoint.getEmployee().getEfficiency() > baggageControlPoint.getPassangers().size())
                     howMany = baggageControlPoint.getPassangers().size();
