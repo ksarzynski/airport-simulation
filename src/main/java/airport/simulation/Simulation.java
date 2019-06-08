@@ -118,6 +118,10 @@ public class Simulation {
 
             do {
                 salePointIndex = Helpers.getRandomNumber(0, (salePoints.get(0).getOpenSalePointIndex()-1));
+                if(salePointIndex > salePoints.size() -1 )
+                    System.out.print("tutaj blad \n");
+//                System.out.print("tyle otwartych puntow" + salePoints.get(0).getOpenSalePointIndex() + "\n");
+//                System.out.print("a tyle jest salepointow w liscie" + salePoints.size() + "\n");
 
             }while(!salePoints.get(salePointIndex).getIsOpen());
 
