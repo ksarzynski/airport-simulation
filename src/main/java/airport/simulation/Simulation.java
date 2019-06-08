@@ -17,7 +17,7 @@ public class Simulation {
     public static final String AIRPLANES = "airplanes";
     public static final String CLOCK = "clock";
 
-    private Schedule schedule = new Schedule(this);
+    private Schedule schedule;
     private ArrayList<Ticket> allAvailableTickets = new ArrayList<>();
     private ArrayList<Vendor> allVendors = new ArrayList<>();
     private ArrayList<Controller> allControllers = new ArrayList<>();
@@ -41,6 +41,7 @@ public class Simulation {
             Integer simulationSpeedInMiliseconds,
             Integer timeShift
     ) throws IOException {
+        schedule = new Schedule(this);
         initialization(
                 salePointsAmount,
                 vendorsAmount,
@@ -66,7 +67,6 @@ public class Simulation {
             Integer openBaggageControlPointsAmount,
             Integer flightsAmount
     ) throws IOException {
-
         addNewRandomVendors(vendorsAmount);
         createSalePoints(salePointsAmount, 10, 25);
         openRandomSalePoints(openSalePointsAmount);
@@ -80,7 +80,19 @@ public class Simulation {
         addNewRandomAirplanes(flightsAmount);
 
         this.dutyFreeZone = new DutyFreeZone("Strefa bezcłowa", 10000, 100);
+    }
 
+    public void stop() {
+        allVendors.clear();
+        salePoints.clear();
+        controlPoints.clear();
+        allControllers.clear();
+        baggageControlPoints.clear();
+        airplanes.clear();
+        allAvailableTickets.clear();
+
+        schedule.cancel();
+        schedule = null;
     }
 
     private void start(Integer simulationSpeedInMiliseconds, Integer timeShift) {

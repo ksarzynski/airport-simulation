@@ -1,7 +1,6 @@
 package main.java.airport.gui;
 
 import main.java.airport.app.airplane.Airplane;
-import main.java.airport.app.place.BaggageControlPoint;
 import main.java.airport.app.place.ControlPoint;
 import main.java.airport.app.place.DutyFreeZone;
 import main.java.airport.app.place.SalePoint;
@@ -19,7 +18,7 @@ public class MainScreen extends JFrame implements  PropertyChangeListener {
     private JTextField timeShiftTF;
     private JButton add5PassengersBtn;
     private JButton add25PassengersBtn;
-    private JButton addFivePassengersBtn;
+    private JButton add50PassengersBtn;
     private JPanel rootPanel;
     private JButton STARTBtn;
     private JButton STOPBtn;
@@ -58,9 +57,12 @@ public class MainScreen extends JFrame implements  PropertyChangeListener {
     private JScrollPane airplanesSP;
     private DefaultListModel<Object> airplanesListModel;
     private JList<Airplane> airplanesList;
+    private Boolean runningStatus;
 
     public MainScreen(Simulation simulation) {
         this.simulation = simulation;
+        setSimulationStatus(false);
+
         add(rootPanel);
 
         setTitle("Airport simulation");
@@ -69,6 +71,7 @@ public class MainScreen extends JFrame implements  PropertyChangeListener {
 
         STARTBtn.addActionListener(e -> {
             try {
+                setSimulationStatus(true);
                 simulation.start(
                         Integer.parseInt(salePointsAmountTF.getText()),
                         Integer.parseInt(vendorsAmountTF.getText()),
@@ -85,6 +88,12 @@ public class MainScreen extends JFrame implements  PropertyChangeListener {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+        });
+
+        STOPBtn.addActionListener(e -> {
+            setSimulationStatus(false);
+            clearListsModels();
+            simulation.stop();
         });
 
         salePointsListModel = new DefaultListModel<>();
@@ -132,7 +141,38 @@ public class MainScreen extends JFrame implements  PropertyChangeListener {
         airplanesJP.add(airplanesSP);
 
         clockJL.setText("00:00");
+        clockJL.setFont(clockJL.getFont().deriveFont(64.0f));
         simulation.getPropertyChangeSupport().addPropertyChangeListener(Simulation.CLOCK, this);
+    }
+
+    private void clearListsModels() {
+        salePointsListModel.clear();
+        airplanesListModel.clear();
+        dutyFreeZoneListModel.clear();
+        baggageControlPointsListModel.clear();
+        controlPointsListModel.clear();
+    }
+
+    private void setSimulationStatus(boolean status) {
+        runningStatus = status;
+
+        STARTBtn.setEnabled(!status);
+        STOPBtn.setEnabled(status);
+        add5PassengersBtn.setEnabled(status);
+        add25PassengersBtn.setEnabled(status);
+        add50PassengersBtn.setEnabled(status);
+
+        salePointsAmountTF.setEnabled(!status);
+        openSalePointsAmountTF.setEnabled(!status);
+        vendorsAmountTF.setEnabled(!status);
+        controllPointsAmountTF.setEnabled(!status);
+        openControllPointsAmountTF.setEnabled(!status);
+        controlersAmountTF.setEnabled(!status);
+        baggageControlPointsAmountTF.setEnabled(!status);
+        openBaggageControllPointsAmountTF.setEnabled(!status);
+        flightsAmountTF.setEnabled(!status);
+        timeShiftTF.setEnabled(!status);
+        simulationSpeedTF.setEnabled(!status);
     }
 
     @Override
