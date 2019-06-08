@@ -83,6 +83,9 @@ public class Simulation {
     }
 
     public void stop() {
+        schedule.cancel();
+        schedule = null;
+
         allVendors.clear();
         salePoints.clear();
         controlPoints.clear();
@@ -90,9 +93,6 @@ public class Simulation {
         baggageControlPoints.clear();
         airplanes.clear();
         allAvailableTickets.clear();
-
-        schedule.cancel();
-        schedule = null;
     }
 
     private void start(Integer simulationSpeedInMiliseconds, Integer timeShift) {
@@ -361,7 +361,6 @@ public class Simulation {
                 getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoints.get(index));
             }
         }
-
     }
 
     void moveFromBaggageControlPoints() throws NullPointerException {
@@ -406,11 +405,12 @@ public class Simulation {
             {
                 if(controlPoint.getControllersEfficiency() > controlPoint.getPassangers().size())
                     howMany = controlPoint.getPassangers().size();
-
                 else
                     howMany = controlPoint.getControllersEfficiency();
 
-                    controlPoint.movePassengersPoli(dutyFreeZone,howMany);
+                controlPoint.movePassengersPoli(dutyFreeZone, howMany);
+                getPropertyChangeSupport().firePropertyChange(CONTROLPOINTS, "update", controlPoint);
+                getPropertyChangeSupport().firePropertyChange(DUTYFREEZONE, "update", dutyFreeZone);
             }
 
         }

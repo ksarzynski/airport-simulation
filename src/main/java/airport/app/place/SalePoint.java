@@ -95,4 +95,20 @@ public class SalePoint extends Place {
         }
         return null;
     }
+
+    public void movePassengersPoli(Place place, int howMany, ArrayList<Ticket> availableTickets){
+        ArrayList<Passenger> passengersToMove = new ArrayList<>();
+
+        for(int i = 0; i < howMany; i++)
+        {
+            passengersToMove.add(this.passengers.get(i));
+        }
+
+        place.addPassengers(passengersToMove);
+
+        for(int i = 0; i < howMany; i++)
+        {
+            this.passengers.remove(0);
+        }
+    }
 }

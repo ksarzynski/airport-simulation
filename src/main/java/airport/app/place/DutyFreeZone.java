@@ -9,7 +9,6 @@ public class DutyFreeZone extends Place {
     private Integer flow;
 
     public DutyFreeZone(String name, Integer maxPeopleAmount, Integer flow)
-
     {
         super(name, maxPeopleAmount);
         this.flow = flow;
