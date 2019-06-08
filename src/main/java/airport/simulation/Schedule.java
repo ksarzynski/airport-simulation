@@ -33,12 +33,10 @@ class Schedule extends TimerTask {
         //simulation.addNewRandomPassengers(Helpers.getRandomNumber(0, 15));
         simulation.addNewRandomAirplanes(Helpers.getRandomNumber(0, 1));
         simulation.moveFromSalePoints();
-        simulation.moveFromBaggageControlPoints();
+//        simulation.moveFromBaggageControlPoints();
         simulation.moveFromControlPoints();
         simulation.display();
         simulation.updateGUIClock();
-
-        simulation.openRandomSalePoints(1);
 
 //        simulation.moveFromPlaces();
     }

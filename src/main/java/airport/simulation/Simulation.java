@@ -112,7 +112,6 @@ public class Simulation {
             SalePoint salePoint = salePoints.get(salePointIndex);
             salePoint.addPassenger(passenger);
             getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
-
         }
     }
 
@@ -223,7 +222,7 @@ public class Simulation {
         for(int i=0; i<amount; i++) {
             BaggageControlPoint baggageControlPoint = baggageControlPoints.get(Integer.parseInt(randomIDs.get(i).toString()));
             baggageControlPoint.openPoint(getAvailableController(), this.schedule.getDate());
-            getPropertyChangeSupport().firePropertyChange(CONTROLPOINTS, "update", baggageControlPoint);
+            getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoint);
         }
     }
 
@@ -291,6 +290,7 @@ public class Simulation {
             Vendor vendor = salePoint.checkWorkingHour(schedule.getDate());
             if (vendor != null) {
                 returnVendorToPool(vendor);
+                getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
             }
         }
 
@@ -298,6 +298,7 @@ public class Simulation {
             Controller controller = controlPoint.checkWorkingHour(schedule.getDate());
             if (controller != null) {
                 returnControllerToPool(controller);
+                getPropertyChangeSupport().firePropertyChange(CONTROLPOINTS, "update", controlPoint);
             }
         }
 
@@ -305,6 +306,7 @@ public class Simulation {
             Controller controller = baggageControlPoint.checkWorkingHour(schedule.getDate());
             if (controller != null) {
                 returnControllerToPool(controller);
+                getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoint);
             }
         }
     }
@@ -312,6 +314,7 @@ public class Simulation {
     void checkDepartureTimes() {
         for(Airplane airplane : this.airplanes) {
             airplane.checkDepartureTime(schedule.getDate());
+            getPropertyChangeSupport().firePropertyChange(AIRPLANES, "update", airplane);
         }
     }
 
@@ -338,6 +341,8 @@ public class Simulation {
                 }while(!baggageControlPoints.get(index).getIsOpen());
 
                 salePoint.movePassengersPoli(baggageControlPoints.get(index), howMany);
+                getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
+                getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoints.get(index));
             }
         }
 
@@ -367,6 +372,8 @@ public class Simulation {
                 }while(!controlPoints.get(index).getIsOpen());
 
                 baggageControlPoint.movePassengersPoli(controlPoints.get(index), howMany);
+                getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoint);
+                getPropertyChangeSupport().firePropertyChange(CONTROLPOINTS, "update", controlPoints.get(index));
             }
         }
 
