@@ -117,7 +117,9 @@ public class Simulation {
             }
 
             do {
-                salePointIndex = Helpers.getRandomNumber(0, ((salePoints.get(0).getOpenSalePointIndex())-1));
+
+
+                salePointIndex = Helpers.getRandomNumber(0, (salePoints.size()-1));
 
             }while((!salePoints.get(salePointIndex).getIsOpen()) || salePoints.get(salePointIndex).isPlaceFull());
 
@@ -200,7 +202,6 @@ public class Simulation {
 
     private void createBaggageControlPoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
         for(int i=0; i<amount; i++) {
-            System.out.print("otworzono baggagecontrolpoint nr " + i + "\n");
             Integer queueSize = Helpers.getRandomNumber(minAvailableQueue, maxAvailableQueue);
             BaggageControlPoint baggageControlPoint = new BaggageControlPoint("P kontrolny bagażu nr " + (i+1), queueSize);
             this.baggageControlPoints.add(baggageControlPoint);
@@ -214,8 +215,6 @@ public class Simulation {
             SalePoint salePoint = salePoints.get(Integer.parseInt(randomIDs.get(i).toString()));
 
             salePoint.openPoint(getAvailableVendor(), this.schedule.getDate());
-            System.out.print("otworzono salepoint nr " + i + " " + salePoint.getName() + " "
-                    + salePoint.getIsOpen()+  "\n");
             getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
         }
     }
@@ -380,7 +379,6 @@ public class Simulation {
 
                 do{
                     index = Helpers.getRandomNumber(0,baggageControlPoints.size()-1);
-//                    System.out.print("KONTROLA BAGAZU: " + baggageControlPoints.get(index).getName()+"\n");
 
                 }while(!baggageControlPoints.get(index).getIsOpen() || baggageControlPoints.get(index).isPlaceFull());
 
@@ -472,8 +470,6 @@ public class Simulation {
 //        System.out.print("otworzonych salepointow: " + salePoints.get(0).getOpenSalePointIndex()+"\n");
   //      System.out.print("otworzonych baggagecontrolpointow: " + baggageControlPoints.get(0).getOpenSalePointIndex()+"\n");
     //    System.out.print();
-
-        System.out.print("rozmiar jebanych salepointow: " +salePoints.size()+"\n");
 
     }
 
