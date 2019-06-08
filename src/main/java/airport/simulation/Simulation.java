@@ -118,10 +118,6 @@ public class Simulation {
 
             do {
                 salePointIndex = Helpers.getRandomNumber(0, (salePoints.get(0).getOpenSalePointIndex()-1));
-                if(salePointIndex > salePoints.size() -1 )
-                    System.out.print("tutaj blad \n");
-//                System.out.print("tyle otwartych puntow" + salePoints.get(0).getOpenSalePointIndex() + "\n");
-//                System.out.print("a tyle jest salepointow w liscie" + salePoints.size() + "\n");
 
             }while(!salePoints.get(salePointIndex).getIsOpen());
 
@@ -335,7 +331,6 @@ public class Simulation {
     }
 
     void moveFromSalePoints() {
-
         int index;
         int howMany;
 
@@ -375,11 +370,9 @@ public class Simulation {
             {
 
                 baggageControlPoint.checkBaggage(airplanes, 10);
-//                System.out.print("PRODUKTYWNOSC PRACOWNIKA: " + baggageControlPoint.getEmployee().getEfficiency() + "\n");
-//                if(baggageControlPoint.getEmployee().getEfficiency() > baggageControlPoint.getPassangers().size())
+
                     howMany = baggageControlPoint.getPassangers().size();
-//                else
-//                    howMany = baggageControlPoint.getEmployee().getEfficiency();
+
 
                 do{
                     index = Helpers.getRandomNumber(0, controlPoints.size()-1);
@@ -441,31 +434,6 @@ public class Simulation {
     public void updateGUIClock() {
         getPropertyChangeSupport().firePropertyChange(CLOCK, "update", schedule.getTime());
     }
-
-/*    public void moveFromPlaces(ArrayList<Object> objects) {
-
-        if(objects.get(0) instanceof SalePoint)
-        {
-            int index = 0;
-            for(SalePoint salePoint : salePoints)
-            {
-                if(salePoint.getIsOpen())
-                {
-                    while(!baggageControlPoints.get(index).getIsOpen())
-                    {
-                        index = getRandomNumber(0, baggageControlPoints.size()-1);
-                    }
-
-                    if(salePoint.getEmployee().getEfficiency() > salePoint.getPassangers().size())
-                        salePoint.movePassengersPoli(baggageControlPoints.get(index),salePoint.getPassangers().size());
-                    else
-                        salePoint.movePassengersPoli(baggageControlPoints.get(index),salePoint.getEmployee().getEfficiency());
-                }
-            }
-        }
-
-    }
-*/
 
 }
 

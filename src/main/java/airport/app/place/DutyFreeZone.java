@@ -19,19 +19,5 @@ public class DutyFreeZone extends Place {
         return this.flow;
     }
 
-    public void movePassengers(ArrayList<Airplane> airplanes, int basicFlow) {
 
-        for(int i = 0; i < this.flow * basicFlow; i++)
-        {
-            for(Airplane airplane : airplanes)
-            {
-                if(passengers.get(i).getTicket().getFlightName().equals(airplane.getFlightName()))
-                {
-                    airplane.addBaggage(passengers.get(i).getBaggage());
-                    airplane.addPassenger(passengers.get(i));
-                }
-            }
-        }
-
-    }
 }

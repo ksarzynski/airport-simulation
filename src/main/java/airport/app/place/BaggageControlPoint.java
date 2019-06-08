@@ -1,22 +1,14 @@
 package main.java.airport.app.place;
 
 import main.java.airport.app.airplane.Airplane;
-import main.java.airport.app.belongings.Baggage;
 import main.java.airport.app.person.Controller;
 import main.java.airport.app.person.Passenger;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class BaggageControlPoint extends ControlPoint {
 
     private static int baggageControlPointIndex;
-
-//    private Controller controller;
-
-    private ArrayList<Baggage> baggages = new ArrayList<>();
 
     public BaggageControlPoint(String name, Integer maxPeopleAmount) {
         super(name, maxPeopleAmount);
@@ -28,19 +20,12 @@ public class BaggageControlPoint extends ControlPoint {
 
         int dangerLevel;
         int index;
-        if (passengers.size() < controller.getEfficiency()) {
+        if (passengers.size() < controller.getEfficiency())
             index = passengers.size();
-            System.out.print("1 " + " \n");
-            System.out.print("rozmiar kolejki " + passengers.size() + " \n");
-            System.out.print("wydajnosc " + controller.getEfficiency() + " \n");
-            System.out.print("index " + index + " \n");
-        } else{
+
+         else
             index = controller.getEfficiency();
-            System.out.print("2 " + " \n");
-            System.out.print("rozmiar kolejki " + passengers.size() + " \n");
-            System.out.print("wydajnosc " + controller.getEfficiency() + " \n");
-            System.out.print("index " + index + " \n");
-        }
+
         for (int i = 0; i < index; i++) {
 
             if(passengers.get(i).getBaggage()!=null)
@@ -56,7 +41,6 @@ public class BaggageControlPoint extends ControlPoint {
                     passengers.get(i).removeTicket();
                     passengers.get(i).removeBaggage();
                     list.add(i);
-//                    passengers.remove(i);
 
                 }
                 else {
@@ -65,8 +49,6 @@ public class BaggageControlPoint extends ControlPoint {
                         passengers.get(j).removeTicket();
                         passengers.get(j).removeBaggage();
                         list.add(i);
-//                        passengers.remove(i);
-
                     }
                 }
 
@@ -97,22 +79,6 @@ public class BaggageControlPoint extends ControlPoint {
             }
         }
 
-    }
-
-//    public void setController(Controller controller) {
-//        controller = controller;
-//    }
-
-    public void movePassengers(int basicFlow, ControlPoint controlPoint) {
-
-        ArrayList<Passenger> passengersToMove = new ArrayList<>();
-
-        for(int i = 0; i < getControllerEfficiency() * basicFlow; i++)
-        {
-            passengersToMove.add(this.passengers.get(i));
-        }
-
-        controlPoint.addPassengers(passengersToMove);
     }
 
     public void openPoint(Controller controller, Date date) {

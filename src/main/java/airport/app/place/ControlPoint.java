@@ -51,17 +51,6 @@ public class ControlPoint extends Place {
         return removeController();
     }
 
-    public void movePassengers(int basicFlow, DutyFreeZone dutyFreeZone) {
-        ArrayList<Passenger> passengersToMove = new ArrayList<>();
-
-        for(int i = 0; i < getControllerEfficiency() * basicFlow; i++)
-        {
-            passengersToMove.add(this.passengers.get(i));
-        }
-
-        dutyFreeZone.addPassengers(passengersToMove);
-    }
-
     public int getOpenSalePointIndex() {
         return controlPointIndex;
     }

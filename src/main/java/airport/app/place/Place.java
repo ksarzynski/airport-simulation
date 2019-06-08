@@ -30,11 +30,6 @@ public abstract class Place {
         return passengers.size();
     }
 
-    public void getPassangers(List<Passenger> passengers)
-    {
-        this.passengers.addAll(passengers);
-    }
-
     void addPassengers(List<Passenger> passengers) {
 
        this.passengers.addAll(passengers);
@@ -61,14 +56,12 @@ public abstract class Place {
         for(int i = 0; i < howMany; i++)
         {
             passengersToMove.add(this.passengers.get(i));
-//            System.out.print("POLIDODAJE PASAZERA: : " + this.passengers.get(i).getName() + " do " + place.getName() + "\n");
         }
 
         place.addPassengers(passengersToMove);
 
         for(int i = 0; i < howMany; i++)
         {
-//            System.out.print("wywalam pasazera o nazwie: " + this.passengers.get(0).getName() + " wywalam pasazerow z " + this.name + "\n");
             this.passengers.remove(0);
         }
 

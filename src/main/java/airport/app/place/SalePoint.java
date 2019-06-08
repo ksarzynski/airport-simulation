@@ -65,17 +65,6 @@ public class SalePoint extends Place {
         passenger.setTicket(ticket);
     }
 
-    public void movePassengers(int basicFlow, BaggageControlPoint baggageControlPoint) {
-        ArrayList<Passenger> passengersToMove = new ArrayList<>();
-
-        for(int i = 0; i < getVendorsEfficiency() * basicFlow; i++)
-        {
-            passengersToMove.add(this.passengers.get(i));
-        }
-
-        baggageControlPoint.addPassengers(passengersToMove);
-    }
-
     public int getOpenSalePointIndex() {
         return openSalePointIndex;
     }
