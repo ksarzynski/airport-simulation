@@ -273,10 +273,12 @@ public class Simulation {
     }
 
     public Ticket getAvailableTicket() {
+        System.out.println("TEST1: " + allAvailableTickets.size());
         Integer randomId = Helpers.getRandomNumber(0, allAvailableTickets.size()-1);
         Ticket ticket = this.allAvailableTickets.get(randomId);
         ticket.bought();
-        this.allAvailableTickets.remove(randomId);
+        this.allAvailableTickets.remove(ticket);
+        System.out.println("TEST2: " + allAvailableTickets.size());
         getPropertyChangeSupport().firePropertyChange(AIRPLANES, "update", ticket.getAirplane());
         return ticket;
     }
