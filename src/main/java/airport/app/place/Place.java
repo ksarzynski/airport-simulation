@@ -73,7 +73,7 @@ public abstract class Place {
 
     public boolean isPlaceFull (){
 
-        return passengers.size() > maxPeopleAmount;
+        return passengers.size() >= maxPeopleAmount;
 
     }
 
