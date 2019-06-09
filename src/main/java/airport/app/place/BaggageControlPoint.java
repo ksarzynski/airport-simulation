@@ -20,13 +20,14 @@ public class BaggageControlPoint extends ControlPoint {
         super(name, maxPeopleAmount);
     }
 
+/*
     /**
      * metoda sprawdzajaca bagaz oraz wykorzystujaca metode move to umieszczenia go w odpowiednim samolocie
      * @param airplanes lista samolotow
      * @param brutalityLevel ilosc pasazerow likwidowanych w przypadku bardzo niebezpiecznego bagazu
      */
 
-    public void checkBaggage(ArrayList<Airplane> airplanes, int brutalityLevel) {
+ /*   public void checkBaggage(ArrayList<Airplane> airplanes, int brutalityLevel) {
 
         ArrayList<Integer> list = new ArrayList<>();
 
@@ -80,6 +81,60 @@ public class BaggageControlPoint extends ControlPoint {
         }
 
     }
+    */
+
+
+    public void checkBaggage(ArrayList<Airplane> airplanes, int brutalityLevel){
+
+        int howMany = 0;
+        ArrayList<Passenger> passengersToRemove = new ArrayList<>();
+
+        try {
+            howMany = this.passengers.size() < this.getControllersEfficiency() ? this.passengers.size() : this.getControllersEfficiency();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        for(int i = 0; i < howMany; i++){
+
+            if(passengers.get(i).getBaggage() != null){
+
+                if(passengers.get(i).getBaggage().getDangerLevel()==0){
+
+                    passengers.get(i).getTicket().getAirplane().addBaggage(passengers.get(i).getBaggage());
+                    passengers.get(i).removeBaggage();
+                }
+
+                else if(passengers.get(i).getBaggage().getDangerLevel()==1){
+
+                    passengers.get(i).removeBaggage();
+                    passengers.get(i).removeTicket();
+                    passengersToRemove.add(passengers.get(i));
+                }
+
+                else{
+
+                    for(int j = i; j < brutalityLevel; j++){
+
+                        passengers.get(j).removeBaggage();
+                        passengers.get(j).removeTicket();
+                        passengersToRemove.add(passengers.get(j));
+                        i+=brutalityLevel;
+                    }
+                }
+
+            }
+
+        }
+
+        for(Passenger passengerToRemove : passengersToRemove)
+            for(Passenger passenger : passengers){
+                if(passengersToRemove.equals(passenger))
+                passenger = null;
+            }
+    }
+
 
     public void setSuccessor(boolean successor) {
         this.successor = successor;
