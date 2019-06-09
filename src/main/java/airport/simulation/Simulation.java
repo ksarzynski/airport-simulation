@@ -519,8 +519,10 @@ public class Simulation {
 
                 if(!added){
                     ControlPoint controlPoint = openClosedControlPoints();
-                    baggageControlPoint.movePassengersPoli(controlPoint, howMany);
-                    getPropertyChangeSupport().firePropertyChange(CONTROLPOINTS, "update", controlPoint);
+                    if(controlPoint != null){
+                        baggageControlPoint.movePassengersPoli(controlPoint, howMany);
+                        getPropertyChangeSupport().firePropertyChange(CONTROLPOINTS, "update", controlPoint);
+                    }
                 }
                 getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoint);
             }
