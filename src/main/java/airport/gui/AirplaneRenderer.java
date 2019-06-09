@@ -48,7 +48,7 @@ public class AirplaneRenderer extends JPanel implements ListCellRenderer<Airplan
         destination.setText("Cel: " + value.getDirection());
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         flightStart.setText("Czas odlotu: " + timeFormat.format(value.getFlightStart()));
-        maxBaggageWeight.setText("Obciązenie: " + value.getMaxBaggageWeight());
+        maxBaggageWeight.setText("Obciazenie: " + value.getMaxBaggageWeight());
         allPassengers.setText("Ilosc wykupionych biletow: " + value.getPurchasedTicketsAmount() + " / " + value.getMaxPassenger());
         passengers.setText("Ilosc pasazerow na pokladzie: " + value.getPassengersOnBoardAmount() + " / " + value.getMaxPassenger());
 
