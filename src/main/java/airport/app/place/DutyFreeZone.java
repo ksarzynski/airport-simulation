@@ -20,7 +20,7 @@ public class DutyFreeZone extends Place {
         return this.flow;
     }
 
-    public void movePassengersPoli(ArrayList<Airplane> airplanes, int howMany){
+    public void movePassengersPoli(ArrayList<Airplane> airplanes, int howMany) {
 
 /*        for(int i = 0; i < howMany; i++)
         {
@@ -42,15 +42,15 @@ public class DutyFreeZone extends Place {
             }
         }
 */
-    if(howMany!=0)
-    for(int i = 0; i < howMany; i++){
+        if (howMany != 0)
+            for (int i = 0; i < howMany; i++) {
 
-        if (passengers.size()!=0 && passengers.get(0)!=null) {
-            if(passengers.get(0).getTicket() != null && passengers.get(0).getTicket().getAirplane() != null)
-            passengers.get(0).getTicket().getAirplane().addPassenger(passengers.get(0));
-            passengers.remove(0);
-        }
+                if (passengers.size() != 0 && passengers.get(0) != null) {
+                    if (passengers.get(0).getTicket() != null && passengers.get(0).getTicket().getAirplane() != null)
+                        passengers.get(0).getTicket().getAirplane().addPassenger(passengers.get(0));
+                    passengers.remove(0);
+                }
 
+            }
     }
-
 }
