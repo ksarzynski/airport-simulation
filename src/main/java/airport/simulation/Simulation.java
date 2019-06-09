@@ -69,13 +69,13 @@ public class Simulation {
 
     ) throws IOException {
         addNewRandomVendors(vendorsAmount);
-        createSalePoints(salePointsAmount, 10, 2000);
+        createSalePoints(salePointsAmount, 10, 500);
         openRandomSalePoints(openSalePointsAmount);
 
         addNewRandomControllers(controllersAmount);
-        createControlPoints(controlPointsAmount, 10, 2000);
+        createControlPoints(controlPointsAmount, 10, 500);
         openRandomControlPoints(openControlPointsAmount);
-        createBaggageControlPoints(baggageControlPointsAmount, 10, 2000);
+        createBaggageControlPoints(baggageControlPointsAmount, 10, 500);
         openRandomBaggageControlPoints(openBaggageControlPointsAmount);
 
         addNewRandomAirplanes(flightsAmount);
