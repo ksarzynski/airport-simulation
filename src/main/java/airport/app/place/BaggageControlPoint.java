@@ -6,6 +6,11 @@ import airport.app.person.Passenger;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ *  punkt kontroli bagazu, zawiera liste pasazerow w ktorej przetrzymuje pasazerow ktorzy przeszli do punktu kontroli bagazu z kas
+ *  posiada metode kltora sprawdza bagaz, oraz umieszcza go na odpowiednim samolocie oraz metody otwierajace i zamykajace punkt
+ */
+
 public class BaggageControlPoint extends ControlPoint {
 
     private static int baggageControlPointIndex;
@@ -13,6 +18,12 @@ public class BaggageControlPoint extends ControlPoint {
     public BaggageControlPoint(String name, Integer maxPeopleAmount) {
         super(name, maxPeopleAmount);
     }
+
+    /**
+     * metoda sprawdzajaca bagaz oraz wykorzystujaca metode move to umieszczenia go w odpowiednim samolocie
+     * @param airplanes lista samolotow
+     * @param brutalityLevel ilosc pasazerow likwidowanych w przypadku bardzo niebezpiecznego bagazu
+     */
 
     public void checkBaggage(ArrayList<Airplane> airplanes, int brutalityLevel) {
 
@@ -46,9 +57,11 @@ public class BaggageControlPoint extends ControlPoint {
                 else {
                     for (int j = i; j < brutalityLevel && j < getControllerEfficiency(); j++) {
 
-                        passengers.get(j).removeTicket();
-                        passengers.get(j).removeBaggage();
-                        list.add(i);
+                        if(passengers.get(j)!=null) {
+                            passengers.get(j).removeTicket();
+                            passengers.get(j).removeBaggage();
+                            list.add(i);
+                        }
                     }
                 }
 
@@ -60,11 +73,18 @@ public class BaggageControlPoint extends ControlPoint {
 
         for(int j = 0; j < list.size(); j++)
         {
+            if(j-repair>-1)
             passengers.remove(list.get(j) - repair);
             repair++;
         }
 
     }
+
+    /**
+     * funkcja ruszajaca bagaz
+     * @param passenger pasazer ktorego bagaz jest przemieszczany
+     * @param airplanes samoloty wsrod ktorych szukany jest ten do ktorego bagaz ma trafic
+     */
 
     private void moveBaggage(Passenger passenger, ArrayList<Airplane> airplanes) {
 
@@ -81,6 +101,12 @@ public class BaggageControlPoint extends ControlPoint {
 
     }
 
+    /**
+     * funkcja otwierajaca punkt, przypisujaca kontrolera
+     * @param controller przypisany kontroler
+     * @param date ile czasu punkt ma byc otwarty
+     */
+
     public void openPoint(Controller controller, Date date) {
         isOpen = true;
         baggageControlPointIndex += 1;
@@ -88,6 +114,11 @@ public class BaggageControlPoint extends ControlPoint {
 
         setShiftStartTime(date);
     }
+
+    /**
+     * funkcja zamykajaca punkt, usuwajaca kontrolera
+     * @return
+     */
 
     public Controller closePoint(){
         isOpen = false;

@@ -1,5 +1,9 @@
 package airport.app.person;
 
+/**
+ *  pracownik puntow sprzedazy
+ */
+
 public class Vendor extends Employee
 {
 

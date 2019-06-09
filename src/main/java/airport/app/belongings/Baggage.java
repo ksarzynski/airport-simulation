@@ -2,6 +2,14 @@ package airport.app.belongings;
 
 import java.util.Random;
 
+/**
+ * obiekty klasy bagaz sa uzywane przez obiekty klasy pasazer, maja zmienna o nazwie dangerLevel,
+ * bagaz moze byc bezpieczny, moez byc niebezpieczny - wlasciciel takiego
+ * bagazu wraz z bagazem zostaje usuniety z lotniwska a moze byc bardzo niebezpieczny
+ * i spodowac pobliskich osob w kolejce ( np 10 ) i spowodowac usuniecie ich oraz wlasciciela
+ * i ich bagazy z lotniska
+ */
+
 public class Baggage {
     private Integer weight;
     private Integer dangerLevel;
