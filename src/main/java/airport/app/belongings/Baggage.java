@@ -1,4 +1,4 @@
-package main.java.airport.app.belongings;
+package airport.app.belongings;
 
 import java.util.Random;
 

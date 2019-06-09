@@ -1,9 +1,9 @@
-package main.java.airport.simulation;
+package airport.simulation;
 
-import main.java.airport.app.airplane.Airplane;
-import main.java.airport.app.belongings.Ticket;
-import main.java.airport.app.person.*;
-import main.java.airport.app.place.*;
+import airport.app.airplane.Airplane;
+import airport.app.belongings.Ticket;
+import airport.app.person.*;
+import airport.app.place.*;
 
 import java.beans.PropertyChangeSupport;
 import java.io.IOException;
@@ -79,7 +79,7 @@ public class Simulation {
 
         addNewRandomAirplanes(flightsAmount);
 
-        this.dutyFreeZone = new DutyFreeZone("Strefa bezcłowa", 10000, 100);
+        this.dutyFreeZone = new DutyFreeZone("Strefa bezclowa", 10000, 100);
     }
 
     public void stop() {
@@ -185,7 +185,7 @@ public class Simulation {
     private void createSalePoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
         for(int i=0; i<amount; i++) {
             Integer queueSize = Helpers.getRandomNumber(minAvailableQueue, maxAvailableQueue);
-            SalePoint salePoint = new SalePoint("P sprzedaży nr " + (i+1), queueSize);
+            SalePoint salePoint = new SalePoint("P sprzedazy nr " + (i+1), queueSize);
             this.salePoints.add(salePoint);
             getPropertyChangeSupport().firePropertyChange(SALEPOINTS, null, salePoint);
         }
@@ -203,7 +203,7 @@ public class Simulation {
     private void createBaggageControlPoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
         for(int i=0; i<amount; i++) {
             Integer queueSize = Helpers.getRandomNumber(minAvailableQueue, maxAvailableQueue);
-            BaggageControlPoint baggageControlPoint = new BaggageControlPoint("P kontrolny bagażu nr " + (i+1), queueSize);
+            BaggageControlPoint baggageControlPoint = new BaggageControlPoint("P kontrolny bagazu nr " + (i+1), queueSize);
             this.baggageControlPoints.add(baggageControlPoint);
             getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, null, baggageControlPoint);
         }

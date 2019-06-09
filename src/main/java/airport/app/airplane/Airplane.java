@@ -1,9 +1,9 @@
-package main.java.airport.app.airplane;
+package airport.app.airplane;
 
-import main.java.airport.app.belongings.Baggage;
-import main.java.airport.app.person.Passenger;
-import main.java.airport.app.person.Pilot;
-import main.java.airport.simulation.Helpers;
+import airport.app.belongings.Baggage;
+import airport.app.person.Passenger;
+import airport.app.person.Pilot;
+import airport.simulation.Helpers;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package main.java.airport.app.person;
+package airport.app.person;
 
 public class Controller extends Employee
 {

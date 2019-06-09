@@ -1,7 +1,7 @@
-package main.java.airport.app.person;
+package airport.app.person;
 
-import main.java.airport.app.belongings.Baggage;
-import main.java.airport.app.belongings.Ticket;
+import airport.app.belongings.Baggage;
+import airport.app.belongings.Ticket;
 
 public class Passenger extends Person {
     private Baggage baggage;

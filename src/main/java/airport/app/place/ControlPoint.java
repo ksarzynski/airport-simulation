@@ -1,8 +1,8 @@
-package main.java.airport.app.place;
+package airport.app.place;
 
-import main.java.airport.app.person.Controller;
-import main.java.airport.app.person.Employee;
-import main.java.airport.app.person.Passenger;
+import airport.app.person.Controller;
+import airport.app.person.Employee;
+import airport.app.person.Passenger;
 
 import java.util.ArrayList;
 import java.util.Date;

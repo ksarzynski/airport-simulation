@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="airportSimulation.main" target="1.8" />
+      <module name="airportSimulation.test" target="1.8" />
+      <module name="main.java.airport.main" target="1.8" />
+      <module name="main.java.airport.test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

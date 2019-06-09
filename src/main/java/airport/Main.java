@@ -1,11 +1,9 @@
-package main.java.airport;
+package airport;
 
-import main.java.airport.gui.MainScreen;
-import main.java.airport.simulation.Simulation;
+import airport.gui.MainScreen;
+import airport.simulation.Simulation;
 
 import javax.swing.*;
-import java.io.IOException;
-import java.text.ParseException;
 
 public class Main {
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {

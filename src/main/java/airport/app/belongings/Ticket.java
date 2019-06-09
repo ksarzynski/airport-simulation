@@ -1,6 +1,6 @@
-package main.java.airport.app.belongings;
+package airport.app.belongings;
 
-import main.java.airport.app.airplane.Airplane;
+import airport.app.airplane.Airplane;
 
 public class Ticket {
 

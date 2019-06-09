@@ -1,4 +1,4 @@
-package main.java.airport.simulation;
+package airport.simulation;
 
 import java.io.IOException;
 import java.util.Date;

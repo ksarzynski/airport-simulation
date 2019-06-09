@@ -1,4 +1,4 @@
-package main.java.airport.simulation;
+package airport.simulation;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

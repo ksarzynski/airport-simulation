@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'application'
+
+group 'main.java.airport'
+version '1.0-SNAPSHOT'
+mainClassName = 'airport.Main'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/com.opencsv/opencsv
+    compile group: 'com.opencsv', name: 'opencsv', version: '4.6'
+    compile 'com.intellij:forms_rt:7.0.3'
+    // https://mvnrepository.com/artifact/org.netbeans.api/org-openide-awt
+    compile group: 'org.netbeans.api', name: 'org-openide-awt', version: 'RELEASE110'
+
+
+}
