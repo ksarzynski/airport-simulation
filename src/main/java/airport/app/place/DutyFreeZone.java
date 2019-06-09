@@ -28,7 +28,6 @@ public class DutyFreeZone extends Place {
                 if(passengers.size()!=0)
                     if(passengers.get(0).getTicket() != null)
                         if(passengers.get(0).getTicket().getFlightName().equals(airplane.getFlightName())) {
-                            System.out.print("Z BILETU: " + passengers.get(0).getTicket().getFlightName() + " LOT: " + (airplane.getFlightName()) + "\n");
                             airplane.addPassenger(passengers.get(0));
                         }
             if(passengers.size()!=0)

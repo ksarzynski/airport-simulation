@@ -107,7 +107,6 @@ public class Simulation {
     }
 
     public void addNewRandomPassengers(Integer amount) throws IOException {
-        int salePointIndex;
         OpenCSVReader openCSVReader = new OpenCSVReader();
         List randomID = Helpers.getRandomNumbers(0, 300, amount);
         for (int i=0; i<amount; i++){
@@ -117,16 +116,26 @@ public class Simulation {
                 passenger.setBaggage(Integer.parseInt(passengerData[3]));
             }
 
-            do {
+            List randomNumbers = Helpers.getMixedNumbers(0, salePoints.size()-1);
+            Boolean added = false;
+            for(int ii=0; ii<salePoints.size()-1; ii++) {
+                Integer index = (Integer)randomNumbers.get(ii);
+                if(salePoints.get(index).getIsOpen()){
+                    if( !salePoints.get(index).isPlaceFull() ) {
+                        SalePoint salePoint = salePoints.get(index);
+                        salePoint.addPassenger(passenger);
+                        getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
+                        added = true;
+                        break;
+                    }
+                }
+            }
 
-
-                salePointIndex = Helpers.getRandomNumber(0, (salePoints.size()-1));
-
-            }while((!salePoints.get(salePointIndex).getIsOpen()) || salePoints.get(salePointIndex).isPlaceFull());
-
-            SalePoint salePoint = salePoints.get(salePointIndex);
-            salePoint.addPassenger(passenger);
-            getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
+            if(!added){
+                SalePoint salePoint = openClosedSalePoints();
+                salePoint.addPassenger(passenger);
+                getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
+            }
         }
     }
 
@@ -220,14 +229,20 @@ public class Simulation {
         }
     }
 
-    public void openClosedSalePoints() {
+    public SalePoint openClosedSalePoints() {
+        System.out.println("Start Error");
         for(SalePoint salePoint : salePoints){
+            System.out.println("sprawdzanie");
             if(!salePoint.getIsOpen()){
+                System.out.println("Dostępni sprzedawcy: " + allVendors.size());
                 salePoint.openPoint(getAvailableVendor(), this.schedule.getDate());
                 getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
-                break;
+                System.out.println("PRzed erroerm?");
+                return salePoint;
             }
         }
+        System.out.println("ERROR");
+        return null;
     }
 
     public void openRandomControlPoints(Integer amount) {
@@ -242,6 +257,7 @@ public class Simulation {
     public void openClosedControlPoints() {
         for(ControlPoint controlPoint : controlPoints){
             if(!controlPoint.getIsOpen()){
+                System.out.println("Dostępni controlerzy: " + allControllers.size());
                 controlPoint.openPoint(getAvailableController(), this.schedule.getDate());
                 getPropertyChangeSupport().firePropertyChange(CONTROLPOINTS, "update", controlPoint);
                 break;
@@ -261,6 +277,7 @@ public class Simulation {
     public void openClosedBaggageControlPoints() {
         for(BaggageControlPoint baggageControlPoint : baggageControlPoints){
             if(!baggageControlPoint.getIsOpen()){
+                System.out.println("Dostępni controlerzy: " + allControllers.size());
                 baggageControlPoint.openPoint(getAvailableController(), this.schedule.getDate());
                 getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoint);
                 break;
@@ -330,25 +347,49 @@ public class Simulation {
     void checkWorkingHours() {
         for (SalePoint salePoint : this.salePoints) {
             Vendor vendor = salePoint.checkWorkingHour(schedule.getDate());
+            System.out.println("Otwarte salePointy: " + salePoint.getOpenSalePointIndex());
             if (vendor != null) {
                 returnVendorToPool(vendor);
                 getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
+            } else if( salePoint.getIsOpen() && !salePoint.getSuccessor() && schedule.getDate().after(new Date(salePoint.getShiftEndTime().getTime() - (1 * 60 * 60 * 1000))) ){
+                openClosedSalePoints();
+                salePoint.setSuccessor(true);
+            }
+            if( salePoint.getOpenSalePointIndex() == 0 ) {
+                System.out.println("OTWIERAM");
+                openClosedSalePoints();
             }
         }
 
         for (ControlPoint controlPoint : this.controlPoints) {
             Controller controller = controlPoint.checkWorkingHour(schedule.getDate());
+            System.out.println("Otwarte controlPointy: " + controlPoint.getOpenControlPointIndex());
             if (controller != null) {
                 returnControllerToPool(controller);
                 getPropertyChangeSupport().firePropertyChange(CONTROLPOINTS, "update", controlPoint);
+            } else if( controlPoint.getIsOpen() && !controlPoint.getSuccessor() && schedule.getDate().after(new Date(controlPoint.getShiftEndTime().getTime() - (1 * 60 * 60 * 1000))) ){
+                openClosedControlPoints();
+                controlPoint.setSuccessor(true);
+            }
+            if( controlPoint.getOpenControlPointIndex() == 0 ) {
+                System.out.println(controlPoint.getOpenControlPointIndex());
+                openClosedControlPoints();
             }
         }
 
         for (BaggageControlPoint baggageControlPoint : this.baggageControlPoints) {
             Controller controller = baggageControlPoint.checkWorkingHour(schedule.getDate());
+            System.out.println("Otwarte baggageControlPoint: " + baggageControlPoint.getOpenBaggageControlPointIndex());
             if (controller != null) {
                 returnControllerToPool(controller);
                 getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoint);
+            } else if( baggageControlPoint.getIsOpen() && !baggageControlPoint.getSuccessor() && schedule.getDate().after(new Date(baggageControlPoint.getShiftEndTime().getTime() - (1 * 60 * 60 * 1000))) ){
+                openClosedBaggageControlPoints();
+                baggageControlPoint.setSuccessor(true);
+            }
+            if( baggageControlPoint.getOpenBaggageControlPointIndex() == 0 ) {
+                System.out.println(baggageControlPoint.getOpenBaggageControlPointIndex());
+                openClosedBaggageControlPoints();
             }
         }
     }
@@ -370,6 +411,7 @@ public class Simulation {
         {
             if(salePoint.getIsOpen())
             {
+                System.out.println("Czy salePoint jest pełny?: "+ salePoint.isPlaceFull());
                 if(salePoint.isPlaceFull())
                     openClosedSalePoints();
 
@@ -381,6 +423,7 @@ public class Simulation {
                 do{
                     index = Helpers.getRandomNumber(0,baggageControlPoints.size()-1);
 
+                    System.out.println("Petal #1");
                 }while(!baggageControlPoints.get(index).getIsOpen() || baggageControlPoints.get(index).isPlaceFull());
 
                 ArrayList<Ticket> tickets = new ArrayList<>();
@@ -416,6 +459,7 @@ public class Simulation {
                 do{
                     index = Helpers.getRandomNumber(0, controlPoints.size()-1);
 
+                    System.out.println("Petal #2");
                 }while(!controlPoints.get(index).getIsOpen() || controlPoints.get(index).isPlaceFull());
 
                 baggageControlPoint.movePassengersPoli(controlPoints.get(index), howMany);

@@ -37,7 +37,6 @@ class Schedule extends TimerTask {
         simulation.moveFromDutyFreeZone();
         simulation.display();
         simulation.updateGUIClock();
-
     }
 
     void runTimer() {

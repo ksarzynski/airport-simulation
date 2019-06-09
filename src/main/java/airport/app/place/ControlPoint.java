@@ -14,6 +14,7 @@ public class ControlPoint extends Place {
     Controller controller;
 
     private static int controlPointIndex;
+    private boolean successor = false;
 
     public ControlPoint(String name, Integer maxPeopleAmount)
     {
@@ -36,6 +37,14 @@ public class ControlPoint extends Place {
 
     Integer getControllerEfficiency() { return this.controller.getEfficiency(); }
 
+    public void setSuccessor(boolean successor) {
+        this.successor = successor;
+    }
+
+    public boolean getSuccessor() {
+        return this.successor;
+    }
+
     public void openPoint(Controller controller, Date date) {
         isOpen = true;
         controlPointIndex += 1;
@@ -51,7 +60,7 @@ public class ControlPoint extends Place {
         return removeController();
     }
 
-    public int getOpenSalePointIndex() {
+    public int getOpenControlPointIndex() {
         return controlPointIndex;
     }
 

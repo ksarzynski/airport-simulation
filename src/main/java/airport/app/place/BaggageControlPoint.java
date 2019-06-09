@@ -14,6 +14,7 @@ import java.util.Date;
 public class BaggageControlPoint extends ControlPoint {
 
     private static int baggageControlPointIndex;
+    private boolean successor = false;
 
     public BaggageControlPoint(String name, Integer maxPeopleAmount) {
         super(name, maxPeopleAmount);
@@ -78,6 +79,14 @@ public class BaggageControlPoint extends ControlPoint {
             repair++;
         }
 
+    }
+
+    public void setSuccessor(boolean successor) {
+        this.successor = successor;
+    }
+
+    public boolean getSuccessor() {
+        return this.successor;
     }
 
     /**

@@ -15,7 +15,8 @@ public class SalePoint extends Place {
 
     private Vendor vendor;
 
-    private static int openSalePointIndex;
+    private static Integer openSalePointIndex=0;
+    private boolean successor = false;
 
     public SalePoint(String name, Integer maxPeopleAmount) {
         super(name, maxPeopleAmount);
@@ -23,6 +24,7 @@ public class SalePoint extends Place {
 
     public SalePoint(SalePoint salePoint) {
         super(salePoint.getName(), salePoint.getQueueSize());
+
     }
 
     private void setVendor(Vendor vendor) {
@@ -51,6 +53,14 @@ public class SalePoint extends Place {
         setShiftStartTime(date);
     }
 
+    public void setSuccessor(boolean successor) {
+        this.successor = successor;
+    }
+
+    public boolean getSuccessor() {
+        return this.successor;
+    }
+
     private Vendor closePoint(){
         isOpen = false;
         openSalePointIndex -= 1;
@@ -66,7 +76,7 @@ public class SalePoint extends Place {
         passenger.setTicket(ticket);
     }
 
-    public int getOpenSalePointIndex() {
+    public Integer getOpenSalePointIndex() {
         return openSalePointIndex;
     }
 
