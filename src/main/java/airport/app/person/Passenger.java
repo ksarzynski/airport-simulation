@@ -22,10 +22,7 @@ public class Passenger extends Person {
     }
 
     private boolean isBaggage() {
-        if(baggage != null)
-            return true;
-        else
-            return false;
+        return baggage != null;
     }
 
     public void setTicket (Ticket ticket)

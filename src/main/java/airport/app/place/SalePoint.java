@@ -3,34 +3,34 @@ package airport.app.place;
 import airport.app.belongings.Ticket;
 import airport.app.person.Passenger;
 import airport.app.person.Vendor;
-import airport.simulation.Simulation;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
+/**
+ * kasa, w tym miejscu przypisane zostaja bilety, pierwsze miejsce pojawienia sie pasazerow, ktorzy
+ * nastepnie przemieszczani sa do punktu kontroli bagazu
+ */
 public class SalePoint extends Place {
 
     private Date shiftStartTime;
-
     private Vendor vendor;
-
     private static Integer openSalePointIndex=0;
     private boolean successor = false;
 
-    public SalePoint(String name, Integer maxPeopleAmount) {
-        super(name, maxPeopleAmount);
-    }
+    public SalePoint(String name, Integer maxPeopleAmount) { super(name, maxPeopleAmount); }
 
     private void setVendor(Vendor vendor) {
         this.employee = vendor;
         this.vendor = (Vendor)employee;
     }
 
-    private void setShiftStartTime(Date shiftStartTime) {
-        this.shiftStartTime = shiftStartTime;
-    }
+    /**
+     * funkcja ustawia czas rozpoczecia pracy
+     * @param shiftStartTime data rozpoczecia pracy tego punktu sprzedazy
+     */
+    private void setShiftStartTime(Date shiftStartTime) { this.shiftStartTime = shiftStartTime; }
 
     private Vendor removeVendor(){
         Vendor tempVendor = this.vendor;
@@ -38,10 +38,13 @@ public class SalePoint extends Place {
         return tempVendor;
     }
 
-    public Integer getVendorsEfficiency() {
-        return vendor.getEfficiency();
-    }
+    public Integer getVendorsEfficiency() { return vendor.getEfficiency(); }
 
+    /**
+     * funkcja otwiera punkt sprzedazy, przypisujac niezbedne wartosci
+     * @param vendor przypisywany pracownik
+     * @param date data rozpoczecia pracy
+     */
     public void openPoint(Vendor vendor, Date date) {
         setVendor(vendor);
         openSalePointIndex += 1;
@@ -49,19 +52,22 @@ public class SalePoint extends Place {
         setShiftStartTime(date);
     }
 
-    public void setSuccessor(boolean successor) {
-        this.successor = successor;
-    }
+    public void setSuccessor(boolean successor) { this.successor = successor; }
 
     public boolean getSuccessor() {
         return this.successor;
     }
 
+    /**
+     * funkcja zamyka punkt, poprawia licznik otwartych punktow sprzedazy oraz zwraca liste pasazerow ktorzy zostaja
+     * przemieszczeni do innych dzialajacych punktow sprzedazy
+     * @return lista pasazerow
+     */
     public List closePoint(){
         isOpen = false;
         openSalePointIndex -= 1;
         setShiftStartTime(null);
-        List<Passenger> passengers = getPassangers();
+        List<Passenger> passengers = getPassengers();
         removePassengers();
 
         return passengers;
@@ -88,9 +94,15 @@ public class SalePoint extends Place {
         return null;
     }
 
+    /**
+     * funkcja pzremieszcza pasazerow dalej oraz przypisuje im bilety
+     * @param place miejsce docelowe
+     * @param howMany ilosc pasazerow do przesuniecia
+     * @param availableTickets lista dostepnych biletow
+     */
     public void movePassengers(Place place, int howMany, ArrayList<Ticket> availableTickets){
-        ArrayList<Passenger> passengersToMove = new ArrayList<>();
 
+        ArrayList<Passenger> passengersToMove = new ArrayList<>();
         Passenger passenger;
 
         for(int i = 0; i < howMany; i++)
@@ -100,9 +112,7 @@ public class SalePoint extends Place {
             passenger.setTicket(ticket);
             if(passenger.getTicket()!=null) {
                 passengersToMove.add(passenger);
-//                System.out.print(passenger.getTicket().getFlightName());
             }
-
         }
 
         place.addPassengers(passengersToMove);

@@ -12,14 +12,12 @@ import java.util.Date;
  * Klasa samolot, w srodku znajduja sie listy ludzi i bagazy docelowo w obiektach tej klasy
  * umieszczani sa pasazerowie i ich bagaze a o ustalonej godzine nastepuje odlot
  */
-
 public class Airplane {
-    public static int departuteCounter =0;
+    static int triedDeparturesCounter =0;
     private String direction;
     private String flightName;
     private Integer maxPassenger;
     private Integer maxBaggageWeight;
-    private Pilot pilot;
     private String isReady;
     private Date flightStart;
     private ArrayList<Passenger> passengers = new ArrayList<>();
@@ -31,7 +29,6 @@ public class Airplane {
         this.direction = direction;
         this.maxPassenger = maxPassenger;
         this.maxBaggageWeight = maxBaggageWeight;
-        this.pilot = pilot;
         this.isReady = "not ready";
         this.flightStart = flightStart;
         this.purchasedTicketsAmount = 0;
@@ -65,13 +62,9 @@ public class Airplane {
         return maxBaggageWeight;
     }
 
-    public Pilot getPilot() { return pilot; }
-
     public void addPassenger(Passenger passenger) {
         this.passengers.add(passenger);
     }
-
-    public ArrayList<Passenger> getPassengers (){return passengers;}
 
     public Integer getBaggageWeight(){
         Integer weight = 0;
@@ -85,18 +78,15 @@ public class Airplane {
     /**
      * metoda powoduje "odlot" kasowane sa objekty z list
      */
-    public void startFlight() {
+    private void startFlight() {
         for(Passenger passenger : passengers)
         {
             passenger.removeBaggage();
             passenger.removeTicket();
         }
-        for(int i = 0; i <passengers.size(); i++)
-        {
-            passengers.remove(0);
-        }
+        passengers.clear();
         isReady = "gone";
-        departuteCounter++;
+        triedDeparturesCounter++;
     }
 
     public void addBaggage(Baggage baggage) {
@@ -106,7 +96,7 @@ public class Airplane {
     /**
      *  sprawdza czy bagaz kazdego pasazera ( ktory mial bagaz na pozcatku ) jest na pokladzie
      */
-    public void checkBaggageReady() {
+    private void checkBaggageReady() {
         this.isReady="ready";
         for(Passenger passenger: passengers) {
 
@@ -116,9 +106,8 @@ public class Airplane {
                     passenger.getBaggage().setStatus("boarded");
                     this.isReady = "baggage not on board";
                     delayFlight(Helpers.getRandomNumber(10, 10));
-                    System.out.print("ROBIE DELAY\n");
-                    }
                 }
+            }
         }
     }
 

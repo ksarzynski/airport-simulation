@@ -6,6 +6,9 @@ import airport.app.person.Passenger;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * klasa rodzic dla kazdej klasy - miejsca
+ */
 public abstract class Place {
     private String name;
     private int maxPeopleAmount;
@@ -20,13 +23,9 @@ public abstract class Place {
         this.passengers = new ArrayList<>(maxPeopleAmount);
     }
 
-    public List<Passenger> getPassangers() {
+    public List<Passenger> getPassengers() { return this.passengers; }
 
-        return this.passengers;
-
-    }
-
-    public void removePassengers() {
+    void removePassengers() {
         this.passengers.clear();
     }
     
@@ -34,17 +33,9 @@ public abstract class Place {
         return passengers.size();
     }
 
-    void addPassengers(List<Passenger> passengers) {
+    void addPassengers(List<Passenger> passengers) { this.passengers.addAll(passengers); }
 
-       this.passengers.addAll(passengers);
-
-    }
-
-    public void addPassenger(Passenger passenger) {
-
-        this.passengers.add(passenger);
-
-    }
+    public void addPassenger(Passenger passenger) { this.passengers.add(passenger); }
 
     public int getQueueSize()
     {
@@ -53,6 +44,11 @@ public abstract class Place {
 
     public Employee getEmployee(){ return this.employee;}
 
+    /**
+     * funkcja przemieszczajaca pasazerow w wybranej ilosci do wybranego miejsca
+     * @param place miejsce docelowe
+     * @param howMany ilosc do przeniesienia
+     */
     public void movePassengersPoli(Place place, int howMany){
 
         ArrayList<Passenger> passengersToMove = new ArrayList<>();
@@ -75,11 +71,7 @@ public abstract class Place {
 
     public String getName() { return name; }
 
-    public boolean isPlaceFull (){
-
-        return passengers.size() >= maxPeopleAmount;
-
-    }
+    public boolean isPlaceFull (){ return passengers.size() >= maxPeopleAmount; }
 
 }
 

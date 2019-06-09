@@ -7,6 +7,9 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * klasa do czytania plikow csv
+ */
 class OpenCSVReader {
     private String[] data;
 

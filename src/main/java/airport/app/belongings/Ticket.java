@@ -24,3 +24,4 @@ public class Ticket {
         return airplane;
     }
 }
+

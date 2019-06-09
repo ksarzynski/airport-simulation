@@ -48,6 +48,10 @@ public class Baggage {
         this.status = status;
     }
 
+    /**
+     * metoda wywolywana przy tworzeniu bagazy, od niej zalezy czy bagaz jest bezpieczny, niebezpieczny, bardzo niebezpieczny
+     * @param accuracy od tego argumentu zalezy jak czesto pojawiaja sie niebezpieczne i bardzo niebezpieczne bagaze
+     */
     private void setRandomDangerLevel(Integer accuracy)
     {
         Random r = new Random();

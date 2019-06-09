@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ *  klasa odpowiedzialna za uplyw czasu
+ */
 class Clock {
     private Date currentTime;
 
@@ -11,10 +14,7 @@ class Clock {
         this.currentTime = removeTime(new Date());
     }
 
-
-    void increaseTime(Integer minutes) {
-        this.currentTime = new Date(this.currentTime.getTime() + (minutes * 60 * 1000));
-    }
+    void increaseTime(Integer minutes) { this.currentTime = new Date(this.currentTime.getTime() + (minutes * 60 * 1000)); }
 
     String getTime() {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");

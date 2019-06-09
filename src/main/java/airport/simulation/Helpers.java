@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * klasa zawierajaca pomocnicze funkcje do losowania liczb
+ */
 public class Helpers {
-    public static List getRandomNumbers(Integer min, Integer max, Integer amount){
+    static List getRandomNumbers(Integer min, Integer max, Integer amount){
         ArrayList<Integer> numbers = new ArrayList<>();
         for(int i = min-1; i < max; i++)
         {
@@ -25,7 +28,7 @@ public class Helpers {
         return Integer.parseInt(numbers.get(0).toString());
     }
 
-    public static ArrayList<Integer> getMixedNumbers(Integer min, Integer max){
+    static ArrayList<Integer> getMixedNumbers(Integer min, Integer max){
         ArrayList<Integer> numbers = new ArrayList<>();
         for(int i = min-1; i < max; i++)
         {

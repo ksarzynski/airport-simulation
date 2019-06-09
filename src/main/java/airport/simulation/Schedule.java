@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * klasa odpowiedzialna za przebieg symulacji
+ */
 class Schedule extends TimerTask {
     private Clock clock;
     private Integer timeShiftInMilliseconds;
@@ -23,7 +26,7 @@ class Schedule extends TimerTask {
             e.printStackTrace();
         }
         clock.increaseTime(timeShiftInMilliseconds);
-        System.out.println(clock.getTime());
+//        System.out.println(clock.getTime());
     }
 
     private void runCycle() throws IOException {
@@ -41,7 +44,6 @@ class Schedule extends TimerTask {
 
     void runTimer() {
         Timer timer = new Timer();
-
         timer.scheduleAtFixedRate(this, 0, simulationSpeedInMilliseconds);
     }
 
@@ -53,7 +55,7 @@ class Schedule extends TimerTask {
         this.simulationSpeedInMilliseconds = simulationSpeedInMilliseconds;
     }
 
-    public String getTime() {
+    String getTime() {
         return this.clock.getTime();
     }
 

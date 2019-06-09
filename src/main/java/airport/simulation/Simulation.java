@@ -9,14 +9,17 @@ import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * W tej klasie trzymane sa instancje innych obiektow, na zmiennych w niej zawarte sa przeprowadzane operacje
+ */
 public class Simulation {
+
     public static final String SALEPOINTS = "salePoints";
     public static final String CONTROLPOINTS = "controlPoints";
     public static final String BAGGAGECONTROLPOINTS = "baggageControlPoints";
     public static final String DUTYFREEZONE = "dutyFreeZone";
     public static final String AIRPLANES = "airplanes";
     public static final String CLOCK = "clock";
-
     private Schedule schedule;
     private ArrayList<Ticket> allAvailableTickets = new ArrayList<>();
     private ArrayList<Vendor> allVendors = new ArrayList<>();
@@ -28,6 +31,21 @@ public class Simulation {
     private DutyFreeZone dutyFreeZone;
     private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
+    /**
+     * metoda sluzy do wyboru wartosci poczatkowych danych parametrow
+     * @param salePointsAmount poczatkowa ilosc kas
+     * @param vendorsAmount poczatkowa ilosc sprzedawcow
+     * @param openSalePointsAmount poczatkowa ilosc otwartych kas
+     * @param controlPointsAmount poczatkowa ilosc punktow kontrolnych
+     * @param openControlPointsAmount poczatkowa ilosc otwartych punktow kontrolnych
+     * @param controllersAmount poczatkowa ilosc kontrolerow
+     * @param baggageControlPointsAmount poczatkowa ilosc punktow kontroli bagazu
+     * @param openBaggageControlPointsAmount poczatkowa ilosc otwartych punktow kontroli bagazu
+     * @param flightsAmount poczatkowa ilosc samolotow
+     * @param simulationSpeedInMiliseconds poczatkowa predkosc cyklu symulacji w czasie rzeczywistym
+     * @param timeShift poczatkowa dlugosc cyklu symulacji
+     * @throws IOException wyjatek
+     */
     public void start(
             Integer salePointsAmount,
             Integer vendorsAmount,
@@ -40,6 +58,7 @@ public class Simulation {
             Integer flightsAmount,
             Integer simulationSpeedInMiliseconds,
             Integer timeShift
+
     ) throws IOException {
         schedule = new Schedule(this);
         initialization(
@@ -55,7 +74,20 @@ public class Simulation {
         );
         start(simulationSpeedInMiliseconds, timeShift);
     }
-    
+
+    /**
+     * metoda inicjalizuje wybrane obiekty
+     * @param salePointsAmount ilosc kas do inicjalizowania
+     * @param vendorsAmount ilosc sprzedawcow do inicjalizowania
+     * @param openSalePointsAmount ilosc otwartych kas do inicjalizowania
+     * @param controlPointsAmount ilosc punktow kontrolnych do inicjalizowania
+     * @param openControlPointsAmount ilosc otwartych punktow kontrolnych do inicjalizowania
+     * @param controllersAmount ilosc kontrolerow do inicjalizowania
+     * @param baggageControlPointsAmount ilosc punktow kontroli bagazu do incijalizowania
+     * @param openBaggageControlPointsAmount ilosc otwartych punktow kontroli bagazu do incijalizowania
+     * @param flightsAmount ilsoc lotow do inicjalizowania
+     * @throws IOException wyjatek
+     */
     private void initialization(
             Integer salePointsAmount,
             Integer vendorsAmount,
@@ -71,22 +103,21 @@ public class Simulation {
         addNewRandomVendors(vendorsAmount);
         createSalePoints(salePointsAmount, 10, 500);
         openRandomSalePoints(openSalePointsAmount);
-
         addNewRandomControllers(controllersAmount);
         createControlPoints(controlPointsAmount, 10, 500);
         openRandomControlPoints(openControlPointsAmount);
         createBaggageControlPoints(baggageControlPointsAmount, 10, 500);
         openRandomBaggageControlPoints(openBaggageControlPointsAmount);
-
         addNewRandomAirplanes(flightsAmount);
-
         this.dutyFreeZone = new DutyFreeZone("Strefa bezclowa", 10000, 100);
     }
 
+    /**
+     * funkcja wywolywana w momencie wcisniecia stop na gui, zeruje wartosci poprzedniej symulacji
+     */
     public void stop() {
         schedule.cancel();
         schedule = null;
-
         allVendors.clear();
         salePoints.clear();
         controlPoints.clear();
@@ -96,16 +127,31 @@ public class Simulation {
         allAvailableTickets.clear();
     }
 
+    /**
+     * funkcja przeprowadzajaca start symulacji
+     * @param simulationSpeedInMiliseconds uplyw czasu w czasie rzeczywistym
+     * @param timeShift uplyw czasu w symulacji
+     */
     private void start(Integer simulationSpeedInMiliseconds, Integer timeShift) {
         this.schedule.setSimulationSpeedInMilliseconds(simulationSpeedInMiliseconds);
         this.schedule.setTimeShiftInMilliseconds(timeShift);
         schedule.runTimer();
     }
 
+    /**
+     * metoda sluzy do wywolywania zdarzen w przypadku zmiany wartosci zmiennych
+     * @return zwraca zmiane
+     */
     public PropertyChangeSupport getPropertyChangeSupport() {
         return propertyChangeSupport;
     }
 
+    /**
+     * funkcja sluzy do dodawania do symulacji a konkretnie do kas nowych psazerow i do przypisywania im bagazu
+     * funkcja zczytuje dane z csv
+     * @param amount ilosc dodawanych pasazerow
+     * @throws IOException wyjatek
+     */
     public void addNewRandomPassengers(Integer amount) throws IOException {
         OpenCSVReader openCSVReader = new OpenCSVReader();
         List randomID = Helpers.getRandomNumbers(0, 300, amount);
@@ -117,7 +163,7 @@ public class Simulation {
             }
 
             List randomNumbers = Helpers.getMixedNumbers(0, salePoints.size()-1);
-            Boolean added = false;
+            boolean added = false;
             for(int ii=0; ii<salePoints.size()-1; ii++) {
                 Integer index = (Integer)randomNumbers.get(ii);
                 if(salePoints.get(index).getIsOpen()){
@@ -141,6 +187,11 @@ public class Simulation {
         }
     }
 
+    /**
+     * funkcja tworzy nowych sprzedawcow za pomoca csv
+     * @param amount ilosc dodawanych vendorow
+     * @throws IOException wyjatek
+     */
     private void addNewRandomVendors(Integer amount) throws IOException {
         OpenCSVReader openCSVReader = new OpenCSVReader();
         List randomID = Helpers.getRandomNumbers(0, 99, amount);
@@ -151,6 +202,11 @@ public class Simulation {
         }
     }
 
+    /**
+     * funkcja dodaje losowego pilota z danymi z plikow csv
+     * @return pilot
+     * @throws IOException wyjatek
+     */
     private Pilot addNewRandomPilot() throws IOException {
         OpenCSVReader openCSVReader = new OpenCSVReader();
         Integer randomID = Helpers.getRandomNumber(0, 99);
@@ -158,6 +214,11 @@ public class Simulation {
         return new Pilot(pilotData[1]);
     }
 
+    /**
+     * Funkcja sluzy tworzeniu lotow
+     * @param amount ilosc dodawanych samolotow
+     * @throws IOException wyjatek
+     */
     public void addNewRandomAirplanes(Integer amount) throws IOException {
         OpenCSVReader openCSVReader = new OpenCSVReader();
         List randomID = Helpers.getRandomNumbers(0, 99, amount);
@@ -180,6 +241,11 @@ public class Simulation {
         }
     }
 
+    /**
+     * funkcja tworzy losowych kontrolerow korzystajac z plikow csv
+     * @param amount ilosc tworzonych kontrolerow
+     * @throws IOException wyjatek
+     */
     private void addNewRandomControllers(Integer amount) throws IOException {
         OpenCSVReader openCSVReader = new OpenCSVReader();
         List randomID = Helpers.getRandomNumbers(0, 99, amount);
@@ -194,6 +260,12 @@ public class Simulation {
         this.allAvailableTickets.add(ticket);
     }
 
+    /**
+     * funkcja tworzy kasy i przypisuje potrzebne zmienne
+     * @param amount ilosc kas do stworzenia
+     * @param minAvailableQueue minimalny rozmiar kolejki
+     * @param maxAvailableQueue maksymalny rozmiar kolejki
+     */
     private void createSalePoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
         for(int i=0; i<amount; i++) {
             Integer queueSize = Helpers.getRandomNumber(minAvailableQueue, maxAvailableQueue);
@@ -203,6 +275,12 @@ public class Simulation {
         }
     }
 
+    /**
+     * funkcja tworzy punkty kontroli i przypisuje potrzebne zmienne
+     * @param amount ilosc punktow kontroli do stworzenia
+     * @param minAvailableQueue minimalny rozmiar kolejki
+     * @param maxAvailableQueue maksymalny rozmiar kolejki
+     */
     private void createControlPoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
         for(int i=0; i<amount; i++) {
             Integer queueSize = Helpers.getRandomNumber(minAvailableQueue, maxAvailableQueue);
@@ -212,6 +290,12 @@ public class Simulation {
         }
     }
 
+    /**
+     * funkcja tworzy punkty kontroli bagazu i przypisuje potrzebne zmienne
+     * @param amount ilosc punktow kontroli bagazu do stworzenia
+     * @param minAvailableQueue minimalny rozmiar kolejki
+     * @param maxAvailableQueue maksymalny rozmiar kolejki
+     */
     private void createBaggageControlPoints(Integer amount, Integer minAvailableQueue, Integer maxAvailableQueue) {
         for(int i=0; i<amount; i++) {
             Integer queueSize = Helpers.getRandomNumber(minAvailableQueue, maxAvailableQueue);
@@ -221,33 +305,39 @@ public class Simulation {
         }
     }
 
-    public void openRandomSalePoints(Integer amount) {
+    /**
+     * otwiera losowe kasy przypisuje czas i pracownika na poczatku symulacji
+     * @param amount ilsoc kas do otworzenia
+     */
+    private void openRandomSalePoints(Integer amount) {
         List randomIDs = Helpers.getRandomNumbers(0, salePoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
             SalePoint salePoint = salePoints.get(Integer.parseInt(randomIDs.get(i).toString()));
-
             salePoint.openPoint(getAvailableVendor(), this.schedule.getDate());
             getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
         }
     }
 
+    /**
+     * otwiera losowe kasy przypisuje czas i pracownika
+     * @return zwraca otwarta kase
+     */
     public SalePoint openClosedSalePoints() {
-//        System.out.println("Start Error");
         for(SalePoint salePoint : salePoints){
-//            System.out.println("sprawdzanie");
             if(!salePoint.getIsOpen()){
-                System.out.println("Dostępni sprzedawcy: " + allVendors.size());
                 salePoint.openPoint(getAvailableVendor(), this.schedule.getDate());
                 getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
-//                System.out.println("PRzed erroerm?");
                 return salePoint;
             }
         }
-//        System.out.println("ERROR");
         return null;
     }
 
-    public void openRandomControlPoints(Integer amount) {
+    /**
+     * otwiera losowe punkty kontroli przypisuje czas i pracownika na poczatku symulacji
+     * @param amount ilsoc punktow kontroli do otworzenia
+     */
+    private void openRandomControlPoints(Integer amount) {
         List randomIDs = Helpers.getRandomNumbers(0, controlPoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
             ControlPoint controlPoint = controlPoints.get(Integer.parseInt(randomIDs.get(i).toString()));
@@ -256,10 +346,13 @@ public class Simulation {
         }
     }
 
+    /**
+     * otwiera punkty kontroli, przypisuje czas i pracownika
+     * @return zwraca otwarty punkt kontroli
+     */
     public ControlPoint openClosedControlPoints() {
         for(ControlPoint controlPoint : controlPoints){
             if(!controlPoint.getIsOpen()){
-                System.out.println("Dostępni controlerzy: " + allControllers.size());
                 controlPoint.openPoint(getAvailableController(), this.schedule.getDate());
                 getPropertyChangeSupport().firePropertyChange(CONTROLPOINTS, "update", controlPoint);
                 return controlPoint;
@@ -268,7 +361,11 @@ public class Simulation {
         return null;
     }
 
-    public void openRandomBaggageControlPoints(Integer amount) {
+    /**
+     * otwiera losowe punkty kontroli bagazu na poczatku symulacji
+     * @param amount ilosc punktow do otworzenia
+     */
+    private void openRandomBaggageControlPoints(Integer amount) {
         List randomIDs = Helpers.getRandomNumbers(0, controlPoints.size()-1, amount);
         for(int i=0; i<amount; i++) {
             BaggageControlPoint baggageControlPoint = baggageControlPoints.get(Integer.parseInt(randomIDs.get(i).toString()));
@@ -277,10 +374,13 @@ public class Simulation {
         }
     }
 
+    /**
+     * funkcja otwiera punkty kontroli bagazu w czasie symulacji
+     * @return zwraca otwarty punkt kontroli bagazu
+     */
     public BaggageControlPoint openClosedBaggageControlPoints() {
         for(BaggageControlPoint baggageControlPoint : baggageControlPoints){
             if(!baggageControlPoint.getIsOpen()){
-                System.out.println("Dostępni controlerzy: " + allControllers.size());
                 baggageControlPoint.openPoint(getAvailableController(), this.schedule.getDate());
                 getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoint);
                 return baggageControlPoint;
@@ -289,12 +389,11 @@ public class Simulation {
         return null;
     }
 
-    public Integer getAirplanesAmount() {
-        return this.airplanes.size();
-    }
-
-    public Ticket getAvailableTicket() {
-        System.out.println("Liczba biletów: " + allAvailableTickets.size());
+    /**
+     * funkcja pobierajaca dostepny bilet z wykorzystaniem csv
+     * @return zwraca bilet
+     */
+    private Ticket getAvailableTicket() {
         if(allAvailableTickets.size() == 0)
             return null;
 
@@ -328,20 +427,8 @@ public class Simulation {
         return controlPoints;
     }
 
-    public ArrayList<Airplane> getAirplanes() {
-        return airplanes;
-    }
-
     public ArrayList<BaggageControlPoint> getBaggageControlPoints() {
         return baggageControlPoints;
-    }
-
-    public void returnEmployeeToList(Place place) {
-        if(place.getEmployee() instanceof Controller){
-            allControllers.add((Controller)place.getEmployee());
-        } else {
-            allVendors.add((Vendor)place.getEmployee());
-        }
     }
 
     private void returnVendorToPool(Vendor vendor){
@@ -352,11 +439,14 @@ public class Simulation {
         this.allControllers.add(controller);
     }
 
+    /**
+     *
+     */
     void checkWorkingHours() {
         for (SalePoint salePoint : this.salePoints) {
             Vendor vendor = salePoint.checkWorkingHour(schedule.getDate());
             if (vendor != null) {
-                ArrayList<Passenger> passengers = new ArrayList<>(salePoint.closePoint());
+                ArrayList<Passenger> passengers = new ArrayList<Passenger>(salePoint.closePoint());
 
                 List randomNumbers = Helpers.getMixedNumbers(0, salePoints.size()-1);
                 Boolean added = false;
@@ -386,7 +476,7 @@ public class Simulation {
                 }
                 returnVendorToPool(vendor);
                 getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
-            } else if( salePoint.getIsOpen() && !salePoint.getSuccessor() && schedule.getDate().after(new Date(salePoint.getShiftEndTime().getTime() - (1 * 60 * 60 * 1000))) ){
+            } else if( salePoint.getIsOpen() && !salePoint.getSuccessor() && schedule.getDate().after(new Date(salePoint.getShiftEndTime().getTime() - (60 * 60 * 1000))) ){
                 openClosedSalePoints();
                 salePoint.setSuccessor(true);
             }
@@ -398,10 +488,10 @@ public class Simulation {
         for (ControlPoint controlPoint : this.controlPoints) {
             Controller controller = controlPoint.checkWorkingHour(schedule.getDate());
             if (controller != null) {
-                ArrayList<Passenger> passengers = new ArrayList(controlPoint.closePoint());
+                ArrayList<Passenger> passengers = new ArrayList<Passenger>(controlPoint.closePoint());
 
                 List randomNumbers = Helpers.getMixedNumbers(0, controlPoints.size()-1);
-                Boolean added = false;
+                boolean added = false;
                 for(int ii=0; ii<controlPoints.size()-1; ii++) {
                     Integer index = (Integer)randomNumbers.get(ii);
                     if(controlPoints.get(index).getIsOpen()){
@@ -428,12 +518,11 @@ public class Simulation {
                 }
                 returnControllerToPool(controller);
                 getPropertyChangeSupport().firePropertyChange(CONTROLPOINTS, "update", controlPoint);
-            } else if( controlPoint.getIsOpen() && !controlPoint.getSuccessor() && schedule.getDate().after(new Date(controlPoint.getShiftEndTime().getTime() - (1 * 60 * 60 * 1000))) ){
+            } else if( controlPoint.getIsOpen() && !controlPoint.getSuccessor() && schedule.getDate().after(new Date(controlPoint.getShiftEndTime().getTime() - (60 * 60 * 1000))) ){
                 openClosedControlPoints();
                 controlPoint.setSuccessor(true);
             }
             if( controlPoint.getOpenControlPointIndex() == 0 ) {
-                System.out.println(controlPoint.getOpenControlPointIndex());
                 openClosedControlPoints();
             }
         }
@@ -444,7 +533,7 @@ public class Simulation {
                 ArrayList<Passenger> passengers = new ArrayList(baggageControlPoint.closePoint());
 
                 List randomNumbers = Helpers.getMixedNumbers(0, baggageControlPoints.size()-1);
-                Boolean added = false;
+                boolean added = false;
                 for(int ii=0; ii<baggageControlPoints.size()-1; ii++) {
                     Integer index = (Integer)randomNumbers.get(ii);
                     if(baggageControlPoints.get(index).getIsOpen()){
@@ -471,12 +560,11 @@ public class Simulation {
                 }
                 returnControllerToPool(controller);
                 getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoint);
-            } else if( baggageControlPoint.getIsOpen() && !baggageControlPoint.getSuccessor() && schedule.getDate().after(new Date(baggageControlPoint.getShiftEndTime().getTime() - (1 * 60 * 60 * 1000))) ){
+            } else if( baggageControlPoint.getIsOpen() && !baggageControlPoint.getSuccessor() && schedule.getDate().after(new Date(baggageControlPoint.getShiftEndTime().getTime() - (60 * 60 * 1000))) ){
                 openClosedBaggageControlPoints();
                 baggageControlPoint.setSuccessor(true);
             }
             if( baggageControlPoint.getOpenBaggageControlPointIndex() == 0 ) {
-                System.out.println(baggageControlPoint.getOpenBaggageControlPointIndex());
                 openClosedBaggageControlPoints();
             }
         }
@@ -491,6 +579,9 @@ public class Simulation {
         }
     }
 
+    /**
+     * funkcja sluzy do przemieszczania ludzi z kas do punktow kontroli bagazow, przypisaniu biletow i kontroli bledow
+     */
     void moveFromSalePoints() {
         int howMany;
 
@@ -501,13 +592,13 @@ public class Simulation {
                 if(salePoint.isPlaceFull())
                     openClosedSalePoints();
 
-                if(salePoint.getEmployee().getEfficiency() > salePoint.getPassangers().size())
-                    howMany = salePoint.getPassangers().size();
+                if(salePoint.getEmployee().getEfficiency() > salePoint.getPassengers().size())
+                    howMany = salePoint.getPassengers().size();
                 else
                     howMany = salePoint.getEmployee().getEfficiency();
 
                 List randomNumbers = Helpers.getMixedNumbers(0, baggageControlPoints.size()-1);
-                Boolean added = false;
+                boolean added = false;
                 for(int ii=0; ii<baggageControlPoints.size(); ii++) {
                     Integer index =(Integer)randomNumbers.get(ii);
                     if(baggageControlPoints.get(index).getIsOpen()){
@@ -545,6 +636,10 @@ public class Simulation {
         }
     }
 
+    /**
+     * funkcja sluzy do przemieszczania ludzi z punktow kontroli bagazow do punktow kontroli i sprawdzeniu bagazy i kontroli bledow
+     * @throws NullPointerException wyjatek
+     */
     void moveFromBaggageControlPoints() throws NullPointerException {
         int howMany;
 
@@ -556,13 +651,12 @@ public class Simulation {
             if(baggageControlPoint.getIsOpen())
             {
 
-                baggageControlPoint.checkBaggage(airplanes, 10);
+                baggageControlPoint.checkBaggage(10);
 
-                    howMany = baggageControlPoint.getPassangers().size();
+                    howMany = baggageControlPoint.getPassengers().size();
 
                 List randomNumbers = Helpers.getMixedNumbers(0, controlPoints.size()-1);
-                System.out.println(randomNumbers);
-                Boolean added = false;
+                boolean added = false;
                 for(int ii=0; ii<controlPoints.size(); ii++) {
                     Integer index =(Integer)randomNumbers.get(ii);
                     if(controlPoints.get(index).getIsOpen()){
@@ -588,6 +682,9 @@ public class Simulation {
         }
     }
 
+    /**
+     * funkcja sluzy do przemieszczenia ludzi z punktow kontroli do strefy bezclowej oraz do kontroli bledow
+     */
     void moveFromControlPoints() {
         int howMany;
 
@@ -598,8 +695,8 @@ public class Simulation {
 
             if(controlPoint.getIsOpen())
             {
-                if(controlPoint.getControllersEfficiency() > controlPoint.getPassangers().size())
-                    howMany = controlPoint.getPassangers().size();
+                if(controlPoint.getControllersEfficiency() > controlPoint.getPassengers().size())
+                    howMany = controlPoint.getPassengers().size();
                 else
                     howMany = controlPoint.getControllersEfficiency();
 
@@ -607,50 +704,18 @@ public class Simulation {
                 getPropertyChangeSupport().firePropertyChange(CONTROLPOINTS, "update", controlPoint);
                 getPropertyChangeSupport().firePropertyChange(DUTYFREEZONE, "update", dutyFreeZone);
             }
-
         }
-
     }
 
-    public void moveFromDutyFreeZone() {
+    void moveFromDutyFreeZone() {
         dutyFreeZone.movePassengersPoli(airplanes, dutyFreeZone.getFlow());
     }
 
-    void display() {
-        System.out.print("ilosc odlotow: "+Airplane.departuteCounter+"\n");
-    }
+    void display() {}
 
-    public void updateGUIClock() {
+    void updateGUIClock() {
         getPropertyChangeSupport().firePropertyChange(CLOCK, "update", schedule.getTime());
     }
-
-    public void canPlacesBeClosed(Double whenClose){
-
-        boolean needClose = true;
-
-        for(SalePoint salePoint : salePoints){
-            if(salePoint.getPassangers().size() / salePoint.getQueueSize() < whenClose)
-                needClose = false;
-        }
-        if(needClose)
-            ;
-
-        for(BaggageControlPoint baggageControlPoint : baggageControlPoints){
-            if(baggageControlPoint.getPassangers().size() / baggageControlPoint.getQueueSize() < whenClose)
-                needClose = false;
-        }
-        if(needClose)
-            ;
-
-        for(ControlPoint controlPoint : controlPoints){
-            if(controlPoint.getPassangers().size() / controlPoint.getQueueSize() < whenClose)
-                needClose = false;
-        }
-        if(needClose)
-            ;
-
-    }
-
 }
 
 
