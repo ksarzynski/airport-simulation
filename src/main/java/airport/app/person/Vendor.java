@@ -1,5 +1,9 @@
 package main.java.airport.app.person;
 
+/**
+ *  pracownik puntow sprzedazy
+ */
+
 public class Vendor extends Employee
 {
 

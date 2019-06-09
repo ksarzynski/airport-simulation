@@ -8,6 +8,11 @@ import main.java.airport.simulation.Helpers;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Klasa samolot, w srodku znajduja sie listy ludzi i bagazy docelowo w obiektach tej klasy
+ * umieszczani sa pasazerowie i ich bagaze a o ustalonej godzine nastepuje odlot
+ */
+
 public class Airplane {
     private String direction;
     private String flightName;
@@ -65,6 +70,10 @@ public class Airplane {
         this.passengers.add(passenger);
     }
 
+    /**
+     * metoda powoduje "odlot" kasowane sa objekty z list
+     */
+
     public void startFlight() {
         for(Passenger passenger : passengers)
         {
@@ -77,6 +86,10 @@ public class Airplane {
     public void addBaggage(Baggage baggage) {
         this.baggagesOnBoard.add(baggage);
     }
+
+    /**
+     *  sprawdza czy bagaz kazdego pasazera ( ktory mial bagaz na pozcatku ) jest na pokladzie
+     */
 
     public void checkBaggagesReady() {
         for(Passenger passenger: passengers) {

@@ -3,6 +3,11 @@ package main.java.airport.app.person;
 import main.java.airport.app.belongings.Baggage;
 import main.java.airport.app.belongings.Ticket;
 
+/**
+ * pasazer, symulacja polega na przemieszczaniu objektow tej klasy miedzy kolejnymi miejscami
+ * na lotniskum, zawiera pola z klasami bagage i ticket
+ */
+
 public class Passenger extends Person {
     private Baggage baggage;
     private Ticket ticket;
