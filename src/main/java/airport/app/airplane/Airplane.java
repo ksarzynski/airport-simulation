@@ -70,6 +70,8 @@ public class Airplane {
         this.passengers.add(passenger);
     }
 
+    public ArrayList<Passenger> getPassengers (){return passengers;}
+
     /**
      * metoda powoduje "odlot" kasowane sa objekty z list
      */

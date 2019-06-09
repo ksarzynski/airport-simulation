@@ -34,8 +34,6 @@ public class ControlPoint extends Place {
         return tempController;
     }
 
-    Integer getControllerEfficiency() { return this.controller.getEfficiency(); }
-
     public void openPoint(Controller controller, Date date) {
         isOpen = true;
         controlPointIndex += 1;
