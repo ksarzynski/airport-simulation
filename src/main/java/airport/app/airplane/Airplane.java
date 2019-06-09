@@ -95,6 +95,7 @@ public class Airplane {
         {
             passengers.remove(0);
         }
+        isReady = "gone";
         departuteCounter++;
     }
 
@@ -114,7 +115,7 @@ public class Airplane {
 
                     passenger.getBaggage().setStatus("boarded");
                     this.isReady = "baggage not on board";
-                    delayFlight(Helpers.getRandomNumber(1, 5));
+                    delayFlight(Helpers.getRandomNumber(10, 10));
                     System.out.print("ROBIE DELAY\n");
                     }
                 }
@@ -139,4 +140,6 @@ public class Airplane {
         }
         return false;
     }
+
+    public String getIsReady(){return isReady;}
 }

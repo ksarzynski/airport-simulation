@@ -23,11 +23,6 @@ public class SalePoint extends Place {
         super(name, maxPeopleAmount);
     }
 
-    public SalePoint(SalePoint salePoint) {
-        super(salePoint.getName(), salePoint.getQueueSize());
-
-    }
-
     private void setVendor(Vendor vendor) {
         this.employee = vendor;
         this.vendor = (Vendor)employee;
@@ -72,14 +67,6 @@ public class SalePoint extends Place {
         return passengers;
     }
 
-    public void sellRandomTicket(ArrayList<Ticket> tickets, Passenger passenger){
-        Random r = new Random();
-        int a = r.nextInt(tickets.size());
-        Ticket ticket = tickets.get(a);
-        tickets.remove(a);
-        passenger.setTicket(ticket);
-    }
-
     public int getOpenSalePointIndex() {
 
         return openSalePointIndex;
@@ -104,12 +91,18 @@ public class SalePoint extends Place {
     public void movePassengers(Place place, int howMany, ArrayList<Ticket> availableTickets){
         ArrayList<Passenger> passengersToMove = new ArrayList<>();
 
+        Passenger passenger;
+
         for(int i = 0; i < howMany; i++)
         {
-            Passenger passenger = passengers.get(i);
+            passenger = passengers.get(i);
             Ticket ticket = availableTickets.remove(0);
             passenger.setTicket(ticket);
-            passengersToMove.add(passenger);
+            if(passenger.getTicket()!=null) {
+                passengersToMove.add(passenger);
+//                System.out.print(passenger.getTicket().getFlightName());
+            }
+
         }
 
         place.addPassengers(passengersToMove);
