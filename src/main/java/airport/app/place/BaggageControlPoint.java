@@ -116,11 +116,12 @@ public class BaggageControlPoint extends ControlPoint {
                 else{
 
                     for(int j = i; j < brutalityLevel; j++){
-
-                        passengers.get(j).removeBaggage();
-                        passengers.get(j).removeTicket();
-                        passengersToRemove.add(passengers.get(j));
-                        i+=brutalityLevel;
+                        if(j<passengers.size()) {
+                            passengers.get(j).removeBaggage();
+                            passengers.get(j).removeTicket();
+                            passengersToRemove.add(passengers.get(j));
+                            i += brutalityLevel;
+                        }
                     }
                 }
 

@@ -423,7 +423,7 @@ public class Simulation {
                 do{
                     index = Helpers.getRandomNumber(0,baggageControlPoints.size()-1);
 
-                    System.out.println("Petal #1");
+                    System.out.println("    Petal #1");
                 }while(!baggageControlPoints.get(index).getIsOpen() || baggageControlPoints.get(index).isPlaceFull());
 
                 ArrayList<Ticket> tickets = new ArrayList<>();

@@ -23,7 +23,7 @@ public class Airplane {
     private Date flightStart;
     private ArrayList<Passenger> passengers = new ArrayList<>();
     private Integer purchasedTicketsAmount;
-    private ArrayList<Baggage> baggagesOnBoard = new ArrayList<>();
+    private ArrayList<Baggage> baggageOnBoard = new ArrayList<>();
 
     public Airplane(String flightName, String direction, Integer maxPassenger, Integer maxBaggageWeight, Pilot pilot, Date flightStart) {
         this.flightName = flightName;
@@ -72,6 +72,15 @@ public class Airplane {
 
     public ArrayList<Passenger> getPassengers (){return passengers;}
 
+    public Integer getBaggageWeight(){
+        Integer weight = 0;
+        for(Baggage baggage : baggageOnBoard){
+
+            weight+=baggage.getWeight();
+        }
+        return weight;
+    }
+
     /**
      * metoda powoduje "odlot" kasowane sa objekty z list
      */
@@ -82,24 +91,28 @@ public class Airplane {
             passenger.removeBaggage();
             passenger.removeTicket();
         }
+        for(int i = 0; i <passengers.size(); i++)
+        {
+            passengers.remove(0);
+        }
 
     }
 
     public void addBaggage(Baggage baggage) {
-        this.baggagesOnBoard.add(baggage);
+        this.baggageOnBoard.add(baggage);
     }
 
     /**
      *  sprawdza czy bagaz kazdego pasazera ( ktory mial bagaz na pozcatku ) jest na pokladzie
      */
 
-    public void checkBaggagesReady() {
+    public void checkBaggageReady() {
         for(Passenger passenger: passengers) {
 
             if(passenger.getBaggage()!=null) {
                 if (!(passenger.getBaggage().getStatus().equals("boarded"))) {
                      this.isReady = "baggage not on board";
-                     delayFlight(Helpers.getRandomNumber(5, 60));
+                     delayFlight(Helpers.getRandomNumber(1, 5));
                     }
 
                 if (!this.isReady.equals("baggage not on board")) ;
@@ -118,7 +131,7 @@ public class Airplane {
 
     public boolean checkDepartureTime(Date now) {
         if( now.after(getFlightStart()) ){
-            checkBaggagesReady();
+            checkBaggageReady();
             if(isReady.equals("ready")) {
                 startFlight();
                 return true;

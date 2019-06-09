@@ -76,7 +76,8 @@ public class SalePoint extends Place {
         passenger.setTicket(ticket);
     }
 
-    public Integer getOpenSalePointIndex() {
+    public int getOpenSalePointIndex() {
+
         return openSalePointIndex;
     }
 
