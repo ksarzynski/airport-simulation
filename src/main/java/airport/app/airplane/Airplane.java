@@ -14,6 +14,7 @@ import java.util.Date;
  */
 
 public class Airplane {
+    public static int departuteCounter =0;
     private String direction;
     private String flightName;
     private Integer maxPassenger;
@@ -95,7 +96,7 @@ public class Airplane {
         {
             passengers.remove(0);
         }
-
+        departuteCounter++;
     }
 
     public void addBaggage(Baggage baggage) {
@@ -107,16 +108,17 @@ public class Airplane {
      */
 
     public void checkBaggageReady() {
+        this.isReady="ready";
         for(Passenger passenger: passengers) {
 
             if(passenger.getBaggage()!=null) {
                 if (!(passenger.getBaggage().getStatus().equals("boarded"))) {
-                     this.isReady = "baggage not on board";
-                     delayFlight(Helpers.getRandomNumber(1, 5));
-                    }
 
-                if (!this.isReady.equals("baggage not on board")) ;
-                     this.isReady = "baggage on board";
+                    passenger.getBaggage().setStatus("boarded");
+                    this.isReady = "baggage not on board";
+                    delayFlight(Helpers.getRandomNumber(1, 5));
+                    System.out.print("ROBIE DELAY\n");
+                    }
                 }
         }
     }

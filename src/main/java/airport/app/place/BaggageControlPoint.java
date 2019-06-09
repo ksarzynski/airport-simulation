@@ -102,8 +102,7 @@ public class BaggageControlPoint extends ControlPoint {
 
                 if(passengers.get(i).getBaggage().getDangerLevel()==0){
 
-                    passengers.get(i).getTicket().getAirplane().addBaggage(passengers.get(i).getBaggage());
-                    passengers.get(i).removeBaggage();
+                    moveBaggage(passengers.get(i),passengers.get(i).getTicket().getAirplane());
                 }
 
                 else if(passengers.get(i).getBaggage().getDangerLevel()==1){
@@ -148,20 +147,18 @@ public class BaggageControlPoint extends ControlPoint {
     /**
      * funkcja ruszajaca bagaz
      * @param passenger pasazer ktorego bagaz jest przemieszczany
-     * @param airplanes samoloty wsrod ktorych szukany jest ten do ktorego bagaz ma trafic
+     * @param airplane samoloty wsrod ktorych szukany jest ten do ktorego bagaz ma trafic
      */
 
-    private void moveBaggage(Passenger passenger, ArrayList<Airplane> airplanes) {
+    private void moveBaggage(Passenger passenger, Airplane airplane) {
 
         if(passenger.getTicket()!=null)
         {
             String flightName = passenger.getTicket().getFlightName();
-            for (Airplane airplane : airplanes) {
                 if (flightName.equals(airplane.getFlightName())) {
                     airplane.addBaggage(passenger.getBaggage());
                     passenger.getBaggage().setStatus("boarded");
                 }
-            }
         }
 
     }
