@@ -85,7 +85,6 @@ public class Airplane {
     /**
      * metoda powoduje "odlot" kasowane sa objekty z list
      */
-
     public void startFlight() {
         for(Passenger passenger : passengers)
         {
@@ -106,7 +105,6 @@ public class Airplane {
     /**
      *  sprawdza czy bagaz kazdego pasazera ( ktory mial bagaz na pozcatku ) jest na pokladzie
      */
-
     public void checkBaggageReady() {
         this.isReady="ready";
         for(Passenger passenger: passengers) {

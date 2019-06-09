@@ -9,7 +9,6 @@ import java.util.Random;
  * i spodowac pobliskich osob w kolejce ( np 10 ) i spowodowac usuniecie ich oraz wlasciciela
  * i ich bagazy z lotniska
  */
-
 public class Baggage {
     private Integer weight;
     private Integer dangerLevel;

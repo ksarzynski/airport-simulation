@@ -5,7 +5,6 @@ import airport.app.airplane.Airplane;
 /**
  *  Bilet jest polem klasy pasazer, sluzy do umieszczenia pasazera w odpowiednim samolocie
  */
-
 public class Ticket {
 
     private Airplane airplane;
