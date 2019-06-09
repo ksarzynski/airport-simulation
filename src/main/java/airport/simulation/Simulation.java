@@ -302,7 +302,6 @@ public class Simulation {
         Ticket ticket = this.allAvailableTickets.get(randomId);
         ticket.bought();
         this.allAvailableTickets.remove(ticket);
-        System.out.println("TEST1");
         getPropertyChangeSupport().firePropertyChange(AIRPLANES, "update", ticket.getAirplane());
         return ticket;
     }
@@ -485,16 +484,10 @@ public class Simulation {
 
     void checkDepartureTimes() {
         for(Airplane airplane : this.airplanes) {
-            if (airplane.checkDepartureTime(schedule.getDate())){
-                System.out.println("przed: " + allAvailableTickets.size());
-                allAvailableTickets.removeIf(e -> (e.getFlightName().equals(airplane.getFlightName())));
+            if(airplane.checkDepartureTime(schedule.getDate()))
                 getPropertyChangeSupport().firePropertyChange(AIRPLANES, airplane, null);
-                System.out.println("po: " + allAvailableTickets.size());
-            }
-            else {
+            else
                 getPropertyChangeSupport().firePropertyChange(AIRPLANES, "update", airplane);
-                System.out.println("TEST2");
-            }
         }
     }
 
