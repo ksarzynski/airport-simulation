@@ -6,6 +6,7 @@ import airport.app.person.Passenger;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ControlPoint extends Place {
 
@@ -53,11 +54,14 @@ public class ControlPoint extends Place {
         setShiftStartTime(date);
     }
 
-    public Controller closePoint(){
+    public List closePoint(){
         this.isOpen = false;
         controlPointIndex -= 1;
         setShiftStartTime(null);
-        return removeController();
+        List<Passenger> passengers = getPassangers();
+        removePassengers();
+
+        return passengers;
     }
 
     public int getOpenControlPointIndex() {
@@ -74,7 +78,7 @@ public class ControlPoint extends Place {
 
     public Controller checkWorkingHour(Date now) {
         if( isOpen && now.after(getShiftEndTime()) ){
-            return closePoint();
+            return removeController();
         } else {
             return null;
         }

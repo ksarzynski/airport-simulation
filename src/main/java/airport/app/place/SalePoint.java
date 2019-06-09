@@ -7,6 +7,7 @@ import airport.simulation.Simulation;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 public class SalePoint extends Place {
@@ -61,11 +62,14 @@ public class SalePoint extends Place {
         return this.successor;
     }
 
-    private Vendor closePoint(){
+    public List closePoint(){
         isOpen = false;
         openSalePointIndex -= 1;
         setShiftStartTime(null);
-        return removeVendor();
+        List<Passenger> passengers = getPassangers();
+        removePassengers();
+
+        return passengers;
     }
 
     public void sellRandomTicket(ArrayList<Ticket> tickets, Passenger passenger){
@@ -92,7 +96,7 @@ public class SalePoint extends Place {
     public Vendor checkWorkingHour(Date now) {
         if(isOpen){
             if(now.after(getShiftEndTime()))
-                return closePoint();
+                return removeVendor();
         }
         return null;
     }

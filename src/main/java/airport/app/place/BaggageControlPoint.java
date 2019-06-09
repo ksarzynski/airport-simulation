@@ -5,6 +5,7 @@ import airport.app.person.Controller;
 import airport.app.person.Passenger;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *  punkt kontroli bagazu, zawiera liste pasazerow w ktorej przetrzymuje pasazerow ktorzy przeszli do punktu kontroli bagazu z kas
@@ -98,22 +99,15 @@ public class BaggageControlPoint extends ControlPoint {
 
         for(int i = 0; i < howMany; i++){
 
-            if(passengers.get(i).getBaggage() != null){
+            if( passengers.get(i).getBaggage() != null && passengers.get(i).getBaggage().getTicket() != null ){
 
-                if(passengers.get(i).getBaggage().getDangerLevel()==0){
-
-                    moveBaggage(passengers.get(i),passengers.get(i).getTicket().getAirplane());
-                }
-
-                else if(passengers.get(i).getBaggage().getDangerLevel()==1){
-
+                if( passengers.get(i).getBaggage().getDangerLevel()==0 ){
+                    moveBaggage(passengers.get(i), passengers.get(i).getTicket().getAirplane());
+                } else if(passengers.get(i).getBaggage().getDangerLevel()==1){
                     passengers.get(i).removeBaggage();
                     passengers.get(i).removeTicket();
                     passengersToRemove.add(passengers.get(i));
-                }
-
-                else{
-
+                } else {
                     for(int j = i; j < brutalityLevel; j++){
                         if(j<passengers.size()) {
                             passengers.get(j).removeBaggage();
@@ -182,11 +176,14 @@ public class BaggageControlPoint extends ControlPoint {
      * @return
      */
 
-    public Controller closePoint(){
+    public List closePoint(){
         isOpen = false;
         baggageControlPointIndex -= 1;
         setShiftStartTime(null);
-        return removeController();
+        List<Passenger> passengers = getPassangers();
+        removePassengers();
+
+        return passengers;
     }
 
     public int getOpenBaggageControlPointIndex() { return baggageControlPointIndex; }

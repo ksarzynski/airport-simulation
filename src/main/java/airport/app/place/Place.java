@@ -25,6 +25,10 @@ public abstract class Place {
         return this.passengers;
 
     }
+
+    public void removePassengers() {
+        this.passengers.clear();
+    }
     
     public Integer getPassengersAmountInQueue() {
         return passengers.size();

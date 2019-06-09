@@ -237,7 +237,9 @@ public class MainScreen extends JFrame implements PropertyChangeListener {
                 } else if (evt.getOldValue() == null && evt.getNewValue() != null) {
                     airplanesListModel.addElement(evt.getNewValue());
                 } else if (evt.getOldValue() != null && evt.getNewValue() != null) {
-                    airplanesListModel.setElementAt(evt.getNewValue(), airplanesListModel.indexOf(evt.getNewValue()));
+                    Integer index = airplanesListModel.indexOf(evt.getNewValue());
+                    if(index != -1)
+                        airplanesListModel.setElementAt(evt.getNewValue(), index);
                 }
             } else if (Simulation.CLOCK.equals(evt.getPropertyName())) {
                 if (evt.getOldValue() != null && evt.getNewValue() != null) {
