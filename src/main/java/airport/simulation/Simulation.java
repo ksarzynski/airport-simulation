@@ -133,8 +133,10 @@ public class Simulation {
 
             if(!added){
                 SalePoint salePoint = openClosedSalePoints();
-                salePoint.addPassenger(passenger);
-                getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
+                if(salePoint != null) {
+                    salePoint.addPassenger(passenger);
+                    getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
+                }
             }
         }
     }
@@ -436,11 +438,6 @@ public class Simulation {
 //                getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
 //                getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoints.get(index));
 
-                ArrayList<Ticket> tickets = new ArrayList<>();
-                for(int i=0; i<howMany; i++) {
-                    tickets.add(getAvailableTicket());
-                }
-
                 List randomNumbers = Helpers.getMixedNumbers(0, baggageControlPoints.size()-1);
                 Boolean added = false;
                 for(int ii=0; ii<baggageControlPoints.size(); ii++) {
@@ -450,6 +447,10 @@ public class Simulation {
 //                        System.out.println("Is full: "+baggageControlPoints.get(index).isPlaceFull());
                         if( !baggageControlPoints.get(index).isPlaceFull() ) {
                             BaggageControlPoint baggageControlPoint = baggageControlPoints.get(index);
+                            ArrayList<Ticket> tickets = new ArrayList<>();
+                            for(int i=0; i<howMany; i++) {
+                                tickets.add(getAvailableTicket());
+                            }
                             salePoint.movePassengers(baggageControlPoint, howMany, tickets);
                             getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
                             getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoint);
@@ -461,10 +462,16 @@ public class Simulation {
 
                 if(!added){
                     BaggageControlPoint baggageControlPoint = openClosedBaggageControlPoints();
-                    salePoint.movePassengers(baggageControlPoint, howMany, tickets);
-                    getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
-                    getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoint);
+                    if(baggageControlPoint != null) {
+                        ArrayList<Ticket> tickets = new ArrayList<>();
+                        for(int i=0; i<howMany; i++) {
+                            tickets.add(getAvailableTicket());
+                        }
+                        salePoint.movePassengers(baggageControlPoint, howMany, tickets);
+                        getPropertyChangeSupport().firePropertyChange(BAGGAGECONTROLPOINTS, "update", baggageControlPoint);
+                    }
                 }
+                getPropertyChangeSupport().firePropertyChange(SALEPOINTS, "update", salePoint);
             }
         }
     }
