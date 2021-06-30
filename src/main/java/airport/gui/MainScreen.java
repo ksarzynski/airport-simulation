@@ -2,6 +2,8 @@ package airport.gui;
 
 import javax.swing.border.*;
 import airport.app.airplane.Airplane;
+import airport.app.belongings.Baggage;
+import airport.app.place.BaggageControlPoint;
 import airport.app.place.ControlPoint;
 import airport.app.place.DutyFreeZone;
 import airport.app.place.SalePoint;
@@ -118,7 +120,8 @@ public class MainScreen extends JFrame implements PropertyChangeListener {
         });
 
         salePointsListModel = new DefaultListModel<>();
-        salePointsListModel.addAll(simulation.getSalePoints());
+        for(SalePoint salePoint : simulation.getSalePoints())
+            salePointsListModel.addElement(salePoint);
         salePointsList = new JList(salePointsListModel);
         salePointsList.setCellRenderer(new SalePointRenderer());
         simulation.getPropertyChangeSupport().addPropertyChangeListener(Simulation.SALEPOINTS, this);
@@ -127,7 +130,8 @@ public class MainScreen extends JFrame implements PropertyChangeListener {
         salePointsJP.add(salePointsSP);
 
         controlPointsListModel = new DefaultListModel<>();
-        controlPointsListModel.addAll(simulation.getControlPoints());
+        for(ControlPoint controlPoint : simulation.getControlPoints())
+            controlPointsListModel.addElement(controlPoint);
         controlPointsList = new JList(controlPointsListModel);
         controlPointsList.setCellRenderer(new ControlPointRenderer());
         simulation.getPropertyChangeSupport().addPropertyChangeListener(Simulation.CONTROLPOINTS, this);
@@ -136,7 +140,8 @@ public class MainScreen extends JFrame implements PropertyChangeListener {
         controlPointsJP.add(controlPointsSP);
 
         baggageControlPointsListModel = new DefaultListModel<>();
-        baggageControlPointsListModel.addAll(simulation.getBaggageControlPoints());
+        for(BaggageControlPoint baggageControlPoint : simulation.getBaggageControlPoints())
+            baggageControlPointsListModel.addElement(baggageControlPoint);
         baggageControlPointsList = new JList(baggageControlPointsListModel);
         baggageControlPointsList.setCellRenderer(new BaggageControlPointRenderer());
         simulation.getPropertyChangeSupport().addPropertyChangeListener(Simulation.BAGGAGECONTROLPOINTS, this);
@@ -148,7 +153,8 @@ public class MainScreen extends JFrame implements PropertyChangeListener {
         simulation.getPropertyChangeSupport().addPropertyChangeListener(Simulation.DUTYFREEZONE, this);
 
         airplanesListModel = new DefaultListModel<>();
-        airplanesListModel.addAll(simulation.getBaggageControlPoints());
+        for(BaggageControlPoint baggageControlPoint : simulation.getBaggageControlPoints())
+            airplanesListModel.addElement(baggageControlPoint);
         airplanesList = new JList(airplanesListModel);
         airplanesList.setCellRenderer(new AirplaneRenderer());
         simulation.getPropertyChangeSupport().addPropertyChangeListener(Simulation.AIRPLANES, this);
